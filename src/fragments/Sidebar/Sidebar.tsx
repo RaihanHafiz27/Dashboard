@@ -1,79 +1,9 @@
-import {
-  ChevronRight,
-  Gauge,
-  LucideIcon,
-  PanelTopOpen,
-  Search,
-  Settings,
-  ShoppingCart,
-  Star,
-  User2,
-} from "lucide-react";
+import { navLinks } from "@/constants/linksNav";
+import { ChevronRight, PanelTopOpen, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import {LucideIcon} from "lucide-react"
-
-interface NavLinks {
-  id: number;
-  title: string;
-  subs?: { title: string; to: string }[];
-  icon: React.ReactNode;
-}
-
-const navLinks: NavLinks[] = [
-  {
-    id: 1,
-    title: "dashboard",
-    subs: [
-      { title: "overview", to: "/dashboard" },
-      { title: "report", to: "/dashboard/report" },
-      { title: "task", to: "#" },
-    ],
-    icon: <Gauge />,
-  },
-  {
-    id: 2,
-    title: "product",
-    // to: "/dashboard/product",
-    subs: [
-      { title: "all product", to: "/dashboard" },
-      { title: "cahert", to: "/dashboard/report" },
-    ],
-    icon: <ShoppingCart />,
-  },
-  {
-    id: 3,
-    title: "features",
-    // to: "/",
-    subs: [
-      { title: "a121", to: "/dashboard" },
-      { title: "re1rt", to: "/dashboard/report" },
-    ],
-    icon: <Star />,
-  },
-  {
-    id: 4,
-    title: "users",
-    // to: "/",
-    subs: [
-      { title: "status", to: "/dashboard" },
-      { title: "rchat", to: "/dashboard/report" },
-    ],
-    icon: <User2 />,
-  },
-  {
-    id: 5,
-    title: "settings",
-    // to: "/",
-    subs: [
-      { title: "dark", to: "/dashboard" },
-      { title: "rsa", to: "/dashboard/report" },
-    ],
-    icon: <Settings />,
-  },
-];
 
 export const Sidebar = ({
   isFull,
@@ -82,7 +12,7 @@ export const Sidebar = ({
   isFull: boolean;
   setIsFull: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [showMenu, setShowMenu] = useState<string | null>(null);
+  const [showMenu, setShowMenu] = useState<string | null>("dashboard");
   const router = useRouter();
   console.log(router);
 
@@ -198,46 +128,6 @@ export const Sidebar = ({
           ))}
         </ul>
       </nav>
-      {/* <div className="space-y-4">
-        <h2>Profile</h2>
-        <div className="flex items-center space-x-2">
-          <Image
-            src={"/images/profile.jpg"}
-            width={200}
-            height={200}
-            alt="profile"
-            className="w-10 h-10 rounded-full"
-          />
-          <span className="text-xs">
-            <p>KannaSYF</p>
-            <p>Account Settings</p>
-          </span>
-        </div>
-      </div> */}
     </aside>
   );
 };
-
-//  <nav className="grid grid-cols-1 gap-y-4">
-//         {navLinks.map((link) => (
-//           <Link
-//             key={link.id}
-//             href={link.to}
-//             className={`flex items-center justify-between px-2 py-3 capitalize rounded-sm ${
-//               router.pathname === link.to
-//                 ? "border-l-4 border-sky-500 bg-gray-200/10"
-//                 : ""
-//             }`}
-//           >
-//             <span className="flex items-center space-x-2">
-//               <i>{link.icon}</i>
-//               <span className={`${isFull ? "block" : "hidden"}`}>
-//                 {link.title}
-//               </span>
-//             </span>
-//             <i>
-//               <ChevronRight />
-//             </i>
-//           </Link>
-//         ))}
-//       </nav>

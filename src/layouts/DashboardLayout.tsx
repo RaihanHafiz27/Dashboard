@@ -19,38 +19,46 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
       <Sidebar isFull={isFull} setIsFull={setIsFull} />
       {/* main content dashboard */}
       <main className="border-2 border-blue-600 grow bg-gray-300 p-4 space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <p>Pages / Dashboard</p>
-            <p className="font-semibold text-xl text-gray-800">Dashboard</p>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Image
-              src={"/images/user.png"}
-              width={200}
-              height={200}
-              alt="profile"
-              className="w-10 h-10 rounded-full border border-gray-400"
-            />
-            <p>Sign In</p>
-            <MoonIcon />
-            <div className="relative">
-              <Bell />
-              <span
-                className="
+        <Information />
+        <div>{children}</div>
+      </main>
+    </div>
+  );
+};
+
+const Information = () => {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="space-y-1">
+        <p>Pages / Dashboard</p>
+        <p className="font-semibold text-xl text-gray-800">Dashboard</p>
+      </div>
+      <div className="flex items-center space-x-4">
+        <Image
+          src={"/images/user.png"}
+          width={200}
+          height={200}
+          alt="profile"
+          className="w-10 h-10 rounded-full border border-gray-400"
+        />
+        <button disabled className="cursor-not-allowed">
+          Sign In
+        </button>
+        <MoonIcon />
+        <button disabled className="relative cursor-not-allowed">
+          <Bell />
+          <span
+            className="
           absolute -top-1 -right-1 
           flex items-center justify-center
           w-4 h-4 rounded-full 
           bg-red-600 text-white text-xs font-medium
         "
-              >
-                2
-              </span>
-            </div>
-          </div>
-        </div>
-        <div>{children}</div>
-      </main>
+          >
+            2
+          </span>
+        </button>
+      </div>
     </div>
   );
 };

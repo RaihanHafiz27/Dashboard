@@ -1,25 +1,29 @@
-import { Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
+import { Doughnut, Line, Pie } from "react-chartjs-2";
+// import {
+//   Chart as ChartJS,
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+//   Filler,
+//   ArcElement,
+// } from "chart.js";
 
 // wajib register element yang dipakai
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// ChartJS.register(
+//   CategoryScale,
+//   LinearScale,
+//   PointElement,
+//   LineElement,
+//   Title,
+//   Tooltip,
+//   Legend,
+//   Filler,
+//   ArcElement
+// );
 
 import {
   ArrowUpRight,
@@ -28,7 +32,12 @@ import {
   Package,
   Users,
   DollarSign,
+  Handbag,
+  Ellipsis,
 } from "lucide-react";
+import CountUp from "react-countup";
+import { MonthlyLine } from "@/fragments/charts/monthlyLine";
+import { AnalyticsDonut } from "@/fragments/charts/analyticsDonut";
 
 interface Count {
   id: number;
@@ -38,25 +47,16 @@ interface Count {
   icon: React.ReactNode;
 }
 
-// /data/sales.ts
-export interface Sale {
-  month: string;
-  total: number;
+// /data/buyers.ts
+export interface BuyerCategory {
+  label: string;
+  value: number;
 }
 
-export const salesData: Sale[] = [
-  { month: "Jan", total: 12000 },
-  { month: "Feb", total: 15000 },
-  { month: "Mar", total: 18000 },
-  { month: "Apr", total: 17000 },
-  { month: "May", total: 22330 },
-  { month: "Jun", total: 25120 },
-  { month: "Jul", total: 24930 },
-  { month: "Aug", total: 27000 },
-  { month: "Sep", total: 32800 },
-  { month: "Oct", total: 28370 },
-  { month: "Nov", total: 35000 },
-  { month: "Dec", total: 22175 },
+export const buyerData: BuyerCategory[] = [
+  { label: "Remaja (13-19)", value: 350 },
+  { label: "Dewasa (20-40)", value: 780 },
+  { label: "Tua (41+)", value: 220 },
 ];
 
 const datas: Count[] = [
@@ -65,11 +65,11 @@ const datas: Count[] = [
     title: "new order",
     sum: 127,
     growth: +12,
-    icon: <ShoppingCart className="w-6 h-6 text-blue-600" />,
+    icon: <Handbag className="w-6 h-6 text-blue-600" />,
   },
   {
     id: 2,
-    title: "products",
+    title: "stock products",
     sum: 390,
     growth: -3,
     icon: <Package className="w-6 h-6 text-purple-600" />,
@@ -91,36 +91,39 @@ const datas: Count[] = [
 ];
 
 const DashboardPage = () => {
-  const data = {
-    labels: salesData.map((item) => item.month),
-    datasets: [
-      {
-        label: "Monthly Sales",
-        data: salesData.map((item) => item.total),
-        borderColor: "rgb(0, 132, 209)", // hijau
-        backgroundColor: "rgba(34,197,94,0.3)", // hijau transparan
-        fill: true, // area fill di bawah garis
-        tension: 0.3, // bikin garis agak melengkung
-        pointRadius: 4,
-        pointBackgroundColor: "rgb(0, 132, 209)",
-      },
-    ],
-  };
+  // const data1 = {
+  //   labels: buyerData.map((item) => item.label),
+  //   datasets: [
+  //     {
+  //       label: "Jumlah Pembeli",
+  //       data: buyerData.map((item) => item.value),
+  //       backgroundColor: [
+  //         "rgb(246, 51, 154)",
+  //         "rgb(0, 166, 244)",
+  //         "rgb(124, 207, 0)",
+  //       ],
+  //       // borderColor: [
+  //       //   "rgba(59, 130, 246, 1)",
+  //       //   "rgba(34, 197, 94, 1)",
+  //       //   "rgba(239, 68, 68, 1)",
+  //       // ],
+  //       // borderWidth: 1,
+  //     },
+  //   ],
+  // };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-        position: "top" as const,
-      },
-      title: {
-        display: true,
-        text: "Monthly Sales Report (2025)",
-      },
-    },
-  };
+  // const options1 = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       position: "bottom" as const,
+  //     },
+  //     title: {
+  //       display: false,
+  //       text: "Distribusi Usia Pembeli",
+  //     },
+  //   },
+  // };
 
   return (
     <div className="space-y-4">
@@ -129,14 +132,19 @@ const DashboardPage = () => {
           // BERIKAN ANIMASI COUNTING
           <div
             key={item.id}
-            className="bg-slate-50 rounded-md p-4 shadow-sm border border-gray-200"
+            className="bg-slate-50 rounded-md p-4 shadow-sm border border-gray-200 hover:scale-105 transition-all duration-300"
           >
             <div className="flex items-center justify-between mb-2">
               <p className="text-lg capitalize font-medium">{item.title}</p>
               <i>{item.icon}</i>
             </div>
             <span className="flex ">
-              <p className="text-2xl font-bold">{item.sum}</p>
+              <CountUp
+                className="text-2xl font-bold"
+                start={0}
+                end={item.sum}
+                duration={5}
+              />
 
               {/* growth */}
               <div
@@ -156,10 +164,29 @@ const DashboardPage = () => {
         ))}
       </div>
       <div className="grid grid-cols-3 gap-x-4">
-        <div className="bg-slate-50 p-4 col-span-2 rounded-sm h-80">
+        {/* <div className="bg-slate-50 p-4 col-span-2 rounded-sm h-80">
+          <h3>Sales Report</h3>
           <Line data={data} options={options} />
-        </div>
-        <div className="col-span-1 bg-slate-50">test</div>
+        </div> */}
+        {/* <div className="bg-slate-50 col-span-2 rounded-sm">
+          <div className="flex justify-between px-3 pt-3">
+            <h3 className="font-semibold text-gray-600">Monthly Report</h3>
+            <button className="cursor-not-allowed" disabled>
+              <Ellipsis />
+            </button>
+          </div>
+          <div className=" p-4 rounded-sm h-80">
+            <Line data={data} options={options} />
+          </div>
+        </div> */}
+        <MonthlyLine />
+        <AnalyticsDonut />
+        {/* <div className="col-span-1 bg-slate-50 p-3 rounded-sm">
+          <h3 className="font-semibold text-gray-600">Analytics</h3>
+          <div>
+            <Doughnut data={data1} options={options1} />
+          </div>
+        </div> */}
       </div>
     </div>
   );
