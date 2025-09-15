@@ -76,14 +76,14 @@ export const MonthlyLine = () => {
     },
   };
   return (
-    <div className="bg-slate-50 col-span-2 rounded-sm">
+    <div className="bg-slate-50 col-span-2 rounded-sm overflow-hidden">
       <div className="flex justify-between px-3 pt-3">
         <h3 className="font-semibold text-gray-600">Monthly Report</h3>
         <button className="cursor-not-allowed" disabled>
           <Ellipsis />
         </button>
       </div>
-      <div className=" p-4 rounded-sm h-80">
+      <div className="p-4 rounded-sm h-80 hover:scale-105 transition-all duration-300">
         <Line data={data} options={options} />
       </div>
     </div>
