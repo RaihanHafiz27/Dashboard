@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ReactElement, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Bell, MoonIcon, PanelTopOpen } from "lucide-react";
+import { useRouter } from "next/router";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -11,6 +12,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const DashboardLayout = ({ children }: { children: ReactElement }) => {
   const [isFull, setIsFull] = useState<boolean>(true);
+
   return (
     <div
       className={`flex border-2 border-pink-700 w-full min-h-dvh h-auto lg:min-h-screen ${plusJakarta.className}`}
@@ -27,11 +29,13 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 };
 
 const Information = () => {
+  // const { pathname } = useRouter();
+  // console.log(pathname);
   return (
     <div className="flex items-center justify-between">
-      <div className="space-y-1">
+      <div className="space-y-1 text-gray-700">
         <p>Pages / Dashboard</p>
-        <p className="font-semibold text-xl text-gray-800">Dashboard</p>
+        <p className="font-semibold text-xl ">Dashboard</p>
       </div>
       <div className="flex items-center space-x-4">
         <Image

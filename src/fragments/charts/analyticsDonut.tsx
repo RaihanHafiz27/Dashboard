@@ -6,6 +6,7 @@ import {
   CategoryScale,
   Tooltip,
 } from "chart.js";
+import { Ellipsis } from "lucide-react";
 
 ChartJS.register(ArcElement, Legend, CategoryScale, Tooltip);
 
@@ -85,13 +86,20 @@ export const AnalyticsDonut = () => {
   };
 
   return (
-    <div className="col-span-1 bg-slate-50 p-3 rounded-sm">
-      <h3 className="font-semibold text-gray-600">Analytics</h3>
-      <div className="p-4 relative hover:scale-105 transition-all duration-300 grid place-items-center">
+    <div className="flex flex-col col-span-1 bg-slate-50 p-3 rounded-sm">
+      <div className="flex justify-between px-3 pt-3">
+        <h3 className="font-semibold text-gray-600">Analytics</h3>
+        <button className="cursor-not-allowed" disabled>
+          <Ellipsis />
+        </button>
+      </div>
+      <div className="grow p-4 relative hover:scale-105 transition-all duration-300 grid place-items-center">
         <Doughnut data={data} options={options} />
         <div className="absolute top-1/3 translate-x-1/2 right-1/2 flex flex-col justify-center items-center">
-          <p className="text-3xl font-semibold text-gray-700">1350</p>
-          <p className="text-gray-500">Transaction</p>
+          <p className="text-3xl 2xl:text-5xl font-semibold text-gray-700">
+            1350
+          </p>
+          <p className="2xl:text-2xl text-gray-500">Transaction</p>
         </div>
       </div>
     </div>

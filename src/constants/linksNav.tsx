@@ -8,7 +8,6 @@ export const navLinks: NavLinks[] = [
     subs: [
       { title: "overview", to: "/dashboard" },
       { title: "report", to: "/dashboard/report" },
-      { title: "task", to: "#" },
     ],
     icon: <Gauge />,
   },
@@ -17,8 +16,8 @@ export const navLinks: NavLinks[] = [
     title: "product",
     // to: "/dashboard/product",
     subs: [
-      { title: "all product", to: "/dashboard" },
-      { title: "cahert", to: "/dashboard/report" },
+      { title: "all product", to: "/dashboard/product" },
+      { title: "cahert", to: "#" },
     ],
     icon: <ShoppingCart />,
   },
@@ -27,8 +26,8 @@ export const navLinks: NavLinks[] = [
     title: "features",
     // to: "/",
     subs: [
-      { title: "a121", to: "/dashboard" },
-      { title: "re1rt", to: "/dashboard/report" },
+      { title: "task", to: "#" },
+      { title: "refunds", to: "#" },
     ],
     icon: <Star />,
   },
@@ -37,8 +36,8 @@ export const navLinks: NavLinks[] = [
     title: "users",
     // to: "/",
     subs: [
-      { title: "status", to: "/dashboard" },
-      { title: "rchat", to: "/dashboard/report" },
+      { title: "status", to: "#" },
+      { title: "rchat", to: "#" },
     ],
     icon: <User2 />,
   },
@@ -47,8 +46,8 @@ export const navLinks: NavLinks[] = [
     title: "settings",
     // to: "/",
     subs: [
-      { title: "dark", to: "/dashboard" },
-      { title: "rsa", to: "/dashboard/report" },
+      { title: "dark", to: "#" },
+      { title: "rsa", to: "#" },
     ],
     icon: <Settings />,
   },

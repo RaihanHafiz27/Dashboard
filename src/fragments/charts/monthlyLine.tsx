@@ -9,6 +9,7 @@ import {
   Filler,
 } from "chart.js";
 import { salesData } from "@/constants/salesData";
+import { LabelButton } from "../button/LabelButton";
 
 ChartJS.register(CategoryScale, LineElement, LinearScale, PointElement, Filler);
 
@@ -34,8 +35,9 @@ export const MonthlyLine = () => {
         },
         fill: true, // area fill di bawah garis
         tension: 0.3, // bikin garis agak melengkung
-        pointRadius: 4,
-        pointBackgroundColor: "rgb(0, 132, 209)",
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        // pointBackgroundColor: "rgb(0, 132, 209)",
       },
     ],
   };
@@ -75,15 +77,17 @@ export const MonthlyLine = () => {
       },
     },
   };
+
   return (
-    <div className="bg-slate-50 col-span-2 rounded-sm overflow-hidden">
-      <div className="flex justify-between px-3 pt-3">
+    <div className="flex flex-col bg-slate-50 col-span-2 rounded-sm overflow-hidden ">
+      {/* <div className="flex justify-between px-3 pt-3">
         <h3 className="font-semibold text-gray-600">Monthly Report</h3>
         <button className="cursor-not-allowed" disabled>
           <Ellipsis />
         </button>
-      </div>
-      <div className="p-4 rounded-sm h-80 hover:scale-105 transition-all duration-300">
+      </div> */}
+      <LabelButton label={"Monthly Report"} />
+      <div className="grow p-4 rounded-sm h-80 hover:scale-105 transition-all duration-300">
         <Line data={data} options={options} />
       </div>
     </div>

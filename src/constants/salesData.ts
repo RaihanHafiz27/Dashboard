@@ -1,16 +1,16 @@
 import { Sale } from "@/types/sales.type";
 
 export const salesData: Sale[] = [
-  { month: "Jan", total: 10000 },
-  { month: "Feb", total: 12000 },
-  { month: "Mar", total: 18000 },
-  { month: "Apr", total: 17000 },
-  { month: "May", total: 22330 },
-  { month: "Jun", total: 20120 },
-  { month: "Jul", total: 24930 },
-  { month: "Aug", total: 27000 },
-  { month: "Sep", total: 32800 },
-  { month: "Oct", total: 28370 },
-  { month: "Nov", total: 35000 },
-  { month: "Dec", total: 22175 },
+  { month: "Jan", total: 275 },
+  { month: "Feb", total: 732 },
+  { month: "Mar", total: 1200 },
+  { month: "Apr", total: 1700 },
+  { month: "May", total: 2230 },
+  { month: "Jun", total: 2120 },
+  { month: "Jul", total: 2430 },
+  { month: "Aug", total: 2000 },
+  { month: "Sep", total: 3200 },
+  { month: "Oct", total: 2370 },
+  { month: "Nov", total: 2000 },
+  { month: "Dec", total: 2275 },
 ];

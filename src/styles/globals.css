@@ -24,3 +24,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 } */
+
+/* Mengatur lebar scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Lebar scrollbar */
+  height: 6px;
+}
+
+/* Mengatur warna jalur scrollbar */
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+/* Membuat thumb (bagian yang dapat digeser) transparan */
+::-webkit-scrollbar-thumb {
+  background-color: #00598a;
+  border-radius: 10px;
+}
