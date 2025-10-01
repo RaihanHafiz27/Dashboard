@@ -7,6 +7,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Ellipsis } from "lucide-react";
+import { LabelButton } from "../button/LabelButton";
 
 ChartJS.register(ArcElement, Legend, CategoryScale, Tooltip);
 
@@ -86,13 +87,14 @@ export const AnalyticsDonut = () => {
   };
 
   return (
-    <div className="flex flex-col col-span-1 bg-slate-50 p-3 rounded-sm">
-      <div className="flex justify-between px-3 pt-3">
+    <div className="flex flex-col col-span-1 bg-slate-50 rounded-sm">
+      {/* <div className="flex justify-between px-3 pt-3">
         <h3 className="font-semibold text-gray-600">Analytics</h3>
         <button className="cursor-not-allowed" disabled>
           <Ellipsis />
         </button>
-      </div>
+      </div> */}
+      <LabelButton label="Analytics" />
       <div className="grow p-4 relative hover:scale-105 transition-all duration-300 grid place-items-center">
         <Doughnut data={data} options={options} />
         <div className="absolute top-1/3 translate-x-1/2 right-1/2 flex flex-col justify-center items-center">

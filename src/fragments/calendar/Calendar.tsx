@@ -3,7 +3,7 @@ import { DayPicker } from "react-day-picker";
 export const Calendar = () => {
   return (
     <div className="flex flex-col bg-slate-50 p-4 space-y-2 rounded-sm  transition-all duration-300 ease-in-out">
-      <h3 className="font-semibold text-gray-600 text-center text-lg border-b-2 border-gray-500 pb-2">
+      <h3 className="font-semibold text-gray-600 text-center text-lg border-b-2 border-gray-300 pb-2">
         Calendar
       </h3>
       <DayPicker

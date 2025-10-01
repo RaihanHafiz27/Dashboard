@@ -1,24 +1,29 @@
 import { NavLinks } from "@/types/navLinks.type";
-import { Gauge, Settings, ShoppingCart, Star, User2 } from "lucide-react";
+import {
+  CircleQuestionMark,
+  Gauge,
+  Settings,
+  ShoppingCart,
+  Star,
+  User2,
+} from "lucide-react";
 
 export const navLinks: NavLinks[] = [
   {
     id: 1,
     title: "dashboard",
-    subs: [
-      { title: "overview", to: "/dashboard" },
-      { title: "report", to: "/dashboard/report" },
-    ],
+    to: "/dashboard",
+    // subs: [
+    //   { title: "overview", to: "/dashboard" },
+    //   { title: "report", to: "/dashboard/report" },
+    // ],
     icon: <Gauge />,
   },
   {
     id: 2,
     title: "product",
-    // to: "/dashboard/product",
-    subs: [
-      { title: "all product", to: "/dashboard/product" },
-      { title: "cahert", to: "#" },
-    ],
+    to: "/dashboard/product",
+
     icon: <ShoppingCart />,
   },
   {
@@ -26,7 +31,7 @@ export const navLinks: NavLinks[] = [
     title: "features",
     // to: "/",
     subs: [
-      { title: "task", to: "#" },
+      { title: "task", to: "/dashboard/features/task" },
       { title: "refunds", to: "#" },
     ],
     icon: <Star />,
@@ -34,11 +39,7 @@ export const navLinks: NavLinks[] = [
   {
     id: 4,
     title: "users",
-    // to: "/",
-    subs: [
-      { title: "status", to: "#" },
-      { title: "rchat", to: "#" },
-    ],
+    to: "/dashboard/users",
     icon: <User2 />,
   },
   {
@@ -46,9 +47,16 @@ export const navLinks: NavLinks[] = [
     title: "settings",
     // to: "/",
     subs: [
-      { title: "dark", to: "#" },
-      { title: "rsa", to: "#" },
+      { title: "profile", to: "#" },
+      { title: "account", to: "#" },
+      { title: "security", to: "#" },
     ],
     icon: <Settings />,
+  },
+  {
+    id: 6,
+    title: "help",
+    to: "/dashboard/help",
+    icon: <CircleQuestionMark />,
   },
 ];

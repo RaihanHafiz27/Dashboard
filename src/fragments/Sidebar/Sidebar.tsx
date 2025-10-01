@@ -78,52 +78,76 @@ export const Sidebar = ({
         </button>
       </div>
       <nav>
-        <ul className="grid grid-cols-1 gap-y-2 ">
+        <ul className="grid grid-cols-1 gap-y-6 ">
           {navLinks.map((link) => (
-            <li key={link.id} className="p-2 w-full ">
-              <button
-                onClick={() => toggleMenu(link.title)}
-                className={`flex items-center justify-between  capitalize rounded-sm cursor-pointer w-full ${
-                  showMenu === link.title ? "text-sky-500" : ""
-                }`}
-              >
-                <span className="flex items-center space-x-2">
-                  <i>{link.icon}</i>
-                  <span className={`${isFull ? "block" : "hidden"}`}>
-                    {link.title}
-                  </span>
-                </span>
-                <i>
-                  <ChevronRight
-                    color="#f8fafc"
-                    className={`transition-all duration-300 ${
-                      showMenu === link.title ? "rotate-90" : "rotate-0"
-                    } ${isFull ? "block" : "hidden"}`}
-                  />
-                </i>
-              </button>
-              <ul
-                className={`mt-4 space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${
-                  showMenu === link.title
-                    ? "max-h-40 opacity-100"
-                    : "max-h-0 opacity-0"
-                } ${isFull ? "block" : "hidden"}`}
-              >
-                {link?.subs?.map((sub) => (
-                  <li
-                    key={sub.title}
-                    className={`p-2 ${
-                      router.pathname === sub.to
-                        ? "rounded-sm border-l-4 border-sky-500 bg-gray-200/10"
-                        : ""
+            <li
+              key={link.id}
+              className={`p-2 ${
+                router.pathname === link.to
+                  ? " rounded-sm border-l-4 border-sky-500 bg-gray-200/10"
+                  : ""
+              }`}
+            >
+              {link.subs && link.subs.length > 0 ? (
+                <>
+                  <button
+                    onClick={() => toggleMenu(link.title)}
+                    className={`flex items-center justify-between  capitalize rounded-sm cursor-pointer w-full ${
+                      showMenu === link.title ? "text-sky-500" : ""
                     }`}
                   >
-                    <Link href={sub.to} className="capitalize">
-                      {sub.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                    <span className="flex items-center space-x-2">
+                      <i>{link.icon}</i>
+                      <span className={`${isFull ? "block" : "hidden"}`}>
+                        {link.title}
+                      </span>
+                    </span>
+                    <i>
+                      <ChevronRight
+                        color="#f8fafc"
+                        className={`transition-all duration-300 ${
+                          showMenu === link.title ? "rotate-90" : "rotate-0"
+                        } ${isFull ? "block" : "hidden"}`}
+                      />
+                    </i>
+                  </button>
+                  <ul
+                    className={`space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${
+                      showMenu === link.title
+                        ? "max-h-40 opacity-100 mt-4"
+                        : "max-h-0 opacity-0"
+                    } ${isFull ? "block" : "hidden"}`}
+                  >
+                    {link?.subs?.map((sub) => (
+                      <li
+                        key={sub.title}
+                        className={`p-2 ${
+                          router.pathname === sub.to
+                            ? "rounded-sm border-l-4 border-sky-500 bg-gray-200/10"
+                            : ""
+                        }`}
+                      >
+                        <Link href={sub.to} className="capitalize">
+                          {sub.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <Link
+                  href={link.to ?? "#"}
+                  onClick={() => setShowMenu(null)}
+                  className={`flex items-center capitalize rounded-sm w-full `}
+                >
+                  <span className="flex items-center space-x-2">
+                    <i>{link.icon}</i>
+                    <span className={`${isFull ? "block" : "hidden"}`}>
+                      {link.title}
+                    </span>
+                  </span>
+                </Link>
+              )}
             </li>
           ))}
         </ul>
