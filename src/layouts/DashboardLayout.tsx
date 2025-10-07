@@ -15,12 +15,12 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 
   return (
     <div
-      className={`flex border-2 border-pink-700 w-full min-h-dvh h-auto lg:min-h-screen ${plusJakarta.className}`}
+      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto bg-gray-300 lg:min-h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
       <Sidebar isFull={isFull} setIsFull={setIsFull} />
       {/* main content dashboard */}
-      <main className="border-2 border-blue-600 grow bg-gray-300 p-4 space-y-4">
+      <main className="border-2 border-blue-600 grow p-4 2xl:p-8 space-y-4">
         <Information />
         <div>{children}</div>
       </main>

@@ -11,14 +11,12 @@ export const top3: Product[] = [
     id: 2,
     title: "iPad Mini 2021 Starlight",
     price: 928,
-
     img: "/images/2.webp",
   },
   {
     id: 3,
     title: "Women Handbag Black",
     price: 742,
-
     img: "/images/3.webp",
   },
 ];

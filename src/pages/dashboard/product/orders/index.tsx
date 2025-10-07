@@ -1,4 +1,4 @@
-const productDash = () => {
+const productOrders = () => {
   return (
     <div>
       <div>hello world</div>
@@ -6,4 +6,4 @@ const productDash = () => {
   );
 };
 
-export default productDash;
+export default productOrders;

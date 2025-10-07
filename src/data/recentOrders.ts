@@ -7,6 +7,8 @@ export const recentOrders: Order[] = [
     date: "2025-09-08",
     status: "Completed",
     amount: 3200,
+    title: "Longines Master Collection",
+    image: "/images/1.webp",
   },
   {
     id: "#1024",
@@ -14,6 +16,8 @@ export const recentOrders: Order[] = [
     date: "2025-09-07",
     status: "Pending",
     amount: 1500,
+    title: "iPad Mini 2021 Starlight",
+    image: "/images/2.webp",
   },
   {
     id: "#1025",
@@ -21,6 +25,8 @@ export const recentOrders: Order[] = [
     date: "2025-09-07",
     status: "Processing",
     amount: 8799,
+    title: "Women Handbag Black",
+    image: "/images/3.webp",
   },
   {
     id: "#1026",
@@ -28,6 +34,9 @@ export const recentOrders: Order[] = [
     date: "2025-09-06",
     status: "Completed",
     amount: 2200,
+    title: "Longines Master Collection",
+
+    image: "/images/1.webp",
   },
   {
     id: "#1027",
@@ -35,6 +44,9 @@ export const recentOrders: Order[] = [
     date: "2025-09-06",
     status: "Cancelled",
     amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
   },
 ];
 

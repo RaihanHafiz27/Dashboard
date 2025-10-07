@@ -11,14 +11,14 @@ export const SummaryCard = () => {
           className="bg-slate-50 rounded-md p-4 shadow-sm  hover:scale-105 transition-all duration-300"
         >
           <div className="flex items-center justify-between mb-2">
-            <p className="text-lg capitalize font-medium text-gray-700">
+            <p className="text-lg 2xl:text-xl capitalize font-medium text-gray-700">
               {item.title}
             </p>
             <i>{item.icon}</i>
           </div>
           <span className="flex items-center space-x-2">
             <CountUp
-              className="text-2xl font-bold text-gray-700"
+              className="text-2xl 2xl:text-3xl font-bold text-gray-700"
               start={0}
               end={item.sum}
               duration={5}

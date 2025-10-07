@@ -6,4 +6,6 @@ export interface Order {
   date: string;
   status: OrderStatus;
   amount: number;
+  title: string;
+  image: string;
 }
