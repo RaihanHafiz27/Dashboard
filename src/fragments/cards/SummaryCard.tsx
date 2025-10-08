@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 
 export const SummaryCard = () => {
   return (
-    <div className="grid grid-cols-4 gap-x-4 2xl:gap-x-8">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 md:gap-4 gap-x-4 2xl:gap-x-8">
       {datas.map((item) => (
         <div
           key={item.id}

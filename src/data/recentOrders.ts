@@ -4,7 +4,7 @@ export const recentOrders: Order[] = [
   {
     id: "#1023",
     customer: "John Doe",
-    date: "2025-09-08",
+    date: "2025/09/08",
     status: "Completed",
     amount: 3200,
     title: "Longines Master Collection",
@@ -13,7 +13,7 @@ export const recentOrders: Order[] = [
   {
     id: "#1024",
     customer: "Jane Smith",
-    date: "2025-09-07",
+    date: "2025/09/07",
     status: "Pending",
     amount: 1500,
     title: "iPad Mini 2021 Starlight",
@@ -22,7 +22,7 @@ export const recentOrders: Order[] = [
   {
     id: "#1025",
     customer: "Michael Lee",
-    date: "2025-09-07",
+    date: "2025/09/07",
     status: "Processing",
     amount: 8799,
     title: "Women Handbag Black",
@@ -31,7 +31,7 @@ export const recentOrders: Order[] = [
   {
     id: "#1026",
     customer: "Sarah Johnson",
-    date: "2025-09-06",
+    date: "2025/09/06",
     status: "Completed",
     amount: 2200,
     title: "Longines Master Collection",
@@ -41,7 +41,7 @@ export const recentOrders: Order[] = [
   {
     id: "#1027",
     customer: "David Kim",
-    date: "2025-09-06",
+    date: "2025/09/06",
     status: "Cancelled",
     amount: 11500,
     title: "Longines Master Collection",
@@ -56,3 +56,93 @@ export const statusColors: Record<OrderStatus, string> = {
   Completed: "bg-green-100 text-green-700",
   Cancelled: "bg-red-100 text-red-700",
 };
+
+export const orders: Order[] = [
+  {
+    id: "#1023",
+    customer: "John Doe",
+    date: "2025/09/08",
+    status: "Completed",
+    amount: 3200,
+    title: "Longines Master Collection",
+    image: "/images/1.webp",
+  },
+  {
+    id: "#1024",
+    customer: "Jane Smith",
+    date: "2025/09/07",
+    status: "Pending",
+    amount: 1500,
+    title: "iPad Mini 2021 Starlight",
+    image: "/images/2.webp",
+  },
+  {
+    id: "#1025",
+    customer: "Michael Lee",
+    date: "2025/09/07",
+    status: "Processing",
+    amount: 8799,
+    title: "Women Handbag Black",
+    image: "/images/3.webp",
+  },
+  {
+    id: "#1026",
+    customer: "Sarah Johnson",
+    date: "2025/09/06",
+    status: "Completed",
+    amount: 2200,
+    title: "Longines Master Collection",
+
+    image: "/images/1.webp",
+  },
+  {
+    id: "#1027",
+    customer: "David Kim",
+    date: "2025/09/06",
+    status: "Cancelled",
+    amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
+  },
+  {
+    id: "#1028",
+    customer: "David Kim",
+    date: "2025/09/06",
+    status: "Cancelled",
+    amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
+  },
+  {
+    id: "#1029",
+    customer: "David Kim",
+    date: "2025/09/06",
+    status: "Cancelled",
+    amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
+  },
+  {
+    id: "#1030",
+    customer: "David Kim",
+    date: "2025/09/06",
+    status: "Cancelled",
+    amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
+  },
+  {
+    id: "#1031",
+    customer: "David Kim",
+    date: "2025/09/06",
+    status: "Cancelled",
+    amount: 11500,
+    title: "Longines Master Collection",
+
+    image: "/images/3.webp",
+  },
+];

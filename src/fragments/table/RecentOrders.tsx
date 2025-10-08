@@ -37,7 +37,8 @@ export const RecentOrders = () => {
                     />
                   </div>
                   <div>
-                    <p className="font-semibold" title={item.title}>
+                    <p className="font-semibold " title={item.title}>
+                      {/* {item.title} */}
                       {item.title.substring(0, 15)}...
                     </p>
                     <p className="text-xs text-gray-600">lorem</p>

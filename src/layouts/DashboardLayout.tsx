@@ -1,6 +1,6 @@
 import { Sidebar } from "@/fragments/Sidebar/Sidebar";
 import Image from "next/image";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Bell, MoonIcon, PanelTopOpen } from "lucide-react";
 import { useRouter } from "next/router";
@@ -12,17 +12,39 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const DashboardLayout = ({ children }: { children: ReactElement }) => {
   const [isFull, setIsFull] = useState<boolean>(true);
+  const [isSupported, setIsSupported] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSupported(window.innerWidth >= 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (!isSupported) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen text-center px-6">
+        <h1 className="text-2xl font-semibold mb-2">⚠️ Layar Terlalu Kecil</h1>
+        <p className="text-gray-500">
+          Dashboard ini hanya dapat diakses di perangkat dengan layar minimal
+          ukuran tablet.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div
-      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto bg-gray-300 lg:min-h-screen ${plusJakarta.className} overflow-hidden`}
+      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto bg-gray-300 md:min-h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
       <Sidebar isFull={isFull} setIsFull={setIsFull} />
       {/* main content dashboard */}
       <main className="border-2 border-blue-600 grow p-4 2xl:p-8 space-y-4">
         <Information />
-        <div>{children}</div>
+        <div className="w-full">{children}</div>
       </main>
     </div>
   );

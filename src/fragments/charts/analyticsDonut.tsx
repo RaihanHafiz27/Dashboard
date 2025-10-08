@@ -6,7 +6,6 @@ import {
   CategoryScale,
   Tooltip,
 } from "chart.js";
-import { Ellipsis } from "lucide-react";
 import { LabelButton } from "../button/LabelButton";
 
 ChartJS.register(ArcElement, Legend, CategoryScale, Tooltip);
@@ -50,26 +49,7 @@ export const AnalyticsDonut = () => {
   const options = {
     cutout: "70%",
     responsive: true,
-    // plugins: {
-    //   legend: {
-    //     position: "bottom",
-    //     labels: {
-    //       color: "#374151", // warna teks
-    //       font: {
-    //         size: 12,
-    //         family: "Poppins",
-    //         weight: "400",
-    //       },
-    //       usePointStyle: true, // bentuk bulat kecil (bukan kotak)
-    //       pointStyle: "circle", // bisa 'rect', 'circle', 'triangle'
-    //       padding: 2, // jarak antar label
-    //     },
-    //   },
-    //   title: {
-    //     display: false,
-    //     text: "Distribusi Usia Pembeli",
-    //   },
-    // },
+
     plugins: {
       legend: {
         position: "bottom" as const,
