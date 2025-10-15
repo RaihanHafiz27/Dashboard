@@ -1,18 +1,20 @@
 import { orders, recentOrders, statusColors } from "@/data/recentOrders";
 import { LabelButton } from "@/fragments/button/LabelButton";
 import { Avatar } from "@/fragments/profile/Avatar";
+import { Order, OrderStatus } from "@/types/order.type";
 import { ChevronRight, Command, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 const list = ["Latest", "Price", "Status"];
-const statuses = ["Pending", "Processing", "Completed", "Cancelled"];
 
 const productOrders = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [dataOrders, setDataOrders] = useState<Order[]>([]);
 
+  // for dropdown filter
   useEffect(() => {
     const listener = (event: MouseEvent) => {
       if (!menuRef.current || menuRef.current.contains(event.target as Node)) {
@@ -24,50 +26,38 @@ const productOrders = () => {
     return () => document.removeEventListener("mousedown", listener);
   }, [menuRef]);
 
-  console.log(menuRef);
+  // for data order
+  useEffect(() => {
+    const stored = localStorage.getItem("orders");
+    if (stored) {
+      const data: Order[] = stored ? JSON.parse(stored) : null;
+      setDataOrders(data);
+    } else {
+      localStorage.setItem("orders", JSON.stringify(orders));
+      setDataOrders(orders);
+    }
+  }, []);
+
+  // update status on localStorage
+  const updateStatus = (id: string, newStatus: OrderStatus) => {
+    const stored = localStorage.getItem("orders");
+    if (!stored) return;
+
+    const data: Order[] = JSON.parse(stored);
+
+    const updateStat = data.map((order: Order) =>
+      order.id === id ? { ...order, status: newStatus } : order
+    );
+
+    localStorage.setItem("orders", JSON.stringify(updateStat));
+
+    setDataOrders(updateStat);
+  };
+
+  console.log(dataOrders);
 
   return (
     <div className="w-full space-y-4 bg-slate-50 p-4 rounded-sm relative">
-      {/* <div className=" grid grid-cols-3 gap-x-4">
-        <div className="bg-slate-50 col-span-2 grid grid-cols-3 p-4 rounded-sm">
-          <div className="space-y-4  col-span-2">
-            <div className="space-y-1">
-              <p>made with love♥️</p>
-              <h3 className="text-2xl">Assignments</h3>
-            </div>
-            <p className="text-gray-500 max-w-[300px] text-justify">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-              labore? Numquam, error.
-            </p>
-            <Link href={"#"}>see details</Link>
-          </div>
-          <div className="bg-sky-600/60 grid place-items-center rounded-md">
-            <Image
-              src={"/images/notebook.png"}
-              width={100}
-              height={100}
-              alt="note"
-              className="w-4/5 h-auto"
-            />
-          </div>
-        </div>
-        <div className="bg-slate-50 p-4 rounded-sm relative group">
-          <div
-            className="w-full h-full bg-cover bg-center transition-all duration-300 group-hover:brightness-50 rounded-sm"
-            style={{ backgroundImage: "url('/images/img-1.jpg')" }}
-          ></div>
-          <div className="absolute top-4  p-4 text-slate-200 space-y-6">
-            <h3 className="text-xl">Work with...</h3>
-            <p className="text-xs max-w-[250px]">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-              labore? Numquam, error.
-            </p>
-            <Link href={"#"} className="">
-              see details
-            </Link>
-          </div>
-        </div>
-      </div> */}
       <div className="flex justify-between items-center">
         <h3 className="text-xl">All Orders</h3>
         <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
@@ -155,7 +145,7 @@ const productOrders = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-300 text-sm">
-            {orders.map((item) => (
+            {dataOrders.map((item) => (
               <tr
                 key={item.id}
                 className="hover:bg-gray-200  transition-all duration-200 text-gray-700"
@@ -190,7 +180,13 @@ const productOrders = () => {
                 </td>
                 <td className="p-3 text-gray-600 text-center">{item.date}</td>
                 <td className="p-3">
-                  <div className="flex justify-center">
+                  <StatusDropdown
+                    status={item.status}
+                    color={statusColors}
+                    id={item.id}
+                    onClick={updateStatus}
+                  />
+                  {/* <div className="flex justify-center">
                     <span
                       className={`rounded-sm px-3 py-2 text-xs font-semibold leading-tight ${
                         statusColors[item.status] || "bg-gray-100 text-gray-700"
@@ -198,7 +194,7 @@ const productOrders = () => {
                     >
                       {item.status}
                     </span>
-                  </div>
+                  </div> */}
                 </td>
                 <td className="p-3 font-semibold text-gray-700 text-center">
                   $ {item.amount.toLocaleString()}
@@ -220,3 +216,85 @@ const productOrders = () => {
 };
 
 export default productOrders;
+
+type Props = {
+  status: OrderStatus;
+  color: Record<OrderStatus, string>;
+  id: string;
+  onClick: (id: string, newStatus: OrderStatus) => void;
+};
+
+const StatusDropdown = ({ status, color, id, onClick }: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropMenuRef = useRef<HTMLDivElement>(null);
+
+  const statuses: OrderStatus[] = [
+    "Pending",
+    "Processing",
+    "Completed",
+    "Cancelled",
+  ];
+
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      if (
+        !dropMenuRef.current ||
+        dropMenuRef.current.contains(event.target as Node)
+      ) {
+        return null;
+      }
+      setIsOpen(false);
+    };
+    document.addEventListener("mousedown", listener);
+    return () => document.removeEventListener("mousedown", listener);
+  }, [dropMenuRef]);
+
+  console.log(status);
+  console.log(color);
+  console.log(id);
+  console.log(onClick);
+
+  return (
+    <div ref={dropMenuRef} className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer ${
+          color[status] || "bg-gray-100 text-gray-700"
+        }`}
+      >
+        <span className={` text-xs font-semibold leading-tight `}>
+          {status}
+        </span>
+        <ChevronRight
+          size={20}
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-90" : ""
+          }`}
+        />
+      </button>
+      {/* menu */}
+      <div
+        className={`z-10 fixed bg-slate-50 border-slate-300 border top-1/2 right-1/4 w-40 p-4 rounded-md transition-all duration-300 ease-in-out space-y-2 ${
+          isOpen
+            ? "translate-y-0 opacity-100 visible"
+            : "translate-y-full opacity-0 invisible"
+        }`}
+      >
+        {statuses.map((stat) => (
+          <button
+            key={stat}
+            onClick={() => {
+              onClick(id, stat);
+              setIsOpen(!isOpen);
+            }}
+            className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer ${
+              color[stat] || "bg-gray-100 text-gray-700"
+            } border border-${color[stat]}`}
+          >
+            {stat}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};

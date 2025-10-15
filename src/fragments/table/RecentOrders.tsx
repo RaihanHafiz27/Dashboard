@@ -2,8 +2,15 @@ import { LabelButton } from "../button/LabelButton";
 import { recentOrders, statusColors } from "@/data/recentOrders";
 import { Avatar } from "../profile/Avatar";
 import Image from "next/image";
+// import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export const RecentOrders = () => {
+  const router = useRouter();
+
+  console.log(router);
+
   return (
     <div className="flex flex-col bg-slate-50 col-span-2 space-y-2 rounded-sm overflow-hidden">
       <LabelButton title="Recent Orders" type="ellipsis" />
@@ -21,8 +28,9 @@ export const RecentOrders = () => {
         <tbody className="divide-y divide-gray-300 text-sm">
           {recentOrders.map((item) => (
             <tr
+              onClick={() => router.push("/dashboard/product/orders")}
               key={item.id}
-              className="hover:bg-gray-200  transition-all duration-200 text-gray-700"
+              className="hover:bg-gray-200 hover:cursor-pointer  transition-all duration-200 text-gray-700"
             >
               <td className="p-3 font-medium ">{item.id}</td>
               <td className="p-3">
