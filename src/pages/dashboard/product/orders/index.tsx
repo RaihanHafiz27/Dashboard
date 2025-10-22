@@ -1,18 +1,41 @@
-import { orders, recentOrders, statusColors } from "@/data/recentOrders";
-import { LabelButton } from "@/fragments/button/LabelButton";
-import { Avatar } from "@/fragments/profile/Avatar";
-import { Order, OrderStatus } from "@/types/order.type";
-import { ChevronRight, Command, Search } from "lucide-react";
+import { statusColors } from "@/data/recentOrders";
+import { Pagination } from "@/fragments/pagination/Pagination";
+import { updateOrderStatus } from "@/store/ordersSlice";
+import { AppDispatch, RootState } from "@/store/store";
+import { OrderStatus } from "@/types/order.type";
+import { ChevronLeft, ChevronRight, Command, Search } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const list = ["Latest", "Price", "Status"];
+
+const ITEMS_PER_PAGE = 7;
 
 const productOrders = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const [dataOrders, setDataOrders] = useState<Order[]>([]);
+
+  // 3. Ambil state dan dispatch dari store
+  const orders = useSelector((state: RootState) => state.orders.data);
+  const dispatch = useDispatch<AppDispatch>();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // 5. Logika "slice" pagination (sama persis)
+  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
+  const firstItemIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const lastItemIndex = currentPage * ITEMS_PER_PAGE;
+  const currentTableData = orders.slice(firstItemIndex, lastItemIndex);
+
+  // 6. Handler pagination (sama persis)
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // 7. Handler untuk update status (sekarang pakai dispatch)
+  const handleStatusUpdate = (orderId: string, newStatus: OrderStatus) => {
+    dispatch(updateOrderStatus({ orderId, newStatus }));
+  };
 
   // for dropdown filter
   useEffect(() => {
@@ -27,65 +50,64 @@ const productOrders = () => {
   }, [menuRef]);
 
   // for data order
-  useEffect(() => {
-    const stored = localStorage.getItem("orders");
-    if (stored) {
-      const data: Order[] = stored ? JSON.parse(stored) : null;
-      setDataOrders(data);
-    } else {
-      localStorage.setItem("orders", JSON.stringify(orders));
-      setDataOrders(orders);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const stored = localStorage.getItem("orders");
+  //   if (stored) {
+  //     const data: Order[] = stored ? JSON.parse(stored) : null;
+  //     setDataOrders(data);
+  //   } else {
+  //     localStorage.setItem("orders", JSON.stringify(allDummyOrders));
+  //     setDataOrders(allDummyOrders);
+  //   }
+  // }, []);
 
   // update status on localStorage
-  const updateStatus = (id: string, newStatus: OrderStatus) => {
-    const stored = localStorage.getItem("orders");
-    if (!stored) return;
+  // const updateStatus = (id: string, newStatus: OrderStatus) => {
+  //   const stored = localStorage.getItem("orders");
+  //   if (!stored) return;
 
-    const data: Order[] = JSON.parse(stored);
+  //   const data: Order[] = JSON.parse(stored);
 
-    const updateStat = data.map((order: Order) =>
-      order.id === id ? { ...order, status: newStatus } : order
-    );
+  //   const updateStat = data.map((order: Order) =>
+  //     order.id === id ? { ...order, status: newStatus } : order
+  //   );
 
-    localStorage.setItem("orders", JSON.stringify(updateStat));
+  //   localStorage.setItem("orders", JSON.stringify(updateStat));
 
-    setDataOrders(updateStat);
-  };
-
-  console.log(dataOrders);
+  //   setDataOrders(updateStat);
+  // };
 
   return (
     <div className="w-full space-y-4 bg-slate-50 p-4 rounded-sm relative">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pt-2">
         <h3 className="text-xl">All Orders</h3>
         <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
           <div className="relative">
             <input
               type="text"
               placeholder="Search for..."
-              className="bg-slate-200 p-2 w-full rounded-sm text-sm cursor-not-allowed"
+              className="bg-slate-100 border border-slate-300 p-2 w-full rounded-sm text-sm cursor-not-allowed"
               disabled
             />
             <button
               className={`absolute top-2 right-2 cursor-not-allowed`}
               disabled
             >
-              <Search size={20} />
+              <Search size={20} color="#6a7282" />
             </button>
           </div>
           <div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-slate-200 p-2 w-full rounded-sm text-sm text-start flex justify-between cursor-pointer"
+              className="bg-slate-100 border border-slate-300 p-2 w-full rounded-sm text-sm text-start flex justify-between cursor-pointer"
             >
               <div>
                 <span className="text-gray-500">Short by :</span>
-                <span>Newest</span>
+                <span className="text-gray-700">Newest</span>
               </div>
               <ChevronRight
                 size={20}
+                color="#6a7282"
                 className={`${
                   isOpen ? "transition-all duration-300 rotate-90" : ""
                 }`}
@@ -138,14 +160,14 @@ const productOrders = () => {
             <tr className="text-gray-700 tracking-wide text-sm">
               <th className="p-3 ">ID</th>
               <th className="p-3 ">Product</th>
-              <th className="p-3 ">Customer</th>
+              <th className="p-3 ">Address</th>
               <th className="p-3 ">Date</th>
-              <th className="p-3 ">Status</th>
               <th className="p-3 ">Amount</th>
+              <th className="p-3 ">Status</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-300 text-sm">
-            {dataOrders.map((item) => (
+            {currentTableData.map((item) => (
               <tr
                 key={item.id}
                 className="hover:bg-gray-200  transition-all duration-200 text-gray-700"
@@ -155,7 +177,7 @@ const productOrders = () => {
                   <div className="flex items-center space-x-3">
                     <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50">
                       <Image
-                        src={item.image}
+                        src={item.imageUrl}
                         height={40}
                         width={40}
                         alt={item.id}
@@ -163,41 +185,38 @@ const productOrders = () => {
                       />
                     </div>
                     <div>
-                      <p className="font-semibold " title={item.title}>
-                        {item.title.substring(0, 15)}...
+                      <p className="font-semibold " title={item.productName}>
+                        {item?.productName}
                       </p>
-                      <p className="text-xs text-gray-600">lorem</p>
+                      <p className="text-xs text-gray-600">
+                        Quantity : {item?.quantity}
+                      </p>
                     </div>
                   </div>
                 </td>
                 <td className="p-3">
-                  <div className="flex items-center space-x-3">
-                    <Avatar name={item.customer} />
+                  {/* <div className="flex items-center space-x-3">
+                    <Avatar name={item.customerName} />
                     <p className="truncate font-medium text-gray-700">
-                      {item.customer}
+                      {item.customerName}
                     </p>
-                  </div>
+                  </div> */}
+                  <p className="truncate font-medium text-gray-700">
+                    {item.customerAddress}
+                  </p>
                 </td>
                 <td className="p-3 text-gray-600 text-center">{item.date}</td>
+
+                <td className="p-3 font-semibold text-gray-700 text-center">
+                  $ {item?.amount ? item.amount.toLocaleString() : 0}
+                </td>
                 <td className="p-3">
                   <StatusDropdown
                     status={item.status}
                     color={statusColors}
                     id={item.id}
-                    onClick={updateStatus}
+                    onClick={handleStatusUpdate}
                   />
-                  {/* <div className="flex justify-center">
-                    <span
-                      className={`rounded-sm px-3 py-2 text-xs font-semibold leading-tight ${
-                        statusColors[item.status] || "bg-gray-100 text-gray-700"
-                      }`}
-                    >
-                      {item.status}
-                    </span>
-                  </div> */}
-                </td>
-                <td className="p-3 font-semibold text-gray-700 text-center">
-                  $ {item.amount.toLocaleString()}
                 </td>
               </tr>
             ))}
@@ -205,11 +224,15 @@ const productOrders = () => {
         </table>
       </div>
       {/* pagination */}
-      <div className="border-2 border-pink-600 flex justify-between items-center py-2">
+      <div className=" flex justify-between items-center pb-2">
         <p className="text-gray-500 text-sm">
           Showing data 1 to 7 of 256K entries
         </p>
-        <button>test</button>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePagination={handlePagination}
+        />
       </div>
     </div>
   );
@@ -248,11 +271,6 @@ const StatusDropdown = ({ status, color, id, onClick }: Props) => {
     document.addEventListener("mousedown", listener);
     return () => document.removeEventListener("mousedown", listener);
   }, [dropMenuRef]);
-
-  console.log(status);
-  console.log(color);
-  console.log(id);
-  console.log(onClick);
 
   return (
     <div ref={dropMenuRef} className="relative">

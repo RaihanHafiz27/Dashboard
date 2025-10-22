@@ -2,10 +2,11 @@ export type OrderStatus = "Pending" | "Completed" | "Processing" | "Cancelled";
 
 export interface Order {
   id: string;
-  customer: string;
-  date: string;
+  customerAddress: string;
   status: OrderStatus;
+  productName: string;
+  date: string;
   amount: number;
-  title: string;
-  image: string;
+  imageUrl: string;
+  quantity: number;
 }

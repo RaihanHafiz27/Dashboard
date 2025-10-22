@@ -1,13 +1,18 @@
 import { LabelButton } from "../button/LabelButton";
-import { recentOrders, statusColors } from "@/data/recentOrders";
+import { statusColors } from "@/data/recentOrders";
 import { Avatar } from "../profile/Avatar";
 import Image from "next/image";
 // import { useRouter } from "next/navigation";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 export const RecentOrders = () => {
   const router = useRouter();
+  const orders = useSelector((state: RootState) => state.orders.data);
+
+  const recentOrders = orders.slice(0, 5);
 
   console.log(router);
 
@@ -19,10 +24,10 @@ export const RecentOrders = () => {
           <tr className="text-gray-700 tracking-wide text-sm">
             <th className="p-3 ">ID</th>
             <th className="p-3 ">Product</th>
-            <th className="p-3 ">Customer</th>
+            <th className="p-3 ">Address</th>
             <th className="p-3 ">Date</th>
-            <th className="p-3 ">Status</th>
             <th className="p-3 ">Amount</th>
+            <th className="p-3 ">Status</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-300 text-sm">
@@ -37,7 +42,7 @@ export const RecentOrders = () => {
                 <div className="flex items-center space-x-3">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50">
                     <Image
-                      src={item.image} // Sebaiknya gunakan item.product.imageUrl
+                      src={item.imageUrl} // Sebaiknya gunakan item.product.imageUrl
                       height={40}
                       width={40}
                       alt={item.id}
@@ -45,37 +50,41 @@ export const RecentOrders = () => {
                     />
                   </div>
                   <div>
-                    <p className="font-semibold " title={item.title}>
-                      {/* {item.title} */}
-                      {item.title.substring(0, 15)}...
+                    <p className="font-semibold" title={item.productName}>
+                      {item?.productName}
                     </p>
-                    <p className="text-xs text-gray-600">lorem</p>
+                    <p className="text-xs text-gray-600">
+                      Quantity : {item?.quantity}
+                    </p>
                   </div>
                 </div>
               </td>
               <td className="p-3">
-                <div className="flex items-center space-x-3">
-                  <Avatar name={item.customer} />
+                {/* <div className="flex items-center space-x-3">
+                  <Avatar name={item.customerName} />
                   <p className="truncate font-medium text-gray-700">
-                    {item.customer}
+                    {item.customerName}
                   </p>
-                </div>
+                </div> */}
+                <p className="truncate font-medium text-gray-700">
+                  {item.customerAddress}
+                </p>
               </td>
               <td className="p-3 text-gray-600 text-center">{item.date}</td>
 
+              <td className="p-3 font-semibold text-gray-700 text-center">
+                $ {item.amount}
+              </td>
               <td className="p-3">
                 <div className="flex justify-center">
                   <span
-                    className={`rounded-sm px-3 py-2 text-xs font-semibold leading-tight ${
+                    className={`rounded-sm w-full text-center px-3 py-2 text-xs font-semibold leading-tight ${
                       statusColors[item.status] || "bg-gray-100 text-gray-700"
                     }`}
                   >
                     {item.status}
                   </span>
                 </div>
-              </td>
-              <td className="p-3 font-semibold text-gray-700 text-center">
-                $ {item.amount.toLocaleString()}
               </td>
             </tr>
           ))}
