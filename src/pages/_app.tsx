@@ -10,28 +10,23 @@ function StoreHydrator() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // 1. Jalankan HANYA di client, setelah mount
     const persistedOrders = loadState();
 
     if (persistedOrders) {
-      // 2. Jika ada data di localStorage,
-      //    dispatch action 'setOrders' untuk mengisi store
       dispatch(setOrders(persistedOrders));
     }
-    // 3. Jika tidak ada, store akan tetap menggunakan initialState-nya
-  }, [dispatch]); // Jalankan sekali saat mount
+  }, [dispatch]);
 
-  // Komponen ini tidak me-render apapun
   return null;
 }
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <DashboardLayout>
-      <Provider store={store}>
-        <StoreHydrator />
+    <Provider store={store}>
+      <StoreHydrator />
+      <DashboardLayout>
         <Component {...pageProps} />
-      </Provider>
-    </DashboardLayout>
+      </DashboardLayout>
+    </Provider>
   );
 }

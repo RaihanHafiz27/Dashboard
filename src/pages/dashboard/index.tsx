@@ -6,6 +6,7 @@ import { RecentOrders } from "@/fragments/table/RecentOrders";
 import { Calendar } from "@/fragments/calendar/Calendar";
 import { AnalyticsDonut } from "@/fragments/charts/analyticsDonut";
 import { CategoryBar } from "@/fragments/charts/categoryBar";
+import { useSelector } from "react-redux";
 
 const DashboardPage = () => {
   return (

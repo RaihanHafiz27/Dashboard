@@ -1,6 +1,7 @@
 import { Order } from "@/types/order.type";
 import { configureStore } from "@reduxjs/toolkit";
 import ordersReducer from "./ordersSlice";
+import themeReducer from "./themeSlice";
 
 // --- Section 1 logic localStorage ---
 const STORAGE_KEY = "admin-order-storage";
@@ -31,19 +32,12 @@ const saveState = (orders: Order[]) => {
 
 // --- Section 2 Configuration Store ---
 
-// Retrieve the existing state (if any) when the application is loaded
-// const persistedOrders = loadState();
-
 export const store = configureStore({
   // merge all reducer in here
   reducer: {
     orders: ordersReducer,
+    theme: themeReducer,
   },
-  // Tentukan state awal (preloadedState) dari localStorage
-  // Jika persistedOrders adalah undefined, Redux akan otomatis pakai initialState dari slice
-  // preloadedState: persistedOrders
-  //   ? { orders: { data: persistedOrders } }
-  //   : undefined,
 });
 
 // --- Section 3 Save changes ---

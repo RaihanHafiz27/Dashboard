@@ -11,6 +11,7 @@ interface OrderState {
 // Use dummy data as default if there is no data in localStorage.
 const initialState: OrderState = {
   data: allDummyOrders,
+  // data: [],
 };
 
 // Create slice

@@ -1,8 +1,9 @@
 import { statusColors } from "@/data/recentOrders";
 import { Pagination } from "@/fragments/pagination/Pagination";
+import { allDummyOrders } from "@/lib/dummyData";
 import { updateOrderStatus } from "@/store/ordersSlice";
 import { AppDispatch, RootState } from "@/store/store";
-import { OrderStatus } from "@/types/order.type";
+import { Order, OrderStatus } from "@/types/order.type";
 import { ChevronLeft, ChevronRight, Command, Search } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -15,24 +16,24 @@ const ITEMS_PER_PAGE = 7;
 const productOrders = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-  // 3. Ambil state dan dispatch dari store
-  const orders = useSelector((state: RootState) => state.orders.data);
-  const dispatch = useDispatch<AppDispatch>();
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 5. Logika "slice" pagination (sama persis)
+  // Ambil state dan dispatch dari store
+  const orders = useSelector((state: RootState) => state.orders.data);
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Logika "slice" pagination (sama persis)
   const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
   const firstItemIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const lastItemIndex = currentPage * ITEMS_PER_PAGE;
   const currentTableData = orders.slice(firstItemIndex, lastItemIndex);
 
-  // 6. Handler pagination (sama persis)
+  // Handler pagination (sama persis)
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
 
-  // 7. Handler untuk update status (sekarang pakai dispatch)
+  // Handler untuk update status (sekarang pakai dispatch)
   const handleStatusUpdate = (orderId: string, newStatus: OrderStatus) => {
     dispatch(updateOrderStatus({ orderId, newStatus }));
   };
@@ -48,34 +49,6 @@ const productOrders = () => {
     document.addEventListener("mousedown", listener);
     return () => document.removeEventListener("mousedown", listener);
   }, [menuRef]);
-
-  // for data order
-  // useEffect(() => {
-  //   const stored = localStorage.getItem("orders");
-  //   if (stored) {
-  //     const data: Order[] = stored ? JSON.parse(stored) : null;
-  //     setDataOrders(data);
-  //   } else {
-  //     localStorage.setItem("orders", JSON.stringify(allDummyOrders));
-  //     setDataOrders(allDummyOrders);
-  //   }
-  // }, []);
-
-  // update status on localStorage
-  // const updateStatus = (id: string, newStatus: OrderStatus) => {
-  //   const stored = localStorage.getItem("orders");
-  //   if (!stored) return;
-
-  //   const data: Order[] = JSON.parse(stored);
-
-  //   const updateStat = data.map((order: Order) =>
-  //     order.id === id ? { ...order, status: newStatus } : order
-  //   );
-
-  //   localStorage.setItem("orders", JSON.stringify(updateStat));
-
-  //   setDataOrders(updateStat);
-  // };
 
   return (
     <div className="w-full space-y-4 bg-slate-50 p-4 rounded-sm relative">

@@ -2,8 +2,11 @@ import { Sidebar } from "@/fragments/Sidebar/Sidebar";
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { Bell, MoonIcon, PanelTopOpen } from "lucide-react";
+import { Bell, MoonIcon, PanelTopOpen, SunIcon } from "lucide-react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkMode, toogleDarkMode } from "@/store/themeSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -13,6 +16,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const DashboardLayout = ({ children }: { children: ReactElement }) => {
   const [isFull, setIsFull] = useState<boolean>(true);
   const [isSupported, setIsSupported] = useState<boolean>(true);
+  const isDarkMode = useAppSelector((state) => state.theme.darkMode);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,7 +41,9 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 
   return (
     <div
-      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto bg-gray-300 md:min-h-screen ${plusJakarta.className} overflow-hidden`}
+      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto ${
+        isDarkMode ? "bg-gray-900" : "bg-gray-300"
+      } md:min-h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
       <Sidebar isFull={isFull} setIsFull={setIsFull} />
@@ -53,6 +59,12 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 const Information = () => {
   // const { pathname } = useRouter();
   // console.log(pathname);
+  const [dark, setDark] = useState(false);
+  const dispatch = useAppDispatch();
+  const isDarkMode = useAppSelector((state) => state.theme.darkMode);
+
+  console.log(isDarkMode);
+
   return (
     <div className="flex items-center justify-between">
       <div className="space-y-1 text-gray-700">
@@ -70,7 +82,16 @@ const Information = () => {
         <button disabled className="cursor-not-allowed">
           Sign In
         </button>
-        <MoonIcon />
+        <button
+          onClick={
+            isDarkMode
+              ? () => dispatch(toogleDarkMode())
+              : () => dispatch(setDarkMode(true))
+          }
+          className="cursor-pointer"
+        >
+          {isDarkMode ? <SunIcon /> : <MoonIcon />}
+        </button>
         <button disabled className="relative cursor-not-allowed">
           <Bell />
           <span
