@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { SearchBar } from "../input/SearchBar";
 
 export const Sidebar = ({
   isFull,
@@ -63,20 +64,8 @@ export const Sidebar = ({
           />
         </button>
       </div>
-      <div className={`relative ${isFull ? "block" : "hidden"}`}>
-        <input
-          type="text"
-          placeholder="Search for..."
-          className="bg-slate-200/10 p-2 w-full rounded-sm text-sm cursor-not-allowed"
-          disabled
-        />
-        <button
-          className={`absolute top-2 right-2 cursor-not-allowed`}
-          disabled
-        >
-          <Search size={20} />
-        </button>
-      </div>
+      {/* Search Bar */}
+      <SearchBar isFull={isFull} />
       <nav>
         <ul className="grid grid-cols-1 gap-y-6 ">
           {navLinks.map((link) => (

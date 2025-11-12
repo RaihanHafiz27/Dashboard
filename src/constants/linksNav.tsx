@@ -25,7 +25,7 @@ export const navLinks: NavLinks[] = [
     // to: "/dashboard/product",
     subs: [
       { title: "order", to: "/dashboard/product/orders" },
-      { title: "stock", to: "/dashboard/product/stock" },
+      { title: "stock", to: "/dashboard/product/stocks" },
     ],
     icon: <ShoppingCart />,
   },
