@@ -2,6 +2,7 @@ import { Order } from "@/types/order.type";
 import { configureStore } from "@reduxjs/toolkit";
 import ordersReducer from "./ordersSlice";
 import themeReducer from "./themeSlice";
+import usersReducer from "./usersSlice";
 
 // --- Section 1 logic localStorage ---
 const STORAGE_KEY = "admin-order-storage";
@@ -37,6 +38,7 @@ export const store = configureStore({
   reducer: {
     orders: ordersReducer,
     theme: themeReducer,
+    users: usersReducer,
   },
 });
 

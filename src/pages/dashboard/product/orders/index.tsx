@@ -22,13 +22,13 @@ const productOrders = () => {
   const orders = useSelector((state: RootState) => state.orders.data);
   const dispatch = useDispatch<AppDispatch>();
 
-  // Logika "slice" pagination (sama persis)
+  // Logika "slice" pagination
   const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
   const firstItemIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const lastItemIndex = currentPage * ITEMS_PER_PAGE;
   const currentTableData = orders.slice(firstItemIndex, lastItemIndex);
 
-  // Handler pagination (sama persis)
+  // Handler pagination
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
