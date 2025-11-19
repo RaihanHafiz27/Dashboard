@@ -51,9 +51,9 @@ const productOrders = () => {
   }, [menuRef]);
 
   return (
-    <div className="w-full space-y-4 bg-slate-50 p-4 rounded-sm relative">
+    <div className="w-full space-y-4 bg-slate-100 border border-slate-300 shadow-md p-4 rounded-sm relative">
       <div className="flex justify-between items-center pt-2">
-        <h3 className="text-xl">All Orders</h3>
+        <h3 className="text-xl text-gray-700">All Orders</h3>
         <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
           <div className="relative">
             <input

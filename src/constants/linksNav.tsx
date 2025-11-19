@@ -1,11 +1,12 @@
 import { NavLinks } from "@/types/navLinks.type";
 import {
   CircleQuestionMark,
+  ClipboardList,
+  DollarSign,
   Gauge,
   Settings,
   ShoppingCart,
-  Star,
-  User2,
+  Users,
 } from "lucide-react";
 
 export const navLinks: NavLinks[] = [
@@ -13,40 +14,43 @@ export const navLinks: NavLinks[] = [
     id: 1,
     title: "dashboard",
     to: "/dashboard",
-    // subs: [
-    //   { title: "overview", to: "/dashboard" },
-    //   { title: "report", to: "/dashboard/report" },
-    // ],
     icon: <Gauge />,
+    status: "active",
   },
   {
     id: 2,
     title: "product",
-    // to: "/dashboard/product",
     subs: [
-      { title: "order", to: "/dashboard/product/orders" },
-      { title: "stock", to: "/dashboard/product/stocks" },
+      { title: "order", to: "/product/orders" },
+      { title: "stock", to: "/product/stocks" },
+      { title: "refunds", to: "/product/refunds" },
     ],
     icon: <ShoppingCart />,
+    status: "active",
   },
   {
     id: 3,
-    title: "features",
-    // to: "/",
-    subs: [
-      { title: "task", to: "/dashboard/features/task" },
-      { title: "refunds", to: "#" },
-    ],
-    icon: <Star />,
+    title: "to-do",
+    to: "/todo",
+    icon: <ClipboardList />,
+    status: "active",
   },
   {
     id: 4,
-    title: "users",
-    to: "/dashboard/users",
-    icon: <User2 />,
+    title: "invoice",
+    to: "/",
+    icon: <DollarSign />,
+    status: "inactive",
   },
   {
     id: 5,
+    title: "users",
+    to: "/users",
+    icon: <Users />,
+    status: "active",
+  },
+  {
+    id: 6,
     title: "settings",
     // to: "/",
     subs: [
@@ -55,11 +59,13 @@ export const navLinks: NavLinks[] = [
       { title: "security", to: "#" },
     ],
     icon: <Settings />,
+    status: "inactive",
   },
   {
-    id: 6,
+    id: 7,
     title: "help",
-    to: "/dashboard/help",
+    to: "/help",
     icon: <CircleQuestionMark />,
+    status: "inactive",
   },
 ];

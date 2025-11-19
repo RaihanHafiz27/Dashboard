@@ -41,7 +41,7 @@ const productStocks = () => {
   return (
     <>
       <div
-        className={`w-full space-y-4  p-4 rounded-sm bg-slate-50 dark:bg-slate-800`}
+        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 border border-slate-300 shadow-md dark:bg-slate-800`}
       >
         <div className="flex flex-col h-[600px] space-y-2  overflow-hidden">
           <table className="min-w-full overflow-hidden table-auto">

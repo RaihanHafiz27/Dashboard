@@ -6,6 +6,8 @@ import { Provider, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setOrders } from "@/store/ordersSlice";
 import { useAppSelector } from "@/store/hooks";
+import { useRouter } from "next/router";
+import custom404 from "./404";
 
 function StoreHydrator() {
   const dispatch = useDispatch();

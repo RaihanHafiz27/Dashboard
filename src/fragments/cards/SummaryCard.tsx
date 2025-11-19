@@ -8,7 +8,7 @@ export const SummaryCard = () => {
       {datas.map((item) => (
         <div
           key={item.id}
-          className="bg-slate-50 rounded-md p-4 shadow-sm  hover:scale-105 transition-all duration-300"
+          className="bg-slate-100 rounded-md p-4 shadow-md border border-slate-300  hover:scale-105 transition-all duration-300"
         >
           <div className="flex items-center justify-between mb-2">
             <p className="text-lg 2xl:text-xl capitalize font-medium text-gray-700">

@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { SearchBar } from "../input/SearchBar";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { useAppSelector } from "@/store/hooks";
 
 export const Sidebar = ({
   isFull,
@@ -15,17 +18,17 @@ export const Sidebar = ({
 }) => {
   const [showMenu, setShowMenu] = useState<string | null>("dashboard");
   const router = useRouter();
-  console.log(router);
+  const darkmode = useAppSelector((state) => state.theme.darkMode);
 
   const toggleMenu = (menu: string) => {
     setShowMenu(showMenu === menu ? null : menu);
   };
 
-  console.log(showMenu);
+  console.log(darkmode);
 
   return (
     <aside
-      className={` text-slate-200 bg-gray-900 border-2 border-green-600 transition-all duration-300 ease-in-out p-2 space-y-4 ${
+      className={` text-gray-700 dark:text-slate-200 bg-slate-100 dark:bg-gray-900 border-r border-green-600 transition-all duration-300 ease-in-out p-2 space-y-4 ${
         isFull ? "w-60" : "w-16"
       }`}
     >
@@ -39,6 +42,25 @@ export const Sidebar = ({
             loading="lazy"
             className="w-9 h-auto"
           />
+          {/* {darkmode ? (
+            <Image
+              src={"/images/logo.png"}
+              width={100}
+              height={100}
+              alt="logo"
+              loading="lazy"
+              className="w-9 h-auto"
+            />
+          ) : (
+            <Image
+              src={"/images/logo-light.png"}
+              width={100}
+              height={100}
+              alt="logo"
+              loading="lazy"
+              className="w-9 h-auto"
+            />
+          )} */}
           <span className={`${isFull ? "blcok" : "hidden"} text-2xl`}>Xyz</span>
         </div>
         <button
@@ -71,9 +93,9 @@ export const Sidebar = ({
           {navLinks.map((link) => (
             <li
               key={link.id}
-              className={`p-2 ${
+              className={`p-2 text-sm ${
                 router.pathname === link.to
-                  ? " rounded-sm border-l-4 border-sky-500 bg-gray-200/10"
+                  ? " rounded-sm border-l-4 border-sky-500 bg-primary/10 dark:bg-gray-200/10"
                   : ""
               }`}
             >
@@ -93,7 +115,7 @@ export const Sidebar = ({
                     </span>
                     <i>
                       <ChevronRight
-                        color="#f8fafc"
+                        color="#364153"
                         className={`transition-all duration-300 ${
                           showMenu === link.title ? "rotate-90" : "rotate-0"
                         } ${isFull ? "block" : "hidden"}`}
@@ -116,7 +138,19 @@ export const Sidebar = ({
                             : ""
                         }`}
                       >
-                        <Link href={sub.to} className="capitalize">
+                        <Link
+                          href={link.status === "inactive" ? "#" : sub.to}
+                          onClick={(e) => {
+                            if (link.status === "inactive") {
+                              e.preventDefault();
+                            }
+                          }}
+                          className={`capitalize ${
+                            link.status === "inactive"
+                              ? "cursor-not-allowed"
+                              : ""
+                          }`}
+                        >
                           {sub.title}
                         </Link>
                       </li>
@@ -125,9 +159,16 @@ export const Sidebar = ({
                 </>
               ) : (
                 <Link
-                  href={link.to ?? "#"}
-                  onClick={() => setShowMenu(null)}
-                  className={`flex items-center capitalize rounded-sm w-full `}
+                  href={link.status === "inactive" ? "#" : link.to ?? "#"}
+                  onClick={(e) => {
+                    if (link.status === "inactive") {
+                      e.preventDefault();
+                    }
+                    setShowMenu(null);
+                  }}
+                  className={`flex items-center capitalize rounded-sm w-full ${
+                    link.status === "inactive" ? "cursor-not-allowed" : ""
+                  }`}
                 >
                   <span className="flex items-center space-x-2">
                     <i>{link.icon}</i>

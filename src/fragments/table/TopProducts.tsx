@@ -4,7 +4,7 @@ import { top3 } from "@/data/top3";
 
 export const TopProducts = () => {
   return (
-    <div className="rounded-sm bg-slate-50">
+    <div className="rounded-sm bg-slate-100 border border-slate-300 shadow-md">
       <LabelButton title="Top Products" type="ellipsis" />
       <div className="grid grid-cols-1 gap-y-4 p-4 space-y-1  h-80 2xl:h-96">
         {top3.map((prod) => (

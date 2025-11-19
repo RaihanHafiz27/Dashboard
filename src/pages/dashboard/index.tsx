@@ -10,8 +10,14 @@ import { useSelector } from "react-redux";
 
 const DashboardPage = () => {
   return (
-    <div className="space-y-4 2xl:space-y-8">
+    <div className="space-y-6 2xl:space-y-8">
       <SummaryCard />
+      <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
+        <div className="hidden lg:block">
+          <AnalyticsDonut />
+        </div>
+        <CategoryBar />
+      </div>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
         <MonthlyLine />
         <div className="hidden lg:block">
@@ -23,12 +29,12 @@ const DashboardPage = () => {
         <TopProducts />
         <AnalyticsDonut />
       </div>
-      <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
+      {/* <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
         <div className="hidden lg:block">
           <AnalyticsDonut />
         </div>
         <CategoryBar />
-      </div>
+      </div> */}
       <div>
         <RecentOrders />
       </div>

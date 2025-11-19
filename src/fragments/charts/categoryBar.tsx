@@ -80,7 +80,7 @@ export const CategoryBar = () => {
   const labels = formattedChartData.datasets.map((l) => l.label);
 
   return (
-    <div className="bg-slate-50 rounded-sm col-span-2">
+    <div className="bg-slate-100 border border-slate-300 shadow-md rounded-sm col-span-2">
       <LabelButton
         title="Best Selling Categories"
         type="filter"

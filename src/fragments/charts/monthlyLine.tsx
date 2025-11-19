@@ -79,7 +79,7 @@ export const MonthlyLine = () => {
   };
 
   return (
-    <div className="flex flex-col bg-slate-50  col-span-2 rounded-sm overflow-hidden ">
+    <div className="flex flex-col bg-slate-100  col-span-2 rounded-sm overflow-hidden border border-slate-300 shadow-md">
       <LabelButton title={"Monthly Report"} type="ellipsis" />
       <div className="grow p-4 rounded-sm h-80 2xl:h-96 hover:scale-105 transition-all duration-300">
         <Line data={data} options={options} />

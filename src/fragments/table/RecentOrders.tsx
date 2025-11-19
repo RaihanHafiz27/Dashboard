@@ -17,7 +17,7 @@ export const RecentOrders = () => {
   console.log(router);
 
   return (
-    <div className="flex flex-col bg-slate-50 col-span-2 space-y-2 rounded-sm overflow-hidden">
+    <div className="flex flex-col bg-slate-100 border border-slate-300 shadow-md col-span-2 space-y-2 rounded-sm overflow-hidden">
       <LabelButton title="Recent Orders" type="ellipsis" />
       <table className="grow overflow-hidden m-2 table-auto">
         <thead className="border-b border-gray-300">

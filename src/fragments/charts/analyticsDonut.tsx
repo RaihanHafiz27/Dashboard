@@ -67,7 +67,7 @@ export const AnalyticsDonut = () => {
   };
 
   return (
-    <div className="flex flex-col col-span-1 bg-slate-50 rounded-sm">
+    <div className="flex flex-col col-span-1 bg-slate-100 border border-slate-300 shadow-md rounded-sm">
       <LabelButton title="Analytics" type="ellipsis" />
       <div className="grow p-4 relative h-80 2xl:h-96 hover:scale-105 transition-all duration-300 grid place-items-center">
         <Doughnut data={data} options={options} />

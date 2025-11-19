@@ -27,11 +27,10 @@ const UsersPage = () => {
   console.log(users);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <SummaryUsers />
-
       <div
-        className={`w-full space-y-4  p-4 rounded-sm bg-slate-50 dark:bg-slate-800`}
+        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 border border-slate-300 shadow-md dark:bg-slate-800`}
       >
         <div className="flex justify-between items-center">
           <p className="font-semibold text-gray-700 text-xl">All Users</p>

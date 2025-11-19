@@ -47,7 +47,7 @@ export const SummaryUsers = () => {
       {usersSum.map((item) => (
         <div
           key={item.id}
-          className="bg-slate-50 rounded-md p-4 shadow-sm  hover:scale-105 transition-all duration-300 flex justify-between items-center"
+          className="bg-slate-100 border border-slate-300 shadow-md rounded-md p-4 hover:scale-105 transition-all duration-300 flex justify-between items-center"
         >
           <div className="flex  space-x-2 ">
             <div
