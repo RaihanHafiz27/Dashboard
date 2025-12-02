@@ -30,10 +30,12 @@ const UsersPage = () => {
     <div className="space-y-6">
       <SummaryUsers />
       <div
-        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 border border-slate-300 shadow-md dark:bg-slate-800`}
+        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md `}
       >
         <div className="flex justify-between items-center">
-          <p className="font-semibold text-gray-700 text-xl">All Users</p>
+          <p className="font-semibold text-gray-700 dark:text-gray-300 text-xl">
+            All Users
+          </p>
           <div className="flex items-center space-x-4">
             <SearchBar isFull={true} />
             <button className="bg-sky-700 px-4 py-2 text-sm rounded-sm text-slate-200">
@@ -44,8 +46,8 @@ const UsersPage = () => {
         {/* Table Users */}
         <div className="flex flex-col h-[560px] space-y-2  overflow-hidden">
           <table className="min-w-full overflow-hidden table-auto">
-            <thead className="border-b border-gray-300">
-              <tr className="text-gray-700 tracking-wide text-sm">
+            <thead className="border-b border-gray-300 dark:border-gray-500">
+              <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
                 <th className="p-3 text-start">Profile</th>
                 <th className="p-3 text-start">Phone Number</th>
                 <th className="p-3 text-start">Location</th>
@@ -53,7 +55,7 @@ const UsersPage = () => {
                 <th className="p-3 ">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-300 ">
+            <tbody className="divide-y divide-gray-300 dark:divide-gray-500">
               {currentTableData.map((user) => (
                 <tr key={user.id}>
                   <td className="p-3">
@@ -68,24 +70,28 @@ const UsersPage = () => {
                         />
                       </div>
                       <div>
-                        <p className="capitalize">{user.name}</p>
-                        <p className="text-sm text-gray-500">{user.email}</p>
+                        <p className="capitalize text-gray-700 dark:text-gray-300">
+                          {user.name}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {user.email}
+                        </p>
                       </div>
                     </div>
                   </td>
 
-                  <td className="p-3 lowercase text-gray-700 text-sm">
+                  <td className="p-3 lowercase text-gray-700 dark:text-gray-300 text-sm">
                     {user.telp}
                   </td>
-                  <td className="p-3 text-gray-700 text-sm capitalize">
+                  <td className="p-3 text-gray-700 dark:text-gray-300 text-sm capitalize">
                     {user.location}
                   </td>
                   <td className="p-3 text-gray-700">
                     <span
                       className={`flex items-center justify-center py-1 rounded-sm border ${
                         user.status === true
-                          ? "border-green-500 bg-green-100 text-green-700"
-                          : "border-gray-400 bg-gray-100 text-gray-600"
+                          ? "border-green-300 bg-green-100 dark:bg-transparent text-green-700 dark:text-green-500"
+                          : "border-gray-300 bg-gray-100 dark:bg-transparent text-gray-600 dark:text-gray-300"
                       }`}
                     >
                       <span className="flex items-center justify-center">
@@ -97,12 +103,15 @@ const UsersPage = () => {
                     </span>
                   </td>
                   <td className="p-3">
-                    <div className="border border-gray-400 grid grid-cols-2 divide-x divide-gray-400 py-1.5 rounded-md">
+                    <div className="border border-gray-400 dark:border-gray-500 grid grid-cols-2 divide-x divide-gray-400 py-1.5 rounded-md">
                       <button
                         className="flex justify-center cursor-not-allowed"
                         disabled
                       >
-                        <SquarePen color="#6a7282" size={20} />
+                        <SquarePen
+                          size={20}
+                          className="text-gray-700 dark:text-gray-300"
+                        />
                       </button>
                       <button className="flex justify-center cursor-pointer">
                         <Trash2 color="#e7000b" size={20} />

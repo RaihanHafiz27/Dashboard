@@ -25,7 +25,7 @@ const features: Links[] = [
   {
     id: 1,
     title: "Details",
-    to: "/dashboard/product/orders",
+    to: "/product/orders",
     active: true,
     icon: <ViewIcon size={18} />,
   },
@@ -87,17 +87,19 @@ export const LabelButton = ({
 
   return (
     <div ref={menuRef} className="relative flex justify-between px-3 pt-3">
-      <h3 className="font-semibold text-gray-600">{title}</h3>
+      <h3 className="font-semibold text-gray-600 dark:text-gray-300">
+        {title}
+      </h3>
       <button
         className={`cursor-pointer ${
           type === "ellipsis"
             ? ""
-            : "border-b border-gray-700 flex w-28 justify-between text-sm items-center "
+            : "border-b border-gray-700 dark:border-gray-500 text-gray-700 dark:text-gray-300 flex w-28 justify-between text-sm items-center "
         }`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         {type === "ellipsis" ? (
-          <Ellipsis color="#4a5565" />
+          <Ellipsis className="text-gray-500 dark:text-gray-300" />
         ) : (
           <>
             <span className="capitalize">{selectedFilter}</span>
@@ -155,7 +157,7 @@ export const LabelButton = ({
             <li>
               <button
                 onClick={() => onFilterChange?.("all")}
-                className="cursor-pointer flex text-sm justify-between items-center w-40 hover:bg-gray-400/70  p-2 rounded-md text-gray-700"
+                className="cursor-pointer flex text-sm justify-between items-center w-40 hover:bg-gray-400/70  p-2 rounded-md text-gray-700 "
               >
                 <span>All</span>
                 <div className="flex items-center">

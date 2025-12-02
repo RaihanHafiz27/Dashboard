@@ -51,9 +51,9 @@ const productOrders = () => {
   }, [menuRef]);
 
   return (
-    <div className="w-full space-y-4 bg-slate-100 border border-slate-300 shadow-md p-4 rounded-sm relative">
+    <div className="w-full space-y-4 bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md p-4 rounded-sm relative">
       <div className="flex justify-between items-center pt-2">
-        <h3 className="text-xl text-gray-700">All Orders</h3>
+        <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
         <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
           <div className="relative">
             <input
@@ -129,8 +129,8 @@ const productOrders = () => {
       {/* tabel */}
       <div className="flex flex-col h-[555px] space-y-2  overflow-hidden">
         <table className="min-w-full overflow-hidden table-auto">
-          <thead className="border-b border-gray-300">
-            <tr className="text-gray-700 tracking-wide text-sm">
+          <thead className="border-b border-gray-300 dark:border-gray-500">
+            <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
               <th className="p-3 ">ID</th>
               <th className="p-3 ">Product</th>
               <th className="p-3 ">Address</th>
@@ -139,11 +139,11 @@ const productOrders = () => {
               <th className="p-3 ">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-300 text-sm">
+          <tbody className="divide-y divide-gray-300 dark:divide-gray-500 text-sm">
             {currentTableData.map((item) => (
               <tr
                 key={item.id}
-                className="hover:bg-gray-200  transition-all duration-200 text-gray-700"
+                className="hover:bg-gray-200 dark:hover:bg-gray-700/10 transition-all duration-200 text-gray-700 dark:text-gray-300"
               >
                 <td className="p-3 font-medium ">{item.id}</td>
                 <td className="p-3">
@@ -161,7 +161,7 @@ const productOrders = () => {
                       <p className="font-semibold " title={item.productName}>
                         {item?.productName}
                       </p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
                         Quantity : {item?.quantity}
                       </p>
                     </div>
@@ -174,13 +174,15 @@ const productOrders = () => {
                       {item.customerName}
                     </p>
                   </div> */}
-                  <p className="truncate font-medium text-gray-700">
+                  <p className="truncate font-medium text-gray-700 dark:text-gray-300">
                     {item.customerAddress}
                   </p>
                 </td>
-                <td className="p-3 text-gray-600 text-center">{item.date}</td>
+                <td className="p-3 text-gray-600 dark:text-gray-300 text-center">
+                  {item.date}
+                </td>
 
-                <td className="p-3 font-semibold text-gray-700 text-center">
+                <td className="p-3 font-semibold text-gray-700 dark:text-gray-300 text-center">
                   $ {item?.amount ? item.amount.toLocaleString() : 0}
                 </td>
                 <td className="p-3">
@@ -198,7 +200,7 @@ const productOrders = () => {
       </div>
       {/* pagination */}
       <div className=" flex justify-between items-center pb-2">
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-500 dark:text-gray-300 text-sm">
           Showing data 1 to 7 of 256K entries
         </p>
         <Pagination

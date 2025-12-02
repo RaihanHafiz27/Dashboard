@@ -16,28 +16,28 @@ const usersSum = [
     title: "total users",
     count: 1270,
     icon: <Users className="w-5 h-5 text-sky-700" />,
-    background: "bg-sky-700/30",
+    background: "bg-sky-700/30 dark:bg-sky-300",
   },
   {
     id: 2,
     title: "new users",
     count: 25,
     icon: <User className="w-5 h-5 text-red-700" />,
-    background: "bg-red-700/30",
+    background: "bg-red-700/30 dark:bg-red-300",
   },
   {
     id: 3,
     title: "top users",
     count: 77,
     icon: <Heart className="w-5 h-5 text-purple-700" />,
-    background: "bg-purple-700/30",
+    background: "bg-purple-700/30 dark:bg-purple-300",
   },
   {
     id: 4,
     title: "other users",
     count: 1168,
     icon: <CircleEllipsis className="w-5 h-5 text-green-700" />,
-    background: "bg-green-700/30",
+    background: "bg-green-700/30 dark:bg-green-300",
   },
 ];
 
@@ -47,7 +47,7 @@ export const SummaryUsers = () => {
       {usersSum.map((item) => (
         <div
           key={item.id}
-          className="bg-slate-100 border border-slate-300 shadow-md rounded-md p-4 hover:scale-105 transition-all duration-300 flex justify-between items-center"
+          className="bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-md p-4 hover:scale-105 transition-all duration-300 flex justify-between items-center"
         >
           <div className="flex  space-x-2 ">
             <div
@@ -56,11 +56,11 @@ export const SummaryUsers = () => {
               <i>{item.icon}</i>
             </div>
             <div className="flex flex-col justify-center">
-              <p className="capitalize font-semibold text-gray-700">
+              <p className="capitalize font-semibold text-gray-700 dark:text-gray-300">
                 {item.title}
               </p>
               <CountUp
-                className="text-sm text-gray-600"
+                className="text-sm text-gray-600 dark:text-gray-400"
                 start={0}
                 end={item.count}
                 duration={5}
@@ -70,7 +70,7 @@ export const SummaryUsers = () => {
           {/* Ellipsis Button */}
           <div className="grid place-items-center">
             <button>
-              <EllipsisVertical />
+              <EllipsisVertical className="text-gray-700 dark:text-gray-300" />
             </button>
           </div>
         </div>

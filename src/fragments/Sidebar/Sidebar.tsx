@@ -28,7 +28,7 @@ export const Sidebar = ({
 
   return (
     <aside
-      className={` text-gray-700 dark:text-slate-200 bg-slate-100 dark:bg-gray-900 border-r border-green-600 transition-all duration-300 ease-in-out p-2 space-y-4 ${
+      className={` text-gray-700 dark:text-slate-200  transition-all duration-300 ease-in-out px-2 pt-4 space-y-6 ${
         isFull ? "w-60" : "w-16"
       }`}
     >
@@ -134,7 +134,7 @@ export const Sidebar = ({
                         key={sub.title}
                         className={`p-2 ${
                           router.pathname === sub.to
-                            ? "rounded-sm border-l-4 border-sky-500 bg-gray-200/10"
+                            ? "rounded-sm border-l-4 border-sky-500 bg-primary/10"
                             : ""
                         }`}
                       >

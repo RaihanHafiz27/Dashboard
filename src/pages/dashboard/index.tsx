@@ -7,19 +7,25 @@ import { Calendar } from "@/fragments/calendar/Calendar";
 import { AnalyticsDonut } from "@/fragments/charts/analyticsDonut";
 import { CategoryBar } from "@/fragments/charts/categoryBar";
 import { useSelector } from "react-redux";
+import { useAppSelector } from "@/store/hooks";
 
 const DashboardPage = () => {
+  const isDarkMode = useAppSelector((state) => state.theme.darkMode);
+
+  const textColor = isDarkMode ? "#d1d5dc" : "#4a5565";
+  const gridColor = isDarkMode ? "#374151" : "#E5E7EB";
+
   return (
     <div className="space-y-6 2xl:space-y-8">
       <SummaryCard />
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
         <div className="hidden lg:block">
-          <AnalyticsDonut />
+          <AnalyticsDonut textColor={textColor} />
         </div>
-        <CategoryBar />
+        <CategoryBar textColor={textColor} gridColor={gridColor} />
       </div>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
-        <MonthlyLine />
+        <MonthlyLine textColor={textColor} gridColor={gridColor} />
         <div className="hidden lg:block">
           <TopProducts />
         </div>
@@ -27,7 +33,7 @@ const DashboardPage = () => {
       {/* chart components for tablet */}
       <div className="grid grid-cols-2 gap-4 lg:hidden">
         <TopProducts />
-        <AnalyticsDonut />
+        <AnalyticsDonut textColor={textColor} />
       </div>
       {/* <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
         <div className="hidden lg:block">

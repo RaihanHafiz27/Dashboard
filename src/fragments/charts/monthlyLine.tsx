@@ -10,10 +10,11 @@ import {
 } from "chart.js";
 import { salesData } from "@/constants/salesData";
 import { LabelButton } from "../button/LabelButton";
+import { ChartColor } from "@/types/chartColor.type";
 
 ChartJS.register(CategoryScale, LineElement, LinearScale, PointElement, Filler);
 
-export const MonthlyLine = () => {
+export const MonthlyLine = ({ textColor, gridColor }: ChartColor) => {
   const data = {
     labels: salesData.map((item) => item.month),
     datasets: [
@@ -62,7 +63,11 @@ export const MonthlyLine = () => {
           drawBorder: false, // hilangkan border axis
         },
         ticks: {
-          color: "#6b7280",
+          color: textColor,
+        },
+        border: {
+          display: true,
+          color: gridColor,
         },
       },
       y: {
@@ -71,15 +76,19 @@ export const MonthlyLine = () => {
           drawBorder: false,
         },
         ticks: {
-          color: "#6b7280",
+          color: textColor,
           // optionally format ticks, e.g. callback untuk "Rp"
+        },
+        border: {
+          display: true,
+          color: gridColor,
         },
       },
     },
   };
 
   return (
-    <div className="flex flex-col bg-slate-100  col-span-2 rounded-sm overflow-hidden border border-slate-300 shadow-md">
+    <div className="flex flex-col bg-slate-100 dark:bg-transparent  col-span-2 rounded-sm overflow-hidden border border-slate-300 dark:border-gray-500 shadow-md">
       <LabelButton title={"Monthly Report"} type="ellipsis" />
       <div className="grow p-4 rounded-sm h-80 2xl:h-96 hover:scale-105 transition-all duration-300">
         <Line data={data} options={options} />

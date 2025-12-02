@@ -8,17 +8,17 @@ export const SummaryCard = () => {
       {datas.map((item) => (
         <div
           key={item.id}
-          className="bg-slate-100 rounded-md p-4 shadow-md border border-slate-300  hover:scale-105 transition-all duration-300"
+          className="bg-slate-100 dark:bg-transparent rounded-md p-4 shadow-md border border-slate-300 dark:border-gray-500  hover:scale-105 transition-all duration-300"
         >
           <div className="flex items-center justify-between mb-2">
-            <p className="text-lg 2xl:text-xl capitalize font-medium text-gray-700">
+            <p className="text-lg 2xl:text-xl capitalize font-medium text-gray-700 dark:text-gray-300">
               {item.title}
             </p>
             <i>{item.icon}</i>
           </div>
           <span className="flex items-center space-x-2">
             <CountUp
-              className="text-2xl 2xl:text-3xl font-bold text-gray-700"
+              className="text-2xl 2xl:text-3xl font-bold text-gray-700 dark:text-gray-300"
               start={0}
               end={item.sum}
               duration={5}

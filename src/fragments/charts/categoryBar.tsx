@@ -11,6 +11,9 @@ import {
 import { productsCategory } from "@/data/categoryProd";
 import { useEffect, useState } from "react";
 import { LabelButton } from "../button/LabelButton";
+import { useAppSelector } from "@/store/hooks";
+import { color } from "chart.js/helpers";
+import { ChartColor } from "@/types/chartColor.type";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, LineElement, Tooltip);
 
@@ -24,7 +27,7 @@ const formattedChartData = {
   })),
 };
 
-export const CategoryBar = () => {
+export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
   const [selectedFilter, setSelectedFilter] = useState<string>("all");
   const [chartData, setChartData] = useState(formattedChartData);
 
@@ -53,6 +56,9 @@ export const CategoryBar = () => {
         display: true,
         position: "top" as const,
         padding: 10,
+        labels: {
+          color: textColor,
+        },
       },
     },
     scales: {
@@ -62,16 +68,25 @@ export const CategoryBar = () => {
           drawBorder: false,
         },
         ticks: {
-          color: "#6b7280",
+          color: textColor,
+        },
+        border: {
+          display: true,
+          color: gridColor,
         },
       },
       y: {
         grid: {
           display: true,
           drawBorder: false,
+          color: gridColor,
         },
         ticks: {
-          color: "#6b7280",
+          color: textColor,
+        },
+        border: {
+          display: true,
+          color: gridColor,
         },
       },
     },
@@ -80,9 +95,9 @@ export const CategoryBar = () => {
   const labels = formattedChartData.datasets.map((l) => l.label);
 
   return (
-    <div className="bg-slate-100 border border-slate-300 shadow-md rounded-sm col-span-2">
+    <div className="bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-sm col-span-2">
       <LabelButton
-        title="Best Selling Categories"
+        title="Best Sell Categories"
         type="filter"
         selectedFilter={selectedFilter}
         onFilterChange={setSelectedFilter}

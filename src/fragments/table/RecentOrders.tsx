@@ -1,10 +1,7 @@
 import { LabelButton } from "../button/LabelButton";
 import { statusColors } from "@/data/recentOrders";
-import { Avatar } from "../profile/Avatar";
 import Image from "next/image";
-// import { useRouter } from "next/navigation";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
@@ -17,11 +14,11 @@ export const RecentOrders = () => {
   console.log(router);
 
   return (
-    <div className="flex flex-col bg-slate-100 border border-slate-300 shadow-md col-span-2 space-y-2 rounded-sm overflow-hidden">
+    <div className="flex flex-col bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md col-span-2 space-y-2 rounded-sm overflow-hidden">
       <LabelButton title="Recent Orders" type="ellipsis" />
       <table className="grow overflow-hidden m-2 table-auto">
-        <thead className="border-b border-gray-300">
-          <tr className="text-gray-700 tracking-wide text-sm">
+        <thead className="border-b border-gray-300 dark:border-gray-500">
+          <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
             <th className="p-3 ">ID</th>
             <th className="p-3 ">Product</th>
             <th className="p-3 ">Address</th>
@@ -30,12 +27,12 @@ export const RecentOrders = () => {
             <th className="p-3 ">Status</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-300 text-sm">
+        <tbody className="divide-y divide-gray-300 dark:divide-gray-500 text-sm">
           {recentOrders.map((item) => (
             <tr
-              onClick={() => router.push("/dashboard/product/orders")}
+              onClick={() => router.push("/product/orders")}
               key={item.id}
-              className="hover:bg-gray-200 hover:cursor-pointer  transition-all duration-200 text-gray-700"
+              className="hover:bg-gray-200 dark:hover:bg-gray-700/10 hover:cursor-pointer  transition-all duration-200 text-gray-700 dark:text-gray-300"
             >
               <td className="p-3 font-medium ">{item.id}</td>
               <td className="p-3">
@@ -53,7 +50,7 @@ export const RecentOrders = () => {
                     <p className="font-semibold" title={item.productName}>
                       {item?.productName}
                     </p>
-                    <p className="text-xs text-gray-600">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       Quantity : {item?.quantity}
                     </p>
                   </div>
@@ -66,13 +63,15 @@ export const RecentOrders = () => {
                     {item.customerName}
                   </p>
                 </div> */}
-                <p className="truncate font-medium text-gray-700">
+                <p className="truncate font-medium text-gray-700 dark:text-gray-300">
                   {item.customerAddress}
                 </p>
               </td>
-              <td className="p-3 text-gray-600 text-center">{item.date}</td>
+              <td className="p-3 text-gray-700 dark:text-gray-300 text-center">
+                {item.date}
+              </td>
 
-              <td className="p-3 font-semibold text-gray-700 text-center">
+              <td className="p-3 font-semibold text-gray-700 dark:text-gray-300 text-center">
                 $ {item.amount}
               </td>
               <td className="p-3">

@@ -43,14 +43,14 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 
   return (
     <div
-      className={`flex border-2 border-pink-700 w-full  min-h-dvh h-auto ${
+      className={`flex w-full  min-h-dvh h-auto ${
         isDarkMode ? "bg-gray-900" : "bg-slate-100"
       } md:min-h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
       <Sidebar isFull={isFull} setIsFull={setIsFull} />
       {/* main content dashboard */}
-      <main className="border-2 border-blue-600 grow p-4 2xl:p-8 space-y-8">
+      <main className="border-l border-gray-300 dark:border-gray-500 grow p-4 2xl:p-8 space-y-8">
         <Information />
         <div className="w-full">{children}</div>
       </main>
@@ -66,9 +66,9 @@ const Information = () => {
   const segments = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="flex items-center justify-between border-gray-300 pt-2 pb-5 border-b-2">
+    <div className="flex items-center justify-between border-gray-300 dark:border-gray-500 pt-2 pb-5 border-b">
       <div className="flex items-center space-x-4">
-        <p className="font-semibold text-2xl text-gray-700 capitalize">
+        <p className="font-semibold text-2xl text-gray-700 dark:text-gray-300 capitalize">
           {pathname === "/dashboard"
             ? "Dashboard"
             : `${
@@ -81,12 +81,12 @@ const Information = () => {
       <div className="flex items-center space-x-4">
         <button
           disabled
-          className="cursor-not-allowed flex items-center space-x-2 bg-sky-600/20 px-2 py-1.5 rounded-sm text-sm text-sky-700"
+          className="cursor-not-allowed flex items-center space-x-2 bg-sky-600/20 dark:bg-sky-600/20 px-6 py-1.5 rounded-sm text-sm text-sky-700 dark:text-sky-500"
         >
           <i>
-            <Star size={20} fill="#0069a8" />
+            <Star size={20} className="fill-sky-700 dark:fill-sky-500" />
           </i>
-          <span>Upgrade your plan</span>
+          <span>Premium</span>
         </button>
         <button
           onClick={
@@ -94,11 +94,14 @@ const Information = () => {
               ? () => dispatch(toogleDarkMode())
               : () => dispatch(setDarkMode(true))
           }
-          className="cursor-pointer"
+          className="cursor-pointer text-gray-700 dark:text-gray-300"
         >
           {isDarkMode ? <SunIcon /> : <MoonIcon />}
         </button>
-        <button disabled className="relative cursor-not-allowed">
+        <button
+          disabled
+          className="relative cursor-not-allowed text-gray-700 dark:text-gray-300"
+        >
           <Bell />
           <span
             className="
