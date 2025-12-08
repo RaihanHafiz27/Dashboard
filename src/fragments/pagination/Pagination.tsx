@@ -19,12 +19,8 @@ export const Pagination = ({
     (_, i) => startPage + i
   );
 
-  console.log(pageNumbers);
-  console.log(startPage);
-  console.log(endPage);
-
   return (
-    <div className="border border-gray-400 rounded-md flex items-center px-2 py-1 space-x-2 text-xs">
+    <div className="flex items-center px-2 py-1 space-x-2 text-xs">
       <BtnPag
         currentPage={currentPage}
         startPage={startPage}
@@ -36,10 +32,10 @@ export const Pagination = ({
           <button
             key={i}
             onClick={() => handlePagination(i)}
-            className={`w-8 h-8 border  rounded-full hover:cursor-pointer ${
+            className={`w-9 h-9 2xl:w-11 2xl:h-11  rounded-full hover:cursor-pointer transition-all duration-300 ${
               i === currentPage
-                ? "bg-sky-500/70 text-white font-semibold shadow border-sky-300"
-                : "text-gray-600 hover:bg-gray-100 border-gray-300"
+                ? "bg-sky-600 text-white font-semibold shadow"
+                : "text-gray-600 hover:bg-gray-100 border border-gray-300"
             }`}
           >
             {i}
@@ -79,7 +75,7 @@ const BtnPag = ({
       disabled={
         type === "prev" ? currentPage === startPage : currentPage === endPage
       }
-      className=" p-1 border border-gray-300 rounded-full hover:cursor-pointer text-gray-600  transition disabled:cursor-not-allowed disabled:text-gray-400"
+      className="w-9 h-9 2xl:w-11 2xl:h-11 p-1 border border-gray-300 hover:bg-gray-100 rounded-full grid place-items-center hover:cursor-pointer text-gray-600  transition disabled:cursor-not-allowed disabled:text-gray-400"
     >
       <ChevronLeft
         size={20}

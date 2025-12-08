@@ -11,7 +11,7 @@ export const stockProd: Stock[] = [
   {
     id: 1,
     name: "Longines Master Collection",
-    category: "mens-watches",
+    category: "Accessories",
     price: 1241,
     piece: 23,
     image: "/images/1.webp",
@@ -19,7 +19,7 @@ export const stockProd: Stock[] = [
   {
     id: 2,
     name: "iPad Mini 2021 Starlight",
-    category: "Tablets",
+    category: "Gadgets",
     price: 481.79,
     piece: 47,
     image: "/images/2.webp",
@@ -27,7 +27,7 @@ export const stockProd: Stock[] = [
   {
     id: 3,
     name: "Women Handbag Black",
-    category: "womens-bags",
+    category: "Bags",
     price: 53,
     piece: 11,
     image: "/images/3.webp",
@@ -43,7 +43,7 @@ export const stockProd: Stock[] = [
   {
     id: 5,
     name: "Short Frock",
-    category: "Tops",
+    category: "Fashion",
     price: 21.63,
     piece: 22,
     image: "/images/5.webp",
@@ -51,7 +51,7 @@ export const stockProd: Stock[] = [
   {
     id: 6,
     name: "Gucci Bloom Eau de",
-    category: "fragrances",
+    category: "Skincare",
     price: 79,
     piece: 100,
     image: "/images/6.webp",
@@ -59,7 +59,7 @@ export const stockProd: Stock[] = [
   {
     id: 7,
     name: "Puma Future Rider Trainers",
-    category: "mens-shoes",
+    category: "Shoes",
     price: 89.99,
     piece: 77,
     image: "/images/7.webp",

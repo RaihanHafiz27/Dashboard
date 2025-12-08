@@ -1,4 +1,5 @@
 import { statusColors } from "@/data/recentOrders";
+import { SearchBar } from "@/fragments/input/SearchBar";
 import { Pagination } from "@/fragments/pagination/Pagination";
 import { allDummyOrders } from "@/lib/dummyData";
 import { updateOrderStatus } from "@/store/ordersSlice";
@@ -17,6 +18,16 @@ const productOrders = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSupported, setIsSupported] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSupported(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Ambil state dan dispatch dari store
   const orders = useSelector((state: RootState) => state.orders.data);
@@ -55,28 +66,17 @@ const productOrders = () => {
       <div className="flex justify-between items-center pt-2">
         <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
         <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search for..."
-              className="bg-slate-100 border border-slate-300 p-2 w-full rounded-sm text-sm cursor-not-allowed"
-              disabled
-            />
-            <button
-              className={`absolute top-2 right-2 cursor-not-allowed`}
-              disabled
-            >
-              <Search size={20} color="#6a7282" />
-            </button>
-          </div>
+          <SearchBar isFull={true} />
           <div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="bg-slate-100 border border-slate-300 p-2 w-full rounded-sm text-sm text-start flex justify-between cursor-pointer"
+              className="bg-gray-200/10 border border-gray-300 dark:border-gray-500  p-2 w-full rounded-sm text-sm text-start flex justify-between cursor-pointer"
             >
               <div>
-                <span className="text-gray-500">Short by :</span>
-                <span className="text-gray-700">Newest</span>
+                <span className="text-gray-500 dark:text-gray-300">
+                  Short by :{" "}
+                </span>
+                <span className="text-gray-700 dark:text-gray-500">Newest</span>
               </div>
               <ChevronRight
                 size={20}
@@ -89,8 +89,7 @@ const productOrders = () => {
           </div>
         </div>
         <div
-          // ref={menuRef}
-          className={`z-10 absolute bg-slate-200 top-14 right-4 p-2 rounded-md transition-all duration-300 ease-in-out ${
+          className={`z-10 absolute bg-slate-200 top-16 right-4 p-2 rounded-md transition-all duration-300 ease-in-out ${
             isOpen
               ? "translate-x-0 opacity-100 visible"
               : "translate-x-full opacity-0 invisible"
@@ -127,7 +126,7 @@ const productOrders = () => {
         </div>
       </div>
       {/* tabel */}
-      <div className="flex flex-col h-[555px] space-y-2  overflow-hidden">
+      <div className="flex flex-col h-[600px] lg:h-[555px] 2xl:h-[650px] space-y-2  overflow-hidden">
         <table className="min-w-full overflow-hidden table-auto">
           <thead className="border-b border-gray-300 dark:border-gray-500">
             <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
@@ -139,30 +138,38 @@ const productOrders = () => {
               <th className="p-3 ">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-300 dark:divide-gray-500 text-sm">
+          <tbody className="divide-y divide-gray-300 dark:divide-none text-sm">
             {currentTableData.map((item) => (
               <tr
                 key={item.id}
                 className="hover:bg-gray-200 dark:hover:bg-gray-700/10 transition-all duration-200 text-gray-700 dark:text-gray-300"
               >
-                <td className="p-3 font-medium ">{item.id}</td>
+                <td className="p-3 font-medium text-xs lg:text-sm">
+                  {isSupported ? item.id : item.id.slice(4, 8)}
+                </td>
                 <td className="p-3">
                   <div className="flex items-center space-x-3">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50">
+                    <div className="inline-flex h-12 w-12 2xl:w-16 2xl:h-16  items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700">
                       <Image
                         src={item.imageUrl}
                         height={40}
                         width={40}
                         alt={item.id}
-                        className="h-10 w-10 rounded-md object-cover"
+                        className="h-10 w-10 2xl:w-14 2xl:h-14 rounded-md object-cover"
                       />
                     </div>
                     <div>
-                      <p className="font-semibold " title={item.productName}>
-                        {item?.productName}
+                      <p
+                        className="font-semibold text-xs lg:text-sm"
+                        title={item.productName}
+                      >
+                        {isSupported
+                          ? item?.productName
+                          : item?.productName.slice(0, 6)}
                       </p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
-                        Quantity : {item?.quantity}
+                        {isSupported ? "Quantity : " : "Qty : "}
+                        {item?.quantity}
                       </p>
                     </div>
                   </div>
@@ -174,15 +181,17 @@ const productOrders = () => {
                       {item.customerName}
                     </p>
                   </div> */}
-                  <p className="truncate font-medium text-gray-700 dark:text-gray-300">
-                    {item.customerAddress}
+                  <p className="truncate text-xs lg:text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {isSupported
+                      ? item.customerAddress
+                      : `${item.customerAddress.substring(0, 10)}...`}
                   </p>
                 </td>
-                <td className="p-3 text-gray-600 dark:text-gray-300 text-center">
+                <td className="p-3 text-gray-600 dark:text-gray-300 text-center text-xs lg:text-sm">
                   {item.date}
                 </td>
 
-                <td className="p-3 font-semibold text-gray-700 dark:text-gray-300 text-center">
+                <td className="p-3 font-semibold text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
                   $ {item?.amount ? item.amount.toLocaleString() : 0}
                 </td>
                 <td className="p-3">
@@ -251,7 +260,7 @@ const StatusDropdown = ({ status, color, id, onClick }: Props) => {
     <div ref={dropMenuRef} className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer ${
+        className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer transition-all duration-300 ${
           color[status] || "bg-gray-100 text-gray-700"
         }`}
       >
@@ -267,7 +276,7 @@ const StatusDropdown = ({ status, color, id, onClick }: Props) => {
       </button>
       {/* menu */}
       <div
-        className={`z-10 fixed bg-slate-50 border-slate-300 border top-1/2 right-1/4 w-40 p-4 rounded-md transition-all duration-300 ease-in-out space-y-2 ${
+        className={`z-10 fixed bg-slate-50 dark:bg-slate-800 top-10 right-10 w-40 p-4 rounded-md transition-all duration-300 ease-in-out space-y-2 ${
           isOpen
             ? "translate-y-0 opacity-100 visible"
             : "translate-y-full opacity-0 invisible"
@@ -280,9 +289,9 @@ const StatusDropdown = ({ status, color, id, onClick }: Props) => {
               onClick(id, stat);
               setIsOpen(!isOpen);
             }}
-            className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer ${
+            className={`flex justify-between items-center rounded-sm px-3 py-2 w-full cursor-pointer transition-all duration-300 ${
               color[stat] || "bg-gray-100 text-gray-700"
-            } border border-${color[stat]}`}
+            } border border-${color[stat]} `}
           >
             {stat}
           </button>

@@ -18,10 +18,10 @@ const DashboardPage = () => {
   return (
     <div className="space-y-6 2xl:space-y-8">
       <SummaryCard />
-      <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
-        <div className="hidden lg:block">
-          <AnalyticsDonut textColor={textColor} />
-        </div>
+      <div className="grid md:grid-cols-1 gap-y-6 lg:grid-cols-3 lg:gap-y-0 gap-x-4 2xl:gap-x-8">
+        {/* <div className="hidden lg:block">
+        </div> */}
+        <AnalyticsDonut textColor={textColor} />
         <CategoryBar textColor={textColor} gridColor={gridColor} />
       </div>
       <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
@@ -31,10 +31,10 @@ const DashboardPage = () => {
         </div>
       </div>
       {/* chart components for tablet */}
-      <div className="grid grid-cols-2 gap-4 lg:hidden">
+      {/* <div className="grid grid-cols-1 gap-4 lg:hidden">
         <TopProducts />
         <AnalyticsDonut textColor={textColor} />
-      </div>
+      </div> */}
       {/* <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-x-4 2xl:gap-x-8">
         <div className="hidden lg:block">
           <AnalyticsDonut />

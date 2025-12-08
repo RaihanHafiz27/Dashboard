@@ -29,7 +29,7 @@ export const Sidebar = ({
   return (
     <aside
       className={` text-gray-700 dark:text-slate-200  transition-all duration-300 ease-in-out px-2 pt-4 space-y-6 ${
-        isFull ? "w-60" : "w-16"
+        isFull ? "w-52 lg:w-60" : "w-16"
       }`}
     >
       <div className="flex items-center justify-between">
@@ -103,8 +103,10 @@ export const Sidebar = ({
                 <>
                   <button
                     onClick={() => toggleMenu(link.title)}
-                    className={`flex items-center justify-between  capitalize rounded-sm cursor-pointer w-full ${
-                      showMenu === link.title ? "text-sky-500" : ""
+                    className={`flex items-center justify-between  capitalize cursor-pointer w-full ${
+                      showMenu === link.title
+                        ? "text-sky-500 border-b-2 pb-2"
+                        : ""
                     }`}
                   >
                     <span className="flex items-center space-x-2">
@@ -113,19 +115,19 @@ export const Sidebar = ({
                         {link.title}
                       </span>
                     </span>
-                    <i>
-                      <ChevronRight
-                        color="#364153"
-                        className={`transition-all duration-300 ${
-                          showMenu === link.title ? "rotate-90" : "rotate-0"
-                        } ${isFull ? "block" : "hidden"}`}
-                      />
-                    </i>
+                    <ChevronRight
+                      // color="#364153"
+                      className={`transition-all duration-300 ${
+                        showMenu === link.title
+                          ? "rotate-90 text-sky-500"
+                          : "rotate-0 text-gray-600 dark:text-slate-200 "
+                      } ${isFull ? "block" : "hidden"}`}
+                    />
                   </button>
                   <ul
                     className={`space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${
                       showMenu === link.title
-                        ? "max-h-40 opacity-100 mt-4"
+                        ? "max-h-40 opacity-100 mt-2"
                         : "max-h-0 opacity-0"
                     } ${isFull ? "block" : "hidden"}`}
                   >

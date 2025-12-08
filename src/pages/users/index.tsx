@@ -4,7 +4,7 @@ import { Pagination } from "@/fragments/pagination/Pagination";
 import { RootState } from "@/store/store";
 import { Dot, SquarePen, Trash2 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const ITEMS_PER_PAGE = 7;
@@ -12,6 +12,16 @@ const ITEMS_PER_PAGE = 7;
 const UsersPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const users = useSelector((state: RootState) => state.users.data);
+  const [isSupported, setIsSupported] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSupported(window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Logika "slice" pagination
   const totalPages = Math.ceil(users.length / ITEMS_PER_PAGE);
@@ -30,7 +40,7 @@ const UsersPage = () => {
     <div className="space-y-6">
       <SummaryUsers />
       <div
-        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md `}
+        className={`w-full space-y-4  p-5 rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md `}
       >
         <div className="flex justify-between items-center">
           <p className="font-semibold text-gray-700 dark:text-gray-300 text-xl">
@@ -38,84 +48,108 @@ const UsersPage = () => {
           </p>
           <div className="flex items-center space-x-4">
             <SearchBar isFull={true} />
-            <button className="bg-sky-700 px-4 py-2 text-sm rounded-sm text-slate-200">
+            <button
+              className="bg-sky-700 px-4 py-2 text-sm rounded-sm text-slate-200 cursor-not-allowed"
+              disabled
+            >
               Add user
             </button>
           </div>
         </div>
         {/* Table Users */}
-        <div className="flex flex-col h-[560px] space-y-2  overflow-hidden">
-          <table className="min-w-full overflow-hidden table-auto">
+        <div className="flex flex-col h-[560px] 2xl:h-[600px] space-y-2 overflow-hidden">
+          <table className="min-w-full table-auto border-collapse">
             <thead className="border-b border-gray-300 dark:border-gray-500">
-              <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
-                <th className="p-3 text-start">Profile</th>
-                <th className="p-3 text-start">Phone Number</th>
-                <th className="p-3 text-start">Location</th>
-                <th className="p-3 ">Status</th>
-                <th className="p-3 ">Action</th>
+              <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-xs lg:text-sm font-semibold">
+                {/* Profile biasanya butuh ruang lebih luas */}
+                <th className="py-3 px-4 text-start w-1/3">Profile</th>
+                <th className="py-3 px-4 text-start">Phone Number</th>
+                <th className="py-3 px-4 text-start">Location</th>
+                {/* Center untuk Status dan Action agar lebih estetik */}
+                <th className="py-3 px-4 text-center">Status</th>
+                <th className="py-3 px-4 text-center">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-300 dark:divide-gray-500">
+            <tbody className="divide-y divide-gray-200 dark:divide-none">
               {currentTableData.map((user) => (
-                <tr key={user.id}>
-                  <td className="p-3">
+                <tr
+                  key={user.id}
+                  className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                >
+                  <td className="py-3 px-4">
                     <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 ">
+                      <div className="w-12 h-12 2xl:w-14 2xl:h-14 flex-shrink-0">
                         <Image
                           src={user.image}
                           alt={user.name}
                           width={100}
                           height={100}
-                          className="w-full h-auto"
+                          className="rounded-full object-cover w-full h-full"
                         />
                       </div>
-                      <div>
-                        <p className="capitalize text-gray-700 dark:text-gray-300">
+                      <div className="min-w-0">
+                        <p className="capitalize font-medium text-xs lg:text-base 2xl:text-lg text-gray-800 dark:text-gray-200 truncate">
                           {user.name}
                         </p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {user.email}
+                        <p className="text-xs lg:text-sm text-gray-500 dark:text-gray-400 truncate">
+                          {/* {user.email} */}
+                          {isSupported
+                            ? user.email
+                            : `${user.email.substring(0, 8)}...`}
                         </p>
                       </div>
                     </div>
                   </td>
 
-                  <td className="p-3 lowercase text-gray-700 dark:text-gray-300 text-sm">
+                  <td className="py-3 px-4 text-xs lg:text-sm text-gray-700 dark:text-gray-300">
                     {user.telp}
                   </td>
-                  <td className="p-3 text-gray-700 dark:text-gray-300 text-sm capitalize">
+
+                  <td className="py-3 px-4 text-xs lg:text-sm capitalize text-gray-700 dark:text-gray-300">
                     {user.location}
                   </td>
-                  <td className="p-3 text-gray-700">
-                    <span
-                      className={`flex items-center justify-center py-1 rounded-sm border ${
-                        user.status === true
-                          ? "border-green-300 bg-green-100 dark:bg-transparent text-green-700 dark:text-green-500"
-                          : "border-gray-300 bg-gray-100 dark:bg-transparent text-gray-600 dark:text-gray-300"
-                      }`}
-                    >
-                      <span className="flex items-center justify-center">
-                        <Dot className="w-3 h-3" />
-                      </span>
-                      <span className="text-sm font-medium">
-                        {user.status === true ? "online" : "offline"}
-                      </span>
-                    </span>
-                  </td>
-                  <td className="p-3">
-                    <div className="border border-gray-400 dark:border-gray-500 grid grid-cols-2 divide-x divide-gray-400 py-1.5 rounded-md">
-                      <button
-                        className="flex justify-center cursor-not-allowed"
-                        disabled
+
+                  <td className="py-3 px-4">
+                    <div className="flex justify-center">
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${
+                          user.status === true
+                            ? " text-green-700 dark:bg-green-900/20 dark:text-green-400"
+                            : " text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                        }`}
                       >
-                        <SquarePen
-                          size={20}
-                          className="text-gray-700 dark:text-gray-300"
+                        <Dot
+                          className={`w-4 h-4 mr-1 ${
+                            user.status ? "text-green-500" : "text-gray-400"
+                          }`}
                         />
-                      </button>
-                      <button className="flex justify-center cursor-pointer">
-                        <Trash2 color="#e7000b" size={20} />
-                      </button>
+                        {user.status ? "Online" : "Offline"}
+                      </span>
+                    </div>
+                  </td>
+
+                  <td className="py-3 px-4">
+                    <div className="flex justify-center">
+                      <div className="flex border border-gray-300 dark:border-gray-600 divide-x divide-gray-300 dark:divide-gray-600 rounded-md overflow-hidden">
+                        <button
+                          className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                          title="Edit"
+                        >
+                          <SquarePen
+                            size={20}
+                            className="text-blue-600 dark:text-blue-400"
+                          />
+                        </button>
+                        <button
+                          className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2
+                            size={20}
+                            className="text-red-600 dark:text-red-500"
+                          />
+                        </button>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -123,6 +157,7 @@ const UsersPage = () => {
             </tbody>
           </table>
         </div>
+
         {/* pagination */}
         <div className=" flex justify-between items-center pb-2">
           <p className="text-gray-500 text-sm">

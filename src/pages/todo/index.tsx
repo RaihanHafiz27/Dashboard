@@ -244,14 +244,14 @@ const ModalPremium = ({
 
   return (
     <div className="bg-black/40 fixed inset-0 z-50 grid place-items-center">
-      <div className="bg-sky-100 dark:bg-gray-800 w-96 h-[80vh] 2xl:h-[60vh] py-2 rounded-4xl flex flex-col">
+      <div className="bg-sky-100 dark:bg-gray-800 w-96 h-[40vh] lg:h-[80vh] 2xl:h-[55vh] py-2 rounded-4xl flex flex-col">
         <div className="grow flex flex-col justify-center items-center p-6 space-y-6">
           <Image
             src={"/images/sparkle.png"}
             alt="sparkle"
             width={500}
             height={500}
-            className="w-1/4 h-auto"
+            className="w-1/4 2xl:w-1/3 h-auto"
           />
           <div className="text-center space-y-2">
             <h2 className="text-2xl text-gray-700 dark:text-gray-300">

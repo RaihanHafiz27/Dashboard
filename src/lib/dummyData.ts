@@ -49,7 +49,7 @@ const generateDummyData = () => {
     "Processing",
   ];
   const quantities = [1, 5, 2, 8, 3, 10, 4, 7, 6, 9]; // Buat pola
-  const amounts = [500, 1200, 7500, 3000, 4500, 9000, 2100];
+  const amounts = [50, 120, 750, 30, 45, 25, 210];
 
   for (let i = 1; i <= 21; i++) {
     dummyOrders.push({

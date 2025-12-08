@@ -77,7 +77,7 @@ export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
       },
       y: {
         grid: {
-          display: true,
+          display: false,
           drawBorder: false,
           color: gridColor,
         },
@@ -95,7 +95,7 @@ export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
   const labels = formattedChartData.datasets.map((l) => l.label);
 
   return (
-    <div className="bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-sm col-span-2">
+    <div className=" bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-sm lg:col-span-2">
       <LabelButton
         title="Best Sell Categories"
         type="filter"
@@ -104,7 +104,11 @@ export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
         filterOptions={labels}
       />
       <div className="grow p-4 h-80 2xl:h-96">
-        <Bar data={chartData} options={options} />
+        <Bar
+          // style={{ width: "100%", height: "300px" }}
+          data={chartData}
+          options={options}
+        />
       </div>
     </div>
   );

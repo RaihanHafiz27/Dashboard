@@ -7,10 +7,10 @@ const custom404 = () => {
       <div className="text-center">
         <Image
           src={"/images/error.svg"}
-          width={300}
-          height={300}
+          width={500}
+          height={500}
           alt="not-found"
-          className="w-full h-full"
+          className="w-full h-full 2xl:w-96 2xl:h-96"
         />
         <div className="space-y-4">
           <div className="space-y-2">
