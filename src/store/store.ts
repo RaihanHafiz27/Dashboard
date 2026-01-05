@@ -1,7 +1,6 @@
 import { Order } from "@/types/order.type";
 import { configureStore } from "@reduxjs/toolkit";
 import ordersReducer from "./ordersSlice";
-import themeReducer from "./themeSlice";
 import usersReducer from "./usersSlice";
 import todosReducer from "./todosSlice";
 
@@ -11,7 +10,6 @@ export const store = configureStore({
   // merge all reducer in here
   reducer: {
     orders: ordersReducer,
-    theme: themeReducer,
     users: usersReducer,
     todos: todosReducer,
   },

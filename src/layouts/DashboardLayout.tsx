@@ -2,13 +2,9 @@ import { Sidebar } from "@/fragments/Sidebar/Sidebar";
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { Bell, MoonIcon, PanelTopOpen, Star, SunIcon } from "lucide-react";
+import { Bell, MoonIcon, Star, SunIcon } from "lucide-react";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { setDarkMode, toogleDarkMode } from "@/store/themeSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import path from "path";
-import { SearchBar } from "@/fragments/input/SearchBar";
+import { useTheme } from "@/context/ThemeContext";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -18,7 +14,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const DashboardLayout = ({ children }: { children: ReactElement }) => {
   const [isFull, setIsFull] = useState<boolean>(true);
   const [isSupported, setIsSupported] = useState<boolean>(true);
-  const isDarkMode = useAppSelector((state) => state.theme.darkMode);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +40,7 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
   return (
     <div
       className={`flex w-full  min-h-dvh h-auto ${
-        isDarkMode ? "bg-gray-900" : "bg-slate-100"
+        theme === "dark" ? "bg-gray-900" : "bg-slate-100"
       } md:min-h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
@@ -59,8 +55,7 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
 };
 
 const Information = () => {
-  const dispatch = useAppDispatch();
-  const isDarkMode = useAppSelector((state) => state.theme.darkMode);
+  const { theme, toggleTheme } = useTheme();
   const { pathname } = useRouter();
 
   const segments = pathname.split("/").filter(Boolean);
@@ -89,14 +84,10 @@ const Information = () => {
           <span>Premium</span>
         </button>
         <button
-          onClick={
-            isDarkMode
-              ? () => dispatch(toogleDarkMode())
-              : () => dispatch(setDarkMode(true))
-          }
+          onClick={toggleTheme}
           className="cursor-pointer text-gray-700 dark:text-gray-300"
         >
-          {isDarkMode ? <SunIcon /> : <MoonIcon />}
+          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
         </button>
         <button
           disabled

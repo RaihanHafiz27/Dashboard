@@ -8,6 +8,7 @@ import { SearchBar } from "../input/SearchBar";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useAppSelector } from "@/store/hooks";
+import { useTheme } from "@/context/ThemeContext";
 
 export const Sidebar = ({
   isFull,
@@ -18,13 +19,14 @@ export const Sidebar = ({
 }) => {
   const [showMenu, setShowMenu] = useState<string | null>("dashboard");
   const router = useRouter();
-  const darkmode = useAppSelector((state) => state.theme.darkMode);
+  // const darkmode = useAppSelector((state) => state.theme.darkMode);
+  // const {theme, toggleTheme} = useTheme()
 
   const toggleMenu = (menu: string) => {
     setShowMenu(showMenu === menu ? null : menu);
   };
 
-  console.log(darkmode);
+  // console.log(darkmode);
 
   return (
     <aside
