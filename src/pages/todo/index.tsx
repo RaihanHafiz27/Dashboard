@@ -1,4 +1,4 @@
-import { ModalPremium } from "@/fragments/modal/ModalPrem";
+import { ModalPremium } from "@/fragments/modals/ModalPrem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   addTodos,
@@ -214,7 +214,7 @@ const TaskPage = () => {
                   Nothing to do Right Now.
                 </p>
                 <p className="text-gray-500 text-sm 2xl:text-base">
-                  Create a task when you're ready.
+                  Create a task when you&apos;re ready.
                 </p>
               </div>
             </div>

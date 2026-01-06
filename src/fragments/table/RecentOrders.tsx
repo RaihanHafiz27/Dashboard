@@ -1,10 +1,12 @@
-import { LabelButton } from "../button/LabelButton";
-import { statusColors } from "@/data/recentOrders";
+import { LabelButton } from "../../components/ui/Button/LabelButton";
+import { statusColors } from "@/data/statusColors";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useEffect, useState } from "react";
+import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
+import { features } from "@/constants/actionMenu";
 
 export const RecentOrders = () => {
   const router = useRouter();
@@ -27,7 +29,8 @@ export const RecentOrders = () => {
 
   return (
     <div className=" flex flex-col bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md col-span-2 space-y-2 rounded-sm overflow-hidden">
-      <LabelButton title="Recent Orders" type="ellipsis" />
+      {/* <LabelButton title="Recent Orders" type="ellipsis" /> */}
+      <ActionMenu items={features} label="Recent Orders" />
       <table className="grow overflow-hidden m-2 table-auto">
         <thead className="border-b border-gray-300 dark:border-gray-500">
           <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-xs lg:text-sm">

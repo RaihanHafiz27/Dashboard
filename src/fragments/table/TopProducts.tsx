@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { LabelButton } from "../button/LabelButton";
+import { LabelButton } from "../../components/ui/Button/LabelButton";
 import { top3 } from "@/data/top3";
+import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
+import { features } from "@/constants/actionMenu";
 
 export const TopProducts = () => {
   return (
     <div className="rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md">
-      <LabelButton title="Top Products" type="ellipsis" />
+      {/* <LabelButton title="Top Products" type="ellipsis" /> */}
+      <ActionMenu items={features} label="Top Products" />
       <div className="grid grid-cols-1 gap-y-4 p-4 space-y-1  h-80 2xl:h-96">
         {top3.map((prod) => (
           <div

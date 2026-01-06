@@ -18,7 +18,7 @@ const custom404 = () => {
               page not found
             </p>
             <p className="text-gray-500 capitalize text-sm">
-              look like you're lost
+              look like you&apos;re lost
             </p>
           </div>
           <Link

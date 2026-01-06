@@ -10,10 +10,9 @@ import {
 } from "chart.js";
 import { productsCategory } from "@/data/categoryProd";
 import { useEffect, useState } from "react";
-import { LabelButton } from "../button/LabelButton";
-import { useAppSelector } from "@/store/hooks";
-import { color } from "chart.js/helpers";
+import { LabelButton } from "../../components/ui/Button/LabelButton";
 import { ChartColor } from "@/types/chartColor.type";
+import { FilterControl } from "@/components/common/Dropdown/DropdownFilter";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, LineElement, Tooltip);
 
@@ -96,19 +95,21 @@ export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
 
   return (
     <div className=" bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-sm lg:col-span-2">
-      <LabelButton
+      {/* <LabelButton
         title="Best Sell Categories"
         type="filter"
         selectedFilter={selectedFilter}
         onFilterChange={setSelectedFilter}
         filterOptions={labels}
+      /> */}
+      <FilterControl
+        label="Best Categories"
+        options={labels}
+        selected={selectedFilter}
+        onChange={setSelectedFilter}
       />
       <div className="grow p-4 h-80 2xl:h-96">
-        <Bar
-          // style={{ width: "100%", height: "300px" }}
-          data={chartData}
-          options={options}
-        />
+        <Bar data={chartData} options={options} />
       </div>
     </div>
   );

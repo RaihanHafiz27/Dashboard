@@ -1,25 +1,15 @@
-import { ProductType } from "@/types/categoryProd.type";
 import {
-  ChevronDown,
   ChevronRight,
   Command,
   DownloadIcon,
   Ellipsis,
   Gauge,
-  RotateCcwIcon,
   RotateCwIcon,
   ViewIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { AnchorHTMLAttributes, useEffect, useRef, useState } from "react";
-
-interface Links {
-  id: number;
-  title: string;
-  to: string;
-  active: boolean;
-  icon?: React.ReactNode;
-}
+import { useEffect, useRef, useState } from "react";
+import { LabelControlProps, Links } from "./Types/button.type";
 
 const features: Links[] = [
   {
@@ -51,16 +41,6 @@ const features: Links[] = [
     icon: <Gauge size={18} />,
   },
 ];
-
-type LabelControlProps = {
-  title: string;
-  type: "ellipsis" | "filter";
-
-  // Props khusus untuk mode filter
-  filterOptions?: string[];
-  selectedFilter?: string;
-  onFilterChange?: (value: string) => void;
-};
 
 export const LabelButton = ({
   title,
@@ -131,11 +111,10 @@ export const LabelButton = ({
                     if (!item.active) {
                       e.preventDefault();
                     } else {
-                      () => setIsMenuOpen(!isMenuOpen);
+                      setIsMenuOpen(!isMenuOpen);
                     }
                   }}
                   aria-disabled={!item.active}
-                  // onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className={` flex text-sm justify-between items-center w-40 hover:bg-gray-400/70  p-2 rounded-md text-gray-700 ${
                     item.id > 1 ? "cursor-not-allowed" : "cursor-pointer"
                   }`}

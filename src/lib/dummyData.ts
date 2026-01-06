@@ -1,8 +1,5 @@
-// Di dalam file (misal: lib/dummyData.js)
-
 import { Order, OrderStatus } from "@/types/order.type";
 
-// 1. Siapkan array kecil berisi path gambar lokalmu
 const dummyImages = [
   "/images/1.webp",
   "/images/6.webp",
@@ -12,19 +9,6 @@ const dummyImages = [
   "/images/4.webp",
   "/images/7.webp",
   "/images/3.webp",
-];
-
-const people = [
-  "Oliver Smith",
-  "Amelia Brown",
-  "Liam Johnson",
-  "John Doe",
-  "Alex Johnson",
-  "Vanessa Liebert",
-  "Kelly Zoltrack",
-  "Noah Müller",
-  "Isabella Dubois",
-  "Lucas Novak",
 ];
 
 const addresses = [
@@ -48,7 +32,7 @@ const generateDummyData = () => {
     "Cancelled",
     "Processing",
   ];
-  const quantities = [1, 5, 2, 8, 3, 10, 4, 7, 6, 9]; // Buat pola
+  const quantities = [1, 5, 2, 8, 3, 10, 4, 7, 6, 9];
   const amounts = [50, 120, 750, 30, 45, 25, 210];
 
   for (let i = 1; i <= 21; i++) {
@@ -56,10 +40,7 @@ const generateDummyData = () => {
       id: `ORD-${1000 + i}`,
       customerAddress: addresses[i % addresses.length],
       productName: `Produk ${String.fromCharCode(65 + (i % 7))}`,
-
-      // 2. Ambil path gambar secara berurutan atau acak
       imageUrl: dummyImages[i % dummyImages.length],
-
       date: `2025/10/${String((i % 30) + 1).padStart(2, "0")}`,
       quantity: quantities[i % quantities.length],
       amount: amounts[i % amounts.length] * quantities[i % quantities.length],

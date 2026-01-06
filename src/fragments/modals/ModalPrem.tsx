@@ -29,7 +29,7 @@ export const ModalPremium = ({
           />
           <div className="text-center space-y-2">
             <h2 className="text-2xl text-gray-700 dark:text-gray-300">
-              Greate find! You've unlocked a premium feature!
+              Greate find! You&apos;ve unlocked a premium feature!
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Upgrade to enjoy all the extra features.

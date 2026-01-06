@@ -1,14 +1,10 @@
 import { navLinks } from "@/constants/linksNav";
-import { ChevronRight, PanelTopOpen, Search } from "lucide-react";
+import { ChevronRight, PanelTopOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { SearchBar } from "../input/SearchBar";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { useAppSelector } from "@/store/hooks";
-import { useTheme } from "@/context/ThemeContext";
+import { SearchBar } from "../../components/ui/Input/SearchBar";
 
 export const Sidebar = ({
   isFull,
@@ -19,14 +15,10 @@ export const Sidebar = ({
 }) => {
   const [showMenu, setShowMenu] = useState<string | null>("dashboard");
   const router = useRouter();
-  // const darkmode = useAppSelector((state) => state.theme.darkMode);
-  // const {theme, toggleTheme} = useTheme()
 
   const toggleMenu = (menu: string) => {
     setShowMenu(showMenu === menu ? null : menu);
   };
-
-  // console.log(darkmode);
 
   return (
     <aside
@@ -44,25 +36,6 @@ export const Sidebar = ({
             loading="lazy"
             className="w-9 h-auto"
           />
-          {/* {darkmode ? (
-            <Image
-              src={"/images/logo.png"}
-              width={100}
-              height={100}
-              alt="logo"
-              loading="lazy"
-              className="w-9 h-auto"
-            />
-          ) : (
-            <Image
-              src={"/images/logo-light.png"}
-              width={100}
-              height={100}
-              alt="logo"
-              loading="lazy"
-              className="w-9 h-auto"
-            />
-          )} */}
           <span className={`${isFull ? "blcok" : "hidden"} text-2xl`}>Xyz</span>
         </div>
         <button
@@ -97,7 +70,7 @@ export const Sidebar = ({
               key={link.id}
               className={`p-2 text-sm ${
                 router.pathname === link.to
-                  ? " rounded-sm border-l-4 border-sky-500 bg-primary/10 dark:bg-gray-200/10"
+                  ? " rounded-sm border-l-4 border-sky-500 bg-sky-500/10 dark:bg-gray-200/10"
                   : ""
               }`}
             >
@@ -138,7 +111,7 @@ export const Sidebar = ({
                         key={sub.title}
                         className={`p-2 ${
                           router.pathname === sub.to
-                            ? "rounded-sm border-l-4 border-sky-500 bg-primary/10"
+                            ? "rounded-sm border-l-4 border-sky-500 bg-sky-500/10 dark:bg-gray-200/10"
                             : ""
                         }`}
                       >

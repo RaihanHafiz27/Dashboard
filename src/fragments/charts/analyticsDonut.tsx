@@ -6,8 +6,10 @@ import {
   CategoryScale,
   Tooltip,
 } from "chart.js";
-import { LabelButton } from "../button/LabelButton";
+import { LabelButton } from "../../components/ui/Button/LabelButton";
 import { ChartColor } from "@/types/chartColor.type";
+import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
+import { features } from "@/constants/actionMenu";
 
 ChartJS.register(ArcElement, Legend, CategoryScale, Tooltip);
 
@@ -70,7 +72,8 @@ export const AnalyticsDonut = ({ textColor }: ChartColor) => {
 
   return (
     <div className=" flex flex-col lg:col-span-1 bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md rounded-sm">
-      <LabelButton title="Analytics" type="ellipsis" />
+      {/* <LabelButton title="Analytics" type="ellipsis" /> */}
+      <ActionMenu items={features} label="Analytics" />
       <div className="grow p-4 relative h-80 2xl:h-96 hover:scale-105 transition-all duration-300 grid place-items-center">
         <Doughnut data={data} options={options} />
         <div className="absolute top-1/3 translate-x-1/2 right-1/2 flex flex-col justify-center items-center">

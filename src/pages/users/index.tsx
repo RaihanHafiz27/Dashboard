@@ -1,5 +1,6 @@
+import { Calendar } from "@/fragments/calendar/Calendar";
 import { SummaryUsers } from "@/fragments/cards/SummaryUsers";
-import { SearchBar } from "@/fragments/input/SearchBar";
+import { SearchBar } from "@/components/ui/Input/SearchBar";
 import { Pagination } from "@/fragments/pagination/Pagination";
 import { RootState } from "@/store/store";
 import { Dot, SquarePen, Trash2 } from "lucide-react";
@@ -34,8 +35,6 @@ const UsersPage = () => {
     setCurrentPage(page);
   };
 
-  console.log(users);
-
   return (
     <div className="space-y-6">
       <SummaryUsers />
@@ -61,11 +60,9 @@ const UsersPage = () => {
           <table className="min-w-full table-auto border-collapse">
             <thead className="border-b border-gray-300 dark:border-gray-500">
               <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-xs lg:text-sm font-semibold">
-                {/* Profile biasanya butuh ruang lebih luas */}
                 <th className="py-3 px-4 text-start w-1/3">Profile</th>
                 <th className="py-3 px-4 text-start">Phone Number</th>
                 <th className="py-3 px-4 text-start">Location</th>
-                {/* Center untuk Status dan Action agar lebih estetik */}
                 <th className="py-3 px-4 text-center">Status</th>
                 <th className="py-3 px-4 text-center">Action</th>
               </tr>
@@ -114,8 +111,8 @@ const UsersPage = () => {
                       <span
                         className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${
                           user.status === true
-                            ? " text-green-700 dark:bg-green-900/20 dark:text-green-400"
-                            : " text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+                            ? " text-green-700 bg-green-300 dark:bg-green-900/20 dark:text-green-400"
+                            : " text-gray-600 bg-gray-300 dark:bg-gray-800 dark:text-gray-400"
                         }`}
                       >
                         <Dot

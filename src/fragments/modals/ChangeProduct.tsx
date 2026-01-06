@@ -1,8 +1,8 @@
 import { Stock } from "@/data/stocksProd";
 import { UploadIcon, XIcon } from "lucide-react";
-import { useRef, useState } from "react";
-import { InputPrimary } from "../input/InputPrimary";
-import { InputDropdown } from "../input/InputDropdown";
+import { useRef } from "react";
+import { InputPrimary } from "../../components/ui/Input/InputPrimary";
+import { InputDropdown } from "../../components/ui/Input/InputDropdown";
 import { Category } from "@/constants/categoryLabels";
 
 export const ChangeProduct = ({

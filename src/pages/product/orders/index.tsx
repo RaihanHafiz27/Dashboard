@@ -1,11 +1,10 @@
-import { statusColors } from "@/data/recentOrders";
-import { SearchBar } from "@/fragments/input/SearchBar";
+import { statusColors } from "@/data/statusColors";
+import { SearchBar } from "@/components/ui/Input/SearchBar";
 import { Pagination } from "@/fragments/pagination/Pagination";
-import { allDummyOrders } from "@/lib/dummyData";
 import { updateOrderStatus } from "@/store/ordersSlice";
 import { AppDispatch, RootState } from "@/store/store";
-import { Order, OrderStatus } from "@/types/order.type";
-import { ChevronLeft, ChevronRight, Command, Search } from "lucide-react";
+import { OrderStatus } from "@/types/order.type";
+import { ChevronRight, Command } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
