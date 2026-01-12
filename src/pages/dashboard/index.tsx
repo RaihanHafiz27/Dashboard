@@ -3,9 +3,9 @@ import "react-day-picker/style.css";
 import { TopProducts } from "@/fragments/table/TopProducts";
 import { SummaryCard } from "@/fragments/cards/SummaryCard";
 import { RecentOrders } from "@/fragments/table/RecentOrders";
-import { AnalyticsDonut } from "@/fragments/charts/analyticsDonut";
-import { CategoryBar } from "@/fragments/charts/categoryBar";
 import { useTheme } from "@/context/ThemeContext";
+import { CategoryBar } from "@/features/Dashboard/components/CategoryBar";
+import { AnalyticsDonut } from "@/features/Dashboard/components/AnalyticsDonut";
 
 const DashboardPage = () => {
   const { theme } = useTheme();
