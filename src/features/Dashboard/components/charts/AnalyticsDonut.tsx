@@ -6,11 +6,11 @@ import {
   CategoryScale,
   Tooltip,
 } from "chart.js";
-import { ChartColor } from "@/types/chartColor.type";
+import { ChartColor } from "@/features/Dashboard/types/chartColor.type";
 import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
 import { features } from "@/constants/actionMenu";
-import { getDougnutChartOption } from "../utils/chart-options";
-import { useBuyerAnalytics } from "../hooks/useBuyerAnalytics";
+import { getDougnutChartOption } from "../../utils/chart-options";
+import { useBuyerAnalytics } from "../../hooks/useBuyerAnalytics";
 
 ChartJS.register(ArcElement, Legend, CategoryScale, Tooltip);
 

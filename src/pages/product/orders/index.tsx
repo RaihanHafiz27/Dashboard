@@ -8,6 +8,7 @@ import { ChevronRight, Command } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { OrdersTable } from "@/components/common/Table/OrdersTable";
 
 const list = ["Latest", "Price", "Status"];
 
@@ -126,7 +127,7 @@ const productOrders = () => {
       </div>
       {/* tabel */}
       <div className="flex flex-col h-[600px] lg:h-[555px] 2xl:h-[650px] space-y-2  overflow-hidden">
-        <table className="min-w-full overflow-hidden table-auto">
+        {/* <table className="min-w-full overflow-hidden table-auto">
           <thead className="border-b border-gray-300 dark:border-gray-500">
             <tr className="text-gray-700 dark:text-gray-300 tracking-wide text-sm">
               <th className="p-3 ">ID</th>
@@ -174,12 +175,6 @@ const productOrders = () => {
                   </div>
                 </td>
                 <td className="p-3">
-                  {/* <div className="flex items-center space-x-3">
-                    <Avatar name={item.customerName} />
-                    <p className="truncate font-medium text-gray-700">
-                      {item.customerName}
-                    </p>
-                  </div> */}
                   <p className="truncate text-xs lg:text-sm font-medium text-gray-700 dark:text-gray-300">
                     {isSupported
                       ? item.customerAddress
@@ -204,7 +199,18 @@ const productOrders = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+        <OrdersTable
+          data={currentTableData}
+          renderStatus={(item) => (
+            <StatusDropdown
+              id={item.id}
+              status={item.status}
+              color={statusColors}
+              onClick={handleStatusUpdate}
+            />
+          )}
+        />
       </div>
       {/* pagination */}
       <div className=" flex justify-between items-center pb-2">

@@ -1,11 +1,11 @@
-import { MonthlyLine } from "@/fragments/charts/monthlyLine";
 import "react-day-picker/style.css";
-import { TopProducts } from "@/fragments/table/TopProducts";
+import { TopProducts } from "@/features/Dashboard/components/tables/TopProducts";
 import { SummaryCard } from "@/fragments/cards/SummaryCard";
-import { RecentOrders } from "@/fragments/table/RecentOrders";
+import { RecentOrders } from "@/features/Dashboard/components/tables/RecentOrders";
 import { useTheme } from "@/context/ThemeContext";
-import { CategoryBar } from "@/features/Dashboard/components/CategoryBar";
-import { AnalyticsDonut } from "@/features/Dashboard/components/AnalyticsDonut";
+import { CategoryBar } from "@/features/Dashboard/components/charts/CategoryBar";
+import { AnalyticsDonut } from "@/features/Dashboard/components/charts/AnalyticsDonut";
+import { MonthlyLine } from "@/features/Dashboard/components/charts/MonthlyLine";
 
 const DashboardPage = () => {
   const { theme } = useTheme();

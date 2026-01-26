@@ -1,4 +1,9 @@
-import { ChartOptions } from "chart.js";
+import { ChartOptions, Color } from "chart.js";
+
+type ColorType = {
+  textColor: string;
+  gridColor?: string;
+};
 
 // ============================
 // OPTION FOR BAR CHART
@@ -6,10 +11,7 @@ import { ChartOptions } from "chart.js";
 export const getBarChartOption = ({
   textColor,
   gridColor,
-}: {
-  textColor: string;
-  gridColor: string;
-}): ChartOptions<"bar"> => {
+}: ColorType): ChartOptions<"bar"> => {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -59,9 +61,7 @@ export const getBarChartOption = ({
 // ============================
 export const getDougnutChartOption = ({
   textColor,
-}: {
-  textColor: string;
-}): ChartOptions<"doughnut"> => {
+}: ColorType): ChartOptions<"doughnut"> => {
   return {
     cutout: "70%",
     responsive: true,
@@ -79,6 +79,47 @@ export const getDougnutChartOption = ({
       title: {
         display: false,
         text: "Distribusi Usia Pembeli",
+      },
+    },
+  };
+};
+
+export const getLineChartOption = ({ textColor, gridColor }: ColorType) => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+        position: "top" as const,
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          color: textColor,
+        },
+        border: {
+          display: true,
+          color: gridColor,
+        },
+      },
+      y: {
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+        ticks: {
+          color: textColor,
+        },
+        border: {
+          display: true,
+          color: gridColor,
+        },
       },
     },
   };

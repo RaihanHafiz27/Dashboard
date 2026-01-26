@@ -1,14 +1,13 @@
 import { Bar } from "react-chartjs-2";
-import { useCategorySales } from "../hooks/useCategorySales";
-import { getBarChartOption } from "../utils/chart-options";
+import { useCategorySales } from "../../hooks/useCategorySales";
+import { getBarChartOption } from "../../utils/chart-options";
 import { FilterControl } from "@/components/common/Dropdown/DropdownFilter";
+import { Chart as ChartJS, BarElement, CategoryScale, Legend } from "chart.js";
+import { ChartColor } from "@/features/Dashboard/types/chartColor.type";
 
-type Props = {
-  textColor: string;
-  gridColor: string;
-};
+ChartJS.register(BarElement, CategoryScale, Legend);
 
-export const CategoryBar = ({ textColor, gridColor }: Props) => {
+export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
   const { filter, setFilter, chartData, filterOptions } = useCategorySales();
 
   const options = getBarChartOption({ textColor, gridColor });
