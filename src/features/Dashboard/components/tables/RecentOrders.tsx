@@ -1,5 +1,3 @@
-import { statusColors } from "@/data/statusColors";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";

@@ -98,8 +98,10 @@ export const OrdersTable = ({
             {/* Status Column */}
             <td className=" py-3 px-3">
               {renderStatus ? (
+                // CAN EDITS
                 renderStatus(item)
               ) : (
+                // ONLY VIEWS
                 <div className="flex justify-center">
                   <span
                     className={`rounded-sm w-full text-center px-3 py-2 text-xs font-semibold leading-tight ${
