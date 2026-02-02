@@ -30,11 +30,12 @@ export const FilterControl = ({
         {/* trigger button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`cursor-pointer border-b border-gray-700 dark:border-gray-500 text-gray-700 dark:text-gray-300 flex w-28 justify-between text-sm items-center pb-1`}
+          className={` cursor-pointer border border-gray-400 dark:border-gray-600  text-gray-700 dark:text-gray-300 flex w-32 py-1 px-2 justify-between text-sm items-center rounded-md`}
         >
           <span className="capitalize">{selected}</span>
           <ChevronRight
             size={20}
+            strokeWidth={1}
             className={`transition-transform duration-300 ${
               isOpen ? "rotate-90" : ""
             }`}

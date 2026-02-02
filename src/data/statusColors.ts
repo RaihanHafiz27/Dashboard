@@ -2,11 +2,11 @@ import { OrderStatus } from "@/types/order.type";
 
 export const statusColors: Record<OrderStatus, string> = {
   Pending:
-    "bg-yellow-100 dark:bg-transparent dark:border dark:border-yellow-100 dark:hover:bg-yellow-100 text-yellow-700 dark:text-yellow-500",
+    "bg-transparent border border-gray-300 dark:border dark:border-gray-100 text-gray-700 dark:text-slate-200",
   Processing:
-    "bg-blue-100  dark:bg-transparent dark:border dark:border-blue-300 dark:hover:bg-blue-100 text-blue-700 dark:text-blue-300",
+    "bg-gray-500 border border-gray-300 dark:border-gray-700  dark:bg-gray-700 text-slate-200 dark:text-slate-200",
   Completed:
-    "bg-green-100  dark:bg-transparent dark:border dark:border-green-300 dark:hover:bg-green-100 text-green-700 dark:text-green-400",
+    "bg-gray-800 border border-gray-300 dark:border-slate-100 dark:bg-slate-100 text-slate-200 dark:text-gray-800",
   Cancelled:
-    "bg-red-100  dark:bg-transparent dark:border dark:border-red-300 dark:hover:bg-red-100 text-red-700 dark:text-red-400",
+    "line-through bg-slate-200 border border-slate-200 dark:border-gray-600  dark:bg-transparent text-gray-400 dark:text-gray-600",
 };

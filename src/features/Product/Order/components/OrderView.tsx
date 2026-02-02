@@ -2,9 +2,9 @@ import { OrdersTable } from "@/components/common/Table/OrdersTable";
 import { SearchBar } from "@/components/ui/Input/SearchBar";
 import { FilterButton } from "./filter/FilterButton";
 import { FilterDropdown } from "./filter/FilterDropdown";
-import { StatusDropdown } from "@/pages/product/orders";
 import { Pagination } from "@/fragments/pagination/Pagination";
 import { Order, OrderStatus } from "@/types/order.type";
+import { StatusDropdown } from "./dropdown/StatusDropdown";
 
 interface OrderViewProps {
   // State UI

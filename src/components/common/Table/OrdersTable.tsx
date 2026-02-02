@@ -21,9 +21,9 @@ export const OrdersTable = ({
           <th className=" pb-2 px-3">ID</th>
           <th className=" pb-2 px-3">Product</th>
           <th className=" pb-2 px-3">Address</th>
-          <th className=" pb-2 px-3">Date</th>
           <th className=" pb-2 px-3">Amount</th>
           <th className=" pb-2 px-3">Status</th>
+          <th className=" pb-2 px-3">Date</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-300 dark:divide-none text-sm">
@@ -32,7 +32,7 @@ export const OrdersTable = ({
             // ONLY FOR RECENT ORDERS
             onClick={() => onRowClick && onRowClick(item)}
             key={item.id}
-            className={`hover:bg-gray-200 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} transition-all duration-200 text-gray-700 dark:text-gray-300`}
+            className={`hover:bg-slate-200/50 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} transition-all duration-200 text-gray-700 dark:text-gray-300`}
           >
             {/* ID Column */}
             <td className=" py-3 px-3 text-xs font-medium lg:text-sm text-center">
@@ -62,7 +62,7 @@ export const OrdersTable = ({
                 </div>
                 <div className="text-xs lg:text-sm lg:space-y-2">
                   <p
-                    className="font-semibold max-w-[100px] lg:max-w-xs truncate"
+                    className=" max-w-[100px] lg:max-w-xs truncate"
                     title={item.productName}
                   >
                     {item.productName}
@@ -86,13 +86,9 @@ export const OrdersTable = ({
                 {item.customerAddress}
               </p>
             </td>
-            {/* Date Column */}
-            <td className=" py-3 px-3 text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
-              {item.date}
-            </td>
 
             {/* Amount Column */}
-            <td className=" py-3 px-3 font-semibold text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
+            <td className=" p-3 text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
               $ {item.amount}
             </td>
             {/* Status Column */}
@@ -112,6 +108,10 @@ export const OrdersTable = ({
                   </span>
                 </div>
               )}
+            </td>
+            {/* Date Column */}
+            <td className=" py-3 px-3 text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
+              {item.date}
             </td>
           </tr>
         ))}
