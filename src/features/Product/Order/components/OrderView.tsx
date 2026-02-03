@@ -1,17 +1,11 @@
 import { OrdersTable } from "@/components/common/Table/OrdersTable";
 import { SearchBar } from "@/components/ui/Input/SearchBar";
-import { FilterButton } from "./filter/FilterButton";
-import { FilterDropdown } from "./filter/FilterDropdown";
 import { Pagination } from "@/fragments/pagination/Pagination";
 import { Order, OrderStatus } from "@/types/order.type";
-import { StatusDropdown } from "./dropdown/StatusDropdown";
+import { ChangeStatus } from "./dropdown/ChangeStatus";
+import { FilterStatus } from "./dropdown/FilterStatus";
 
 interface OrderViewProps {
-  // State UI
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  menuRef: React.RefObject<HTMLDivElement | null>;
-
   // Table Data
   tableData: Order[];
   statusColors: any;
@@ -23,35 +17,41 @@ interface OrderViewProps {
   // Pagination State
   currentPage: number;
   totalPages: number;
+
+  //
+  statusFiltered: string | OrderStatus;
+  setStatusFiltered: React.Dispatch<React.SetStateAction<string | OrderStatus>>;
 }
 
 export const OrderView = ({
-  isOpen,
-  setIsOpen,
-  menuRef,
   tableData,
   statusColors,
   handleStatusUpdate,
   handlePagination,
   currentPage,
   totalPages,
+  statusFiltered,
+  setStatusFiltered,
 }: OrderViewProps) => {
   return (
-    <div className="w-full space-y-4 bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md p-4 rounded-sm relative">
+    <div className="w-full space-y-4 bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md p-4 rounded-sm">
       <div className="flex justify-between items-center pt-2">
         <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
-        <div ref={menuRef} className="grid grid-cols-2 gap-x-2">
+        <div className="grid grid-cols-2 gap-x-2">
           <SearchBar isFull={true} />
-          <FilterButton isOpen={isOpen} setIsOpen={setIsOpen} />
+          <FilterStatus
+            statusFiltered={statusFiltered}
+            setStatusFiltered={setStatusFiltered}
+          />
         </div>
-        <FilterDropdown isOpen={isOpen} />
       </div>
       {/* tabel */}
       <div className="flex flex-col h-[600px] lg:h-[555px] 2xl:h-[650px] space-y-2  overflow-hidden">
         <OrdersTable
           data={tableData}
+          minRows={7}
           renderStatus={(item) => (
-            <StatusDropdown
+            <ChangeStatus
               id={item.id}
               status={item.status}
               color={statusColors}

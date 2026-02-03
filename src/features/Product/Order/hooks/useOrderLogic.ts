@@ -1,47 +1,51 @@
 import { statusColors } from "@/data/statusColors";
-import { useClickOutside } from "@/hooks/useClickOutside";
 import { updateOrderStatus } from "@/store/ordersSlice";
 import { AppDispatch, RootState } from "@/store/store";
 import { OrderStatus } from "@/types/order.type";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { usePagination } from "./usePagination";
 
 const ITEMS_PER_PAGE = 7;
 
 export const useOrderLogic = () => {
-  // UI State & Ref
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const menuRef = useClickOutside(() => setIsOpen(false));
-  const [currentPage, setCurrentPage] = useState(1);
-
   // Redux State
   const orders = useSelector((state: RootState) => state.orders.data);
   const dispatch = useDispatch<AppDispatch>();
 
-  // Logic Pagination
-  const totalPages = Math.ceil(orders.length / ITEMS_PER_PAGE);
-  const firstItemIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const lastItemIndex = currentPage * ITEMS_PER_PAGE;
-  const currentTableData = orders.slice(firstItemIndex, lastItemIndex);
+  const [statusFiltered, setStatusFiltered] = useState<string | OrderStatus>(
+    "All",
+  );
 
-  // Handler
-  const handlePagination = (page: number) => {
-    setCurrentPage(page);
-  };
+  const filteredOrders = useMemo(() => {
+    if (statusFiltered === "All") return orders;
+    return orders.filter((item) => item.status === statusFiltered);
+  }, [orders, statusFiltered]);
+
+  const { currentData, currentPage, totalPages, goToPage } = usePagination(
+    filteredOrders,
+    ITEMS_PER_PAGE,
+  );
 
   const handleStatusUpdate = (orderId: string, newStatus: OrderStatus) => {
     dispatch(updateOrderStatus({ orderId, newStatus }));
   };
 
   return {
-    isOpen,
-    setIsOpen,
-    menuRef,
-    tableData: currentTableData,
+    // The Data
+    tableData: currentData,
     statusColors,
+
+    // Pagination Controls
     currentPage,
     totalPages,
-    handlePagination,
+    handlePagination: goToPage,
+
+    // Filter Controls
+    statusFiltered,
+    setStatusFiltered,
+
+    // Action
     handleStatusUpdate,
   };
 };
