@@ -18,9 +18,13 @@ interface OrderViewProps {
   currentPage: number;
   totalPages: number;
 
-  //
-  statusFiltered: string | OrderStatus;
-  setStatusFiltered: React.Dispatch<React.SetStateAction<string | OrderStatus>>;
+  // Filter Control
+  filterValue: string | OrderStatus;
+  onFilterChange: (val: string | OrderStatus) => void;
+
+  // Searching Control
+  searchValue: string;
+  onSearchChange: (val: string) => void;
 }
 
 export const OrderView = ({
@@ -30,19 +34,22 @@ export const OrderView = ({
   handlePagination,
   currentPage,
   totalPages,
-  statusFiltered,
-  setStatusFiltered,
+  filterValue,
+  onFilterChange,
+  searchValue,
+  onSearchChange,
 }: OrderViewProps) => {
   return (
     <div className="w-full space-y-4 bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md p-4 rounded-sm">
       <div className="flex justify-between items-center pt-2">
         <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
         <div className="grid grid-cols-2 gap-x-2">
-          <SearchBar isFull={true} />
-          <FilterStatus
-            statusFiltered={statusFiltered}
-            setStatusFiltered={setStatusFiltered}
+          <SearchBar
+            placeholder="Search ID"
+            value={searchValue}
+            onChange={onSearchChange}
           />
+          <FilterStatus value={filterValue} onChange={onFilterChange} />
         </div>
       </div>
       {/* tabel */}

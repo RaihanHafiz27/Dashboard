@@ -62,7 +62,12 @@ export const Sidebar = ({
         </button>
       </div>
       {/* Search Bar */}
-      <SearchBar isFull={isFull} />
+      <SearchBar
+        classname={`
+            transition-all duration-300
+            ${isFull ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10 pointer-events-none hidden"}
+          `}
+      />
       <nav>
         <ul className="grid grid-cols-1 gap-y-6 ">
           {navLinks.map((link) => (
@@ -136,7 +141,7 @@ export const Sidebar = ({
                 </>
               ) : (
                 <Link
-                  href={link.status === "inactive" ? "#" : link.to ?? "#"}
+                  href={link.status === "inactive" ? "#" : (link.to ?? "#")}
                   onClick={(e) => {
                     if (link.status === "inactive") {
                       e.preventDefault();

@@ -1,8 +1,8 @@
 import { statusColors } from "@/data/statusColors";
 import { updateOrderStatus } from "@/store/ordersSlice";
 import { AppDispatch, RootState } from "@/store/store";
-import { OrderStatus } from "@/types/order.type";
-import { useMemo, useState } from "react";
+import { Order, OrderStatus } from "@/types/order.type";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePagination } from "./usePagination";
 
@@ -16,14 +16,29 @@ export const useOrderLogic = () => {
   const [statusFiltered, setStatusFiltered] = useState<string | OrderStatus>(
     "All",
   );
+  const [search, setSearch] = useState("");
 
-  const filteredOrders = useMemo(() => {
-    if (statusFiltered === "All") return orders;
-    return orders.filter((item) => item.status === statusFiltered);
-  }, [orders, statusFiltered]);
+  const filteredData = useMemo(() => {
+    return orders.filter((item) => {
+      // Logic Search by ID or Address
+      const queryLower = search.toLowerCase();
+      const queryMatch = search
+        ? item.id.toLowerCase().includes(queryLower) ||
+          item.customerAddress.toLowerCase().includes(queryLower)
+        : true;
+
+      // Logic Status
+      const statusMatch =
+        statusFiltered && statusFiltered !== "All"
+          ? item.status === statusFiltered
+          : true;
+
+      return queryMatch && statusMatch;
+    });
+  }, [orders, search, statusFiltered]);
 
   const { currentData, currentPage, totalPages, goToPage } = usePagination(
-    filteredOrders,
+    filteredData,
     ITEMS_PER_PAGE,
   );
 
@@ -44,6 +59,10 @@ export const useOrderLogic = () => {
     // Filter Controls
     statusFiltered,
     setStatusFiltered,
+
+    // Searching Control
+    search,
+    setSearch,
 
     // Action
     handleStatusUpdate,

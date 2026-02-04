@@ -11,6 +11,17 @@ const dummyImages = [
   "/images/3.webp",
 ];
 
+const productNames = [
+  "Longines Master Collection",
+  "Gucci Bloom Eau de",
+  "iPad Mini 2021 Starlight",
+  "Gigabyte Aorus Men Tshirt",
+  "Short Frock",
+  "Red Lipstick",
+  "Puma Future Rider Trainers",
+  "Women Handbag Black",
+];
+
 const addresses = [
   "221B Baker Street, London, United Kingdom",
   "Via Roma 14, Milan, Italy",
@@ -37,9 +48,9 @@ const generateDummyData = () => {
 
   for (let i = 1; i <= 21; i++) {
     dummyOrders.push({
-      id: `ORD-${1000 + i}`,
+      id: `ORD-${1000 + (i + 1)}`,
       customerAddress: addresses[i % addresses.length],
-      productName: `Produk ${String.fromCharCode(65 + (i % 7))}`,
+      productName: productNames[i % productNames.length],
       imageUrl: dummyImages[i % dummyImages.length],
       date: `2025/10/${String((i % 30) + 1).padStart(2, "0")}`,
       quantity: quantities[i % quantities.length],

@@ -104,8 +104,8 @@ const OrderRow = ({
       </td>
       {/* Product Column */}
       <td className=" py-3 px-3">
-        <div className="flex items-center justify-center w-full space-x-4">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700">
+        <div className=" flex items-center w-full space-x-4">
+          <div className="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700">
             <Image
               src={item.imageUrl}
               height={40}
@@ -114,12 +114,13 @@ const OrderRow = ({
               className="h-10 w-10 rounded-md object-cover"
             />
           </div>
-          <div className="text-xs lg:text-sm lg:space-y-2">
+          <div className="flex-1 min-w-0 max-w-[150px] 2xl:max-w-[200px] text-xs lg:text-sm lg:space-y-1.5">
             <p
-              className=" max-w-[100px] lg:max-w-xs truncate"
+              className="w-full truncate font-medium text-gray-700 dark:text-gray-300"
               title={item.productName}
             >
               {item.productName}
+              {/* {item.productName.substring(0, 10)}... */}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
               {/* small screen */}
@@ -134,7 +135,7 @@ const OrderRow = ({
       {/* Address Column */}
       <td className=" py-3 px-3">
         <div
-          className="w-full max-w-[150px] lg:max-w-[200px] truncate text-xs font-medium text-gray-700 dark:text-gray-300 lg:text-sm mx-auto"
+          className="flex-1 truncate w-full max-w-[150px] lg:max-w-[200px] 2xl:max-w-[250px] text-xs font-medium text-gray-700 dark:text-gray-300 lg:text-sm mx-auto"
           title={item.customerAddress}
         >
           {item.customerAddress}

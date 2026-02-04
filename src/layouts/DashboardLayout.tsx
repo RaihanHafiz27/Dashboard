@@ -41,15 +41,32 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
     <div
       className={`flex w-full  min-h-dvh h-auto ${
         theme === "dark" ? "bg-gray-900" : "bg-slate-100"
-      } md:min-h-screen ${plusJakarta.className} overflow-hidden`}
+      } md:h-screen ${plusJakarta.className} overflow-hidden`}
     >
       {/* Sidebar */}
-      <Sidebar isFull={isFull} setIsFull={setIsFull} />
+      <div className="shrink-0 h-screen overflow-y-auto border-r border-gray-300 dark:border-gray-500">
+        <Sidebar isFull={isFull} setIsFull={setIsFull} />
+      </div>
       {/* main content dashboard */}
-      <main className="border-l border-gray-300 dark:border-gray-500 grow p-4 2xl:p-8 space-y-8">
+      {/* <main className="border-l border-gray-300 dark:border-gray-500 flex-1 min-w-0 p-4 2xl:p-8 space-y-8 overflow-y-auto">
         <Information />
         <div className="w-full">{children}</div>
-      </main>
+      </main> */}
+      {/* 2. Kanan (Wrapper Vertikal) */}
+      {/* Kita bungkus Kanan jadi Flex Column: Atas (Header) & Bawah (Content) */}
+      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+        {/* A. HEADER / INFORMATION (Diam di Atas) */}
+        {/* shrink-0: Jangan mengecil. z-10: Biar di atas content kalau ada shadow */}
+        <header className="shrink-0 pt-4 pb-1 px-4 2xl:px-8 bg-inherit z-10 ">
+          <Information />
+        </header>
+
+        {/* B. MAIN CONTENT (Scrollable) */}
+        {/* flex-1: Ambil sisa ruang. overflow-y-auto: Cuma ini yang scroll! */}
+        <main className="flex-1 overflow-y-auto p-4 2xl:p-8 space-y-8 ">
+          <div className="w-full">{children}</div>
+        </main>
+      </div>
     </div>
   );
 };

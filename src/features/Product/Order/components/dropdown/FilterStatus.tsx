@@ -1,10 +1,10 @@
 import { useFloatingMenu } from "@/hooks/useFloatingMenu";
 import { OrderStatus } from "@/types/order.type";
-import { ChevronRight, Command, ListFilter } from "lucide-react";
+import { Command, ListFilter } from "lucide-react";
 
 interface FilterProps {
-  statusFiltered: string | OrderStatus;
-  setStatusFiltered: React.Dispatch<React.SetStateAction<string | OrderStatus>>;
+  value: string | OrderStatus;
+  onChange: (val: string | OrderStatus) => void;
 }
 
 const statuses: OrderStatus[] = [
@@ -14,10 +14,7 @@ const statuses: OrderStatus[] = [
   "Cancelled",
 ];
 
-export const FilterStatus = ({
-  statusFiltered,
-  setStatusFiltered,
-}: FilterProps) => {
+export const FilterStatus = ({ value, onChange }: FilterProps) => {
   const {
     open,
     setOpen,
@@ -35,7 +32,7 @@ export const FilterStatus = ({
         className="bg-slate-200 dark:bg-transparent border border-slate-200 dark:border-gray-500  p-2 gap-2 w-full rounded-sm text-sm text-start flex justify-between cursor-pointer"
       >
         <span className="text-gray-700 dark:text-gray-500 font-medium truncate">
-          {statusFiltered}
+          {value}
         </span>
         <ListFilter size={20} className="text-slate-400 shrink-0" />
       </button>
@@ -53,7 +50,7 @@ export const FilterStatus = ({
               <li>
                 <button
                   onClick={() => {
-                    (setStatusFiltered("All"), setOpen(false));
+                    (onChange("All"), setOpen(false));
                   }}
                   className="cursor-pointer flex text-sm justify-between items-center w-40 hover:bg-slate-800/10 dark:hover:bg-slate-70  p-2 rounded-md text-gray-700"
                 >
@@ -68,7 +65,7 @@ export const FilterStatus = ({
                 <li key={label} className="">
                   <button
                     onClick={() => {
-                      (setStatusFiltered(label), setOpen(false));
+                      (onChange(label), setOpen(false));
                     }}
                     className="cursor-pointer flex text-sm justify-between items-center w-40 hover:bg-slate-800/10 dark:hover:bg-slate-70  p-2 rounded-md text-gray-700"
                   >
