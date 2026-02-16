@@ -15,11 +15,13 @@ import { useState } from "react";
 interface FloatingProps {
   placement?: Placement;
   offsetPx?: number;
+  shiftScreen?: number;
 }
 
 export const useFloatingMenu = ({
   placement = "bottom",
   offsetPx = 8,
+  shiftScreen = 0,
 }: FloatingProps = {}) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -28,7 +30,7 @@ export const useFloatingMenu = ({
     open,
     onOpenChange: setOpen,
     placement,
-    middleware: [offset(offsetPx), flip(), shift()],
+    middleware: [offset(offsetPx), flip(), shift({ padding: shiftScreen })],
 
     whileElementsMounted: autoUpdate,
   });

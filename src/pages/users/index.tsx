@@ -46,7 +46,7 @@ const UsersPage = () => {
             All Users
           </p>
           <div className="flex items-center space-x-4">
-            <SearchBar isFull={true} />
+            <SearchBar />
             <button
               className="bg-sky-700 px-4 py-2 text-sm rounded-sm text-slate-200 cursor-not-allowed"
               disabled

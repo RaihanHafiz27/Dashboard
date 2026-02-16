@@ -1,8 +1,8 @@
 import { statusColors } from "@/data/statusColors";
 import { updateOrderStatus } from "@/store/ordersSlice";
 import { AppDispatch, RootState } from "@/store/store";
-import { Order, OrderStatus } from "@/types/order.type";
-import { useEffect, useMemo, useState } from "react";
+import { OrderStatus } from "@/types/order.type";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePagination } from "./usePagination";
 
@@ -24,6 +24,7 @@ export const useOrderLogic = () => {
       const queryLower = search.toLowerCase();
       const queryMatch = search
         ? item.id.toLowerCase().includes(queryLower) ||
+          item.productName.toLowerCase().includes(queryLower) ||
           item.customerAddress.toLowerCase().includes(queryLower)
         : true;
 

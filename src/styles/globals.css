@@ -56,3 +56,14 @@
 .dark ::-webkit-scrollbar-thumb:hover {
   background-color: #667085;
 }
+
+/* Sembunyikan scrollbar untuk Chrome, Safari dan Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sembunyikan scrollbar untuk IE, Edge dan Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

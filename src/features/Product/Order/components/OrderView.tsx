@@ -44,11 +44,7 @@ export const OrderView = ({
       <div className="flex justify-between items-center pt-2">
         <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
         <div className="grid grid-cols-2 gap-x-2">
-          <SearchBar
-            placeholder="Search ID"
-            value={searchValue}
-            onChange={onSearchChange}
-          />
+          <SearchBar value={searchValue} onChange={onSearchChange} />
           <FilterStatus value={filterValue} onChange={onFilterChange} />
         </div>
       </div>

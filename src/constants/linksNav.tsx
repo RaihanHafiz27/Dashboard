@@ -1,11 +1,13 @@
 import { NavLinks } from "@/types/navLinks.type";
 import {
+  ChartNoAxesColumn,
+  Circle,
   CircleQuestionMark,
   ClipboardList,
   DollarSign,
-  Gauge,
+  Mail,
+  Package,
   Settings,
-  ShoppingCart,
   Users,
 } from "lucide-react";
 
@@ -14,18 +16,22 @@ export const navLinks: NavLinks[] = [
     id: 1,
     title: "dashboard",
     to: "/dashboard",
-    icon: <Gauge />,
+    icon: <ChartNoAxesColumn />,
     status: "active",
   },
   {
     id: 2,
     title: "product",
     subs: [
-      { title: "order", to: "/product/orders" },
-      { title: "stock", to: "/product/stocks" },
-      { title: "refunds", to: "/product/refunds" },
+      { title: "order", to: "/product/orders", iconSub: <Circle size={18} /> },
+      { title: "stock", to: "/product/stocks", iconSub: <Circle size={18} /> },
+      {
+        title: "refunds",
+        to: "/product/refunds",
+        iconSub: <Circle size={18} />,
+      },
     ],
-    icon: <ShoppingCart />,
+    icon: <Package />,
     status: "active",
   },
   {
@@ -51,18 +57,25 @@ export const navLinks: NavLinks[] = [
   },
   {
     id: 6,
+    title: "mailbox",
+    to: "/",
+    icon: <Mail />,
+    status: "active",
+  },
+  {
+    id: 7,
     title: "settings",
     // to: "/",
     subs: [
-      { title: "profile", to: "#" },
-      { title: "account", to: "#" },
-      { title: "security", to: "#" },
+      { title: "profile", to: "#", iconSub: <Circle size={18} /> },
+      { title: "account", to: "#", iconSub: <Circle size={18} /> },
+      { title: "security", to: "#", iconSub: <Circle size={18} /> },
     ],
     icon: <Settings />,
     status: "inactive",
   },
   {
-    id: 7,
+    id: 8,
     title: "help",
     to: "/help",
     icon: <CircleQuestionMark />,

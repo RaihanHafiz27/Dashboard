@@ -8,5 +8,5 @@ export const statusColors: Record<OrderStatus, string> = {
   Completed:
     "bg-gray-800 border border-gray-300 dark:border-slate-100 dark:bg-slate-100 text-slate-200 dark:text-gray-800",
   Cancelled:
-    "line-through bg-slate-200 border border-slate-200 dark:border-gray-600  dark:bg-transparent text-gray-400 dark:text-gray-600",
+    "bg-slate-200 border border-slate-200 dark:border-gray-600  dark:bg-transparent text-gray-400 dark:text-gray-600",
 };

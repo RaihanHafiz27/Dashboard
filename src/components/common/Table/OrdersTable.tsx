@@ -30,7 +30,7 @@ export const OrdersTable = ({
           <th className=" pb-2 px-3">Address</th>
           <th className=" pb-2 px-3">Amount</th>
           <th className=" pb-2 px-3">Status</th>
-          <th className=" pb-2 px-3">Date</th>
+          <th className=" pb-2 px-3 hidden lg:block">Date</th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-300 dark:divide-none text-sm">
@@ -89,10 +89,12 @@ const OrderRow = ({
     <tr
       onClick={() => onRowClick && onRowClick(item)} // ONLY FOR RECENT ORDERS
       key={item.id}
-      className={`hover:bg-slate-200/50 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} transition-all duration-200 text-gray-700 dark:text-gray-300`}
+      className={`relative hover:bg-slate-200/50 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} transition-all duration-200 text-gray-700 dark:text-gray-300 `}
     >
       {/* ID Column */}
-      <td className=" py-3 px-3 text-xs font-medium lg:text-sm text-center">
+      <td
+        className={`py-3 px-3 text-xs font-medium lg:text-sm text-center  ${item.status === "Cancelled" ? "text-gray-300" : "text-gray-700 dark:text-gray-300"}`}
+      >
         {/* small screen */}
         <span className="lg:hidden" title={item.id}>
           {item.id.slice(4, 8)}
@@ -105,7 +107,9 @@ const OrderRow = ({
       {/* Product Column */}
       <td className=" py-3 px-3">
         <div className=" flex items-center w-full space-x-4">
-          <div className="shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700">
+          <div
+            className={`shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700 ${item.status === "Cancelled" && "opacity-20"}`}
+          >
             <Image
               src={item.imageUrl}
               height={40}
@@ -114,15 +118,18 @@ const OrderRow = ({
               className="h-10 w-10 rounded-md object-cover"
             />
           </div>
-          <div className="flex-1 min-w-0 max-w-[150px] 2xl:max-w-[200px] text-xs lg:text-sm lg:space-y-1.5">
+          <div
+            className={`flex-1 min-w-0 max-w-[150px] 2xl:max-w-[200px] text-xs lg:text-sm lg:space-y-1.5 ${item.status === "Cancelled" ? "text-gray-300" : "text-gray-700 dark:text-gray-300"}`}
+          >
             <p
-              className="w-full truncate font-medium text-gray-700 dark:text-gray-300"
+              className="w-full truncate font-medium "
               title={item.productName}
             >
               {item.productName}
-              {/* {item.productName.substring(0, 10)}... */}
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p
+              className={`text-xs ${item.status !== "Cancelled" && " text-gray-500 dark:text-gray-400"}`}
+            >
               {/* small screen */}
               <span className="lg:hidden">Qty : </span>
               {/* large screen */}
@@ -133,9 +140,11 @@ const OrderRow = ({
         </div>
       </td>
       {/* Address Column */}
-      <td className=" py-3 px-3">
+      <td
+        className={` py-3 px-3  ${item.status === "Cancelled" ? "text-gray-300" : "text-gray-700 dark:text-gray-300"}`}
+      >
         <div
-          className="flex-1 truncate w-full max-w-[150px] lg:max-w-[200px] 2xl:max-w-[250px] text-xs font-medium text-gray-700 dark:text-gray-300 lg:text-sm mx-auto"
+          className="flex-1 truncate w-full max-w-[150px] lg:max-w-[200px] 2xl:max-w-[250px] text-xs font-medium  lg:text-sm mx-auto"
           title={item.customerAddress}
         >
           {item.customerAddress}
@@ -143,7 +152,9 @@ const OrderRow = ({
       </td>
 
       {/* Amount Column */}
-      <td className=" p-3 text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
+      <td
+        className={` p-3  text-center text-xs lg:text-sm ${item.status === "Cancelled" ? "text-gray-300" : "text-gray-700 dark:text-gray-300"}`}
+      >
         $ {item.amount}
       </td>
       {/* Status Column */}
@@ -165,7 +176,9 @@ const OrderRow = ({
         )}
       </td>
       {/* Date Column */}
-      <td className=" py-3 px-3 text-gray-700 dark:text-gray-300 text-center text-xs lg:text-sm">
+      <td
+        className={`hidden lg:table-cell py-3 px-3 text-center text-xs lg:text-sm ${item.status === "Cancelled" ? "text-gray-300" : "text-gray-700 dark:text-gray-300"}`}
+      >
         {item.date}
       </td>
     </tr>
