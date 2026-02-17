@@ -89,7 +89,7 @@ const OrderRow = ({
     <tr
       onClick={() => onRowClick && onRowClick(item)} // ONLY FOR RECENT ORDERS
       key={item.id}
-      className={`relative hover:bg-slate-200/50 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} transition-all duration-200 text-gray-700 dark:text-gray-300 `}
+      className={`relative hover:bg-slate-200/50 dark:hover:bg-gray-700/10 ${onRowClick ? "hover:cursor-pointer" : ""} hover:scale-103 transition-all duration-200 text-gray-700 dark:text-gray-300 `}
     >
       {/* ID Column */}
       <td

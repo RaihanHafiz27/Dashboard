@@ -121,7 +121,7 @@ const SidebarItem = (props: SidebarItemProps) => {
         <div className="mb-1">
           <button
             onClick={onToggle}
-            className={`w-full flex items-center justify-between p-2 rounded-lg transition-colors group relative
+            className={`w-full flex items-center justify-between p-2 rounded-lg transition-al duration-200 group relative hover:pl-4
             ${
               isParentActive || isExpanded
                 ? "border-b-2 border-sky-500 text-gray-600 bg-sky-500/10 dark:text-slate-200 dark:bg-gray-200/10"
@@ -157,7 +157,7 @@ const SidebarItem = (props: SidebarItemProps) => {
                   <li key={sub.title}>
                     <Link
                       href={sub.to}
-                      className={`w-full flex items-center p-2 text-sm rounded-md transition-colors capitalize ${
+                      className={`w-full flex items-center p-2 text-sm rounded-md transition-all duration-200 hover:pl-4 capitalize ${
                         isSubActive
                           ? " text-slate-200 bg-sky-500 dark:bg-gray-200/10"
                           : "text-gray-500 hover:text-slate-200 hover:bg-sky-500 dark:text-slate-200"
@@ -176,7 +176,7 @@ const SidebarItem = (props: SidebarItemProps) => {
         // Single Link
         <Link
           href={item.to || "#"}
-          className={`flex items-center p-2 rounded-md transition-colors mb-1 group capitalize
+          className={`flex items-center p-2 rounded-md transition-all duration-200 mb-1 group capitalize hover:pl-4
         ${
           isSingleActive
             ? "border-l-4 border-sky-500 text-gray-600 bg-sky-500/10 dark:text-slate-200 dark:bg-gray-200/10" // Style Active Keren

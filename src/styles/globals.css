@@ -3,6 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --scale-103: 1.03;
+
   /* Mendaftarkan animasi baru bernama 'pop' */
   --animate-pop: pop-in 0.2s ease-out;
 

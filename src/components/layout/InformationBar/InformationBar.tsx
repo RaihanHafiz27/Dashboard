@@ -19,12 +19,12 @@ export const InformationBar = ({
   const segments = pathname.split("/").filter(Boolean);
 
   return (
-    <div className="flex items-center justify-between border-gray-300 dark:border-gray-500 pt-2 pb-5 border-b">
+    <div className="flex items-center justify-between border-gray-300 dark:border-gray-500 pt-2 pb-5 border-b ">
       <div className="flex items-center space-x-4 text-gray-700 dark:text-gray-300">
         {/* Sidebar Button */}
         <button onClick={onClick} className={`cursor-pointer `}>
           <PanelTopOpen
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-200 hover:scale-110 ${
               lockedValue ? "rotate-90" : "-rotate-90"
             }`}
           />
@@ -43,7 +43,7 @@ export const InformationBar = ({
         {/* Premium Button */}
         <button
           onClick={modalAction}
-          className="flex items-center space-x-2 bg-sky-600/20 dark:bg-sky-600/20 px-6 py-2 rounded-sm text-sm text-sky-700 dark:text-sky-500 cursor-pointer"
+          className="flex items-center space-x-2 bg-sky-600/20 dark:bg-sky-600/20 px-6 py-2 rounded-sm text-sm text-sky-700 dark:text-sky-500 cursor-pointer transition-all duration-200 hover:scale-105"
         >
           <i>
             <Star size={20} className="fill-sky-700 dark:fill-sky-500" />
@@ -53,23 +53,11 @@ export const InformationBar = ({
 
         {/* Notification Button */}
         <Notification />
-        {/* <button className="relative text-gray-700 dark:text-gray-300 cursor-pointer">
-          <Bell />
-          <span
-            className="
-          absolute -top-1 -right-1 
-          flex items-center justify-center
-          w-4 h-4 rounded-full 
-          bg-red-600 text-white text-xs font-medium
-        "
-          >
-            2
-          </span>
-        </button> */}
+
         {/* Theme Button */}
         <button
           onClick={toggleTheme}
-          className="cursor-pointer text-gray-700 dark:text-gray-300"
+          className="cursor-pointer text-gray-700 dark:text-gray-300  transition-all duration-200 hover:scale-110"
         >
           {theme === "dark" ? <SunIcon /> : <MoonIcon />}
         </button>
@@ -78,7 +66,7 @@ export const InformationBar = ({
           width={100}
           height={100}
           alt="profile"
-          className="w-9 h-9 rounded-full cursor-not-allowed"
+          className="w-9 h-9 rounded-full cursor-not-allowed  transition-all duration-200 hover:scale-110"
         />
       </div>
     </div>

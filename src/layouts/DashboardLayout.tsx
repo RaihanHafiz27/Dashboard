@@ -50,7 +50,7 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
       </div>
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         {/* HEADER / INFORMATION */}
-        <header className="shrink-0 pt-4 pb-1 px-4 2xl:px-8 bg-inherit z-10 ">
+        <header className="shrink-0 pt-4 pb-1 px-4 2xl:px-8 z-[999] bg-slate-100 dark:bg-gray-900">
           <InformationBar
             lockedValue={isLocked}
             onClick={() => setIsLocked(!isLocked)}

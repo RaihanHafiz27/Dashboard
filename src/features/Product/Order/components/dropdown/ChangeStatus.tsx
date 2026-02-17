@@ -1,5 +1,6 @@
 import { useFloatingMenu } from "@/hooks/useFloatingMenu";
 import { OrderStatus } from "@/types/order.type";
+import { FloatingPortal } from "@floating-ui/react";
 import { ChevronRight } from "lucide-react";
 
 type Props = {
@@ -48,29 +49,31 @@ export const ChangeStatus = ({ status, color, id, onClick }: Props) => {
 
       {/* Dropdown */}
       {open && (
-        <div
-          ref={refs.setFloating}
-          style={floatingStyles}
-          {...getFloatingProps()}
-          className="z-50 focus:outline-none"
-        >
+        <FloatingPortal>
           <div
-            className={`bg-slate-200 dark:bg-slate-800 rounded-md p-2 transition-all duration-200 ease-in-out space-y-2 shadow-lg animate-pop`}
+            ref={refs.setFloating}
+            style={floatingStyles}
+            {...getFloatingProps()}
+            className="z-[998]"
           >
-            {statuses.map((stat) => (
-              <button
-                key={stat}
-                onClick={() => {
-                  onClick(id, stat);
-                  setOpen(false);
-                }}
-                className={`flex justify-between items-center rounded-sm px-6 py-2 w-full cursor-pointer transition-all duration-200 hover:bg-slate-800/10 dark:hover:bg-slate-700`}
-              >
-                {stat}
-              </button>
-            ))}
+            <div
+              className={`bg-slate-50 border border-slate-200 dark:bg-slate-800 dark:border-slate-700 shadow-xl p-2 text-sm rounded-md animate-pop w-32 hover:scale-103 transition-all duration-300`}
+            >
+              {statuses.map((stat) => (
+                <button
+                  key={stat}
+                  onClick={() => {
+                    onClick(id, stat);
+                    setOpen(false);
+                  }}
+                  className={`flex justify-between items-center rounded-sm px-4 py-2 w-full cursor-pointer transition-all duration-200  text-slate-700 dark:text-slate-200 hover:bg-slate-800/10 dark:hover:bg-slate-700`}
+                >
+                  {stat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        </FloatingPortal>
       )}
     </>
   );

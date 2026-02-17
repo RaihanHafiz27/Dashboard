@@ -4,6 +4,7 @@ import { RootState } from "@/store/store";
 import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
 import { features } from "@/constants/actionMenu";
 import { OrdersTable } from "@/components/common/Table/OrdersTable";
+import { HeaderChart } from "../header/HeaderChart";
 
 export const RecentOrders = () => {
   const router = useRouter();
@@ -13,7 +14,9 @@ export const RecentOrders = () => {
 
   return (
     <div className=" flex flex-col bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md col-span-2 space-y-1 rounded-sm overflow-hidden">
-      <ActionMenu items={features} label="Recent Orders" />
+      <HeaderChart label="Recent Orders">
+        <ActionMenu items={features} />
+      </HeaderChart>
       <OrdersTable
         data={recentOrders}
         onRowClick={() => router.push("/product/orders")}

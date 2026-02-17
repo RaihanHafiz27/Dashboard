@@ -2,16 +2,20 @@ import Image from "next/image";
 import { top3 } from "@/data/top3";
 import { ActionMenu } from "@/components/common/Dropdown/ActionMenu";
 import { features } from "@/constants/actionMenu";
+import { HeaderChart } from "../header/HeaderChart";
 
 export const TopProducts = () => {
   return (
     <div className="rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md">
-      <ActionMenu items={features} label="Top Products" />
-      <ol className="flex flex-col gap-y-5 p-4  h-80 2xl:h-96 overflow-y-auto">
+      {/* <ActionMenu items={features} label="Top Products" /> */}
+      <HeaderChart label="Top Products">
+        <ActionMenu items={features} />
+      </HeaderChart>
+      <ol className="flex flex-col gap-y-5 px-4 py-3  h-80 2xl:h-96 overflow-y-auto">
         {top3.map((prod) => (
           <li
             key={prod.id}
-            className="flex items-center space-x-4  hover:scale-105 transition-all duration-300"
+            className="flex items-center space-x-4  hover:scale-103 transition-all duration-200"
           >
             <div className="relative bg-sky-800/50 dark:bg-sky-700 rounded-sm">
               <Image
