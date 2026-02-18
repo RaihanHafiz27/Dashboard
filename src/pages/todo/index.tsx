@@ -1,4 +1,4 @@
-import { ModalPremium } from "@/fragments/modals/ModalPrem";
+import { ModalPremium } from "@/components/common/Modal/ModalPrem";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   addTodos,

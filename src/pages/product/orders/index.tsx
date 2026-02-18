@@ -2,7 +2,7 @@ import { OrderView } from "@/features/Product/Order/components/OrderView";
 import { useOrderLogic } from "@/features/Product/Order/hooks/useOrderLogic";
 import { OrderStatus } from "@/types/order.type";
 
-const productOrders = () => {
+const ProductOrders = () => {
   const {
     handlePagination,
     statusFiltered,
@@ -32,4 +32,4 @@ const productOrders = () => {
   );
 };
 
-export default productOrders;
+export default ProductOrders;

@@ -3,7 +3,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { useTheme } from "@/context/ThemeContext";
 import { InformationBar } from "@/components/layout/InformationBar/InformationBar";
-import { ModalPremium } from "@/fragments/modals/ModalPrem";
+import { ModalPremium } from "@/components/common/Modal/ModalPrem";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

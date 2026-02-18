@@ -17,7 +17,7 @@ export const ModalPremium = ({
   if (!isOpenPrem) return null;
 
   return (
-    <div className="bg-black/40 fixed inset-0 z-50 grid place-items-center">
+    <div className="bg-black/40 fixed inset-0 z-[1000] grid place-items-center">
       <div className="bg-sky-100 dark:bg-gray-800 w-96 h-[40vh] lg:h-[80vh] 2xl:h-[55vh] py-2 rounded-4xl flex flex-col">
         <div className="grow flex flex-col justify-center items-center p-6 space-y-6">
           <Image

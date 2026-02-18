@@ -1,29 +1,28 @@
 import { Stock } from "@/data/stocksProd";
 import { UploadIcon, XIcon } from "lucide-react";
 import { useRef } from "react";
-import { InputPrimary } from "../../components/ui/Input/InputPrimary";
-import { InputDropdown } from "../../components/ui/Input/InputDropdown";
+import { InputPrimary } from "../../../../../components/ui/Input/InputPrimary";
+import { InputDropdown } from "../../../../../components/ui/Input/InputDropdown";
 import { Category } from "@/constants/categoryLabels";
 
-export const ChangeProduct = ({
-  formData,
-  preview,
-  handleImageChange,
-  setIsOpenModal,
-}: {
+interface ChangeProductProps {
   formData: Stock | undefined;
   preview: string | null;
-  handleImageChange: any;
-  setIsOpenModal: any;
-}) => {
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
+}
+
+export const ChangeProduct = (props: ChangeProductProps) => {
+  const { formData, preview, handleImageChange, onClick } = props;
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
       <div className="bg-white dark:bg-slate-800 rounded-md shadow-xl w-full max-w-3xl p-6 relative">
         {/* Tombol Close */}
         <button
-          onClick={() => setIsOpenModal(false)}
+          onClick={onClick}
           className="absolute top-3 right-3 text-gray-600 dark:text-gray-300 hover:text-red-400 dark:hover:text-gray-500/70 text-xl cursor-pointer"
         >
           <XIcon />
