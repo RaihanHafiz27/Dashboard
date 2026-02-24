@@ -53,7 +53,7 @@ export const stockProd: Stock[] = [
     name: "Gucci Bloom Eau de",
     category: "Skincare",
     price: 79,
-    piece: 100,
+    piece: 9,
     image: "/images/6.webp",
   },
   {
@@ -63,5 +63,13 @@ export const stockProd: Stock[] = [
     price: 89.99,
     piece: 77,
     image: "/images/7.webp",
+  },
+  {
+    id: 8,
+    name: "Gigabyte Aorus Men Tshirt",
+    category: "T-Shirt",
+    price: 30.29,
+    piece: 28,
+    image: "/images/8.webp",
   },
 ];

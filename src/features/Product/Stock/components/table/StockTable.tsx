@@ -20,81 +20,99 @@ export const StockTable = (props: StockTableProps) => {
   }
 
   return (
-    <div className="flex flex-col h-[660px] 2xl:h-[780px] overflow-hidden">
-      <table className="grow overflow-hidden table-auto ">
-        <thead className="border-b border-slate-300 dark:border-gray-500  ">
-          <tr className="text-gray-700 dark:text-slate-300 tracking-wide text-sm">
-            <th className="p-4 text ">Product</th>
-            <th className="p-4 text ">Name</th>
-            <th className="p-4 text ">Category</th>
-            <th className="p-4 text ">Price</th>
-            <th className="p-4 text ">Piece</th>
-            <th className="p-4 text ">Action</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-300 dark:divide-none">
-          {data?.map((item) => (
-            <tr
-              key={item.id}
-              className="hover:scale-103 transition-all duration-200"
-            >
-              <td className="p-4  2xl:py-3">
-                <div className="w-14 h-14 2xl:w-20 2xl:h-20 bg-sky-800/50 dark:bg-sky-700 grid place-items-center mx-auto rounded-md">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={100}
-                    height={100}
-                    className="w-12 h-12 object-cover"
-                  />
-                </div>
-              </td>
-              <td className="p-4  2xl:py-3">
-                <p
-                  className="text-gray-700 dark:text-slate-300 text-xs lg:text-sm"
-                  title={`${item.name}`}
-                >
-                  {item.name.substring(0, 15)}...
-                </p>
-              </td>
-              <td className="p-4  2xl:py-3 capitalize text-gray-700 dark:text-slate-300 text-xs lg:text-sm">
-                {item.category}
-              </td>
-              <td className="p-4  2xl:py-3 text-gray-700 dark:text-slate-300 text-xs lg:text-sm">
-                $ {item.price}
-              </td>
-              <td className="p-4  2xl:py-3 text-gray-700 dark:text-slate-300 text-center text-xs lg:text-sm">
-                {item.piece}
-              </td>
-              <td className="p-4  2xl:py-3">
-                <div className="flex justify-center">
-                  <div className="flex border border-gray-300 dark:border-gray-600 divide-x divide-gray-300 dark:divide-gray-600 rounded-md overflow-hidden">
-                    <button
-                      className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                      title="Edit"
-                    >
-                      <SquarePen
-                        size={20}
-                        className="text-blue-600 dark:text-blue-400 cursor-pointer"
-                        onClick={() => onClick(item.id)}
+    <div className="flex flex-col h-[75vh] 2xl:h-[80vh]">
+      {/* HEADER CONTAINER */}
+      <div className="shrink-0 bg-slate-100 dark:bg-gray-900 border-b border-slate-300 dark:border-gray-500 2xl:px-4">
+        <table className="w-full table-fixed">
+          <thead>
+            <tr className="text-gray-700 dark:text-slate-300">
+              <th className="w-[30%] p-4 text-start text-xs  uppercase font-bold">
+                Product
+              </th>
+              <th className="w-[20%] p-4 text-start text-xs  uppercase font-bold">
+                Category
+              </th>
+              <th className="w-[15%] p-4 text-start text-xs  uppercase font-bold">
+                Price
+              </th>
+              <th className="w-[15%] p-4 text-center text-xs  uppercase font-bold">
+                Piece
+              </th>
+              <th className="w-[20%] p-4 text-center text-xs  uppercase font-bold">
+                Action
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      {/* BODY CONTAINER (Scrollable) */}
+      <div className="grow overflow-y-auto overflow-x-hidden 2xl:px-4">
+        <table className="w-full table-fixed border-separate border-spacing-0">
+          <tbody className="">
+            {data?.map((item) => (
+              <tr
+                key={item.id}
+                className="group hover:scale-103 transition-all duration-200 hover:bg-slate-500/5 dark:hover:bg-gray-800/30"
+              >
+                <td className="w-[30%] p-4 2xl:py-3">
+                  <div className="flex items-center space-x-3 min-w-0">
+                    <div className="relative w-14 h-14 2xl:w-20 2xl:h-20 bg-sky-800/50 dark:bg-sky-700 grid place-items-center rounded-md shrink-0">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
+                    </div>
+                    <div className="space-y-1 2xl:space-y-3 flex-1 min-w-0">
+                      <p
+                        className="text-gray-700 dark:text-slate-300 text-sm truncate"
+                        title={`${item.name}`}
+                      >
+                        {item.name}
+                      </p>
+                      <span className="text-xs 2xl:text-sm text-gray-400">
+                        ID: #{item.id}
+                      </span>
+                    </div>
+                  </div>
+                </td>
+                <td className="w-[20%] p-4">
+                  <span className="px-2 py-1 text-[10px] font-bold uppercase rounded-full bg-slate-300 dark:bg-gray-800 text-gray-500 dark:text-slate-300 border border-slate-200 dark:border-gray-700">
+                    {item.category}
+                  </span>
+                </td>
+                <td className="w-[15%] p-4 2xl:py-3 text-gray-700 dark:text-slate-300 text-sm font-medium">
+                  $ {item.price.toLocaleString()}
+                </td>
+                <td
+                  className={`w-[15%] p-4 2xl:py-3 text-gray-700 dark:text-slate-300 text-center text-xs font-bold ${item.piece < 15 ? "text-red-500" : "text-gray-700 dark:text-slate-300"}`}
+                >
+                  {item.piece}
+                </td>
+                <td className="w-[20%] p-4 2xl:py-3">
+                  <div className="flex justify-center space-x-2">
+                    <button
+                      onClick={() => onClick(item.id)}
+                      className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg hover:scale-103 active:scale-95 transition-all shadow-sm border border-blue-100 dark:border-blue-900/30 cursor-pointer"
+                      title="Edit Product"
+                    >
+                      <SquarePen size={18} />
                     </button>
                     <button
-                      className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                      title="Delete"
+                      disabled
+                      className="p-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg hover:scale-103 active:scale-95 transition-all shadow-sm border border-red-100 dark:border-red-900/30 cursor-not-allowed"
+                      title="Delete Product"
                     >
-                      <Trash2
-                        size={20}
-                        className="text-red-600 dark:text-red-500"
-                      />
+                      <Trash2 size={18} />
                     </button>
                   </div>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

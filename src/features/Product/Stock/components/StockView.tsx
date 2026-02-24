@@ -7,9 +7,11 @@ interface StockViewProps {
   handleOpenEditModal: (id: number) => void;
   selectedProduct: Stock | undefined;
   preview: string | null;
-  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isOpenModal: boolean;
   setIsOpenModal: (val: boolean) => void;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCategoryChange: (val: string) => void;
 }
 
 export const StockView = (props: StockViewProps) => {
@@ -18,15 +20,17 @@ export const StockView = (props: StockViewProps) => {
     handleOpenEditModal,
     selectedProduct,
     preview,
-    handleImageChange,
     isOpenModal,
     setIsOpenModal,
+    handleImageChange,
+    handleInputChange,
+    handleCategoryChange,
   } = props;
 
   return (
     <>
       <div
-        className={`w-full space-y-4  p-4 rounded-sm bg-slate-100 border border-slate-300 dark:border-gray-500  shadow-md dark:bg-transparent`}
+        className={`w-full space-y-4  py-4 pl-4 pr-2 rounded-sm bg-slate-100 border border-slate-300 dark:border-gray-500  shadow-md dark:bg-transparent`}
       >
         {/* STOCK TABLE */}
         <StockTable data={stockProd} onClick={handleOpenEditModal} />
@@ -35,9 +39,11 @@ export const StockView = (props: StockViewProps) => {
       {isOpenModal && (
         <ChangeProduct
           formData={selectedProduct}
-          handleImageChange={handleImageChange}
           preview={preview}
-          onClick={() => setIsOpenModal(false)}
+          onClose={() => setIsOpenModal(false)}
+          handleImageChange={handleImageChange}
+          handleInputChange={handleInputChange}
+          handleCategoryChange={handleCategoryChange}
         />
       )}
     </>
