@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Todos = {
+export type Todos = {
   id: number;
   message: string;
   status: boolean;
@@ -22,20 +22,25 @@ export const todosSlice = createSlice({
     setTodos: (state, action: PayloadAction<Todos[]>) => {
       state.data = action.payload;
     },
-    addTodos: (state, action: PayloadAction<Todos>) => {
-      const existingTodo = state.data.find(
-        (todo) => todo.id === action.payload.id
-      );
-      if (!existingTodo) {
+    addTodos: {
+      reducer: (state, action: PayloadAction<Todos>) => {
         state.data.push(action.payload);
-      }
+      },
+      prepare: (message: string) => {
+        return {
+          payload: {
+            id: Date.now(),
+            message,
+            status: false,
+            mark: false,
+          },
+        };
+      },
     },
     updateTodoStatus: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
       const existingTodo = state.data.find((todo) => todo.id === id);
-      if (existingTodo) {
-        existingTodo.status = !existingTodo.status;
-      }
+      if (existingTodo) existingTodo.status = !existingTodo.status;
     },
     deleteTodo: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
@@ -44,9 +49,7 @@ export const todosSlice = createSlice({
     markingTodo: (state, action: PayloadAction<{ id: number }>) => {
       const { id } = action.payload;
       const existingTodo = state.data.find((todo) => todo.id === id);
-      if (existingTodo) {
-        existingTodo.mark = !existingTodo.mark;
-      }
+      if (existingTodo) existingTodo.mark = !existingTodo.mark;
     },
   },
 });

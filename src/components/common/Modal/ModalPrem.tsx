@@ -8,14 +8,10 @@ const prof = [
 ];
 
 export const ModalPremium = ({
-  isOpenPrem,
   setIsOpenPrem,
 }: {
-  isOpenPrem: boolean;
-  setIsOpenPrem: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenPrem: (val: boolean) => void;
 }) => {
-  if (!isOpenPrem) return null;
-
   return (
     <div className="bg-black/40 fixed inset-0 z-[1000] grid place-items-center">
       <div className="bg-sky-100 dark:bg-gray-800 w-96 h-[40vh] lg:h-[80vh] 2xl:h-[55vh] py-2 rounded-4xl flex flex-col">
@@ -45,7 +41,7 @@ export const ModalPremium = ({
                   height={100}
                   alt="friends"
                   className="w-9 h-9 rounded-2xl absolute left-0"
-                  style={{ left: `${index * 23}px` }} // jarak tumpang tindih
+                  style={{ left: `${index * 23}px` }} // overlap distance
                 />
               ))}
             </div>
@@ -66,7 +62,7 @@ export const ModalPremium = ({
               Upgrade
             </button>
             <button
-              onClick={() => setIsOpenPrem(!isOpenPrem)}
+              onClick={() => setIsOpenPrem(false)}
               className="text-sky-600 hover:text-sky-700 cursor-pointer"
             >
               Go Back

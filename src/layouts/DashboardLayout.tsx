@@ -63,7 +63,7 @@ export const DashboardLayout = ({ children }: { children: ReactElement }) => {
           <div className="w-full">{children}</div>
         </main>
       </div>
-      <ModalPremium isOpenPrem={isModalOpen} setIsOpenPrem={setIsOpenModal} />
+      {isModalOpen && <ModalPremium setIsOpenPrem={setIsOpenModal} />}
     </div>
   );
 };
