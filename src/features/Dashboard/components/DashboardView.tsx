@@ -1,6 +1,6 @@
 import "react-day-picker/style.css";
 import { TopProducts } from "@/features/Dashboard/components/tables/TopProducts";
-import { SummaryCard } from "@/fragments/cards/SummaryCard";
+import { SummaryCard } from "@/features/Dashboard/components/card/SummaryCard";
 import { RecentOrders } from "@/features/Dashboard/components/tables/RecentOrders";
 import { useTheme } from "@/context/ThemeContext";
 import { CategoryBar } from "@/features/Dashboard/components/charts/CategoryBar";

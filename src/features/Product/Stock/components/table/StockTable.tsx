@@ -1,3 +1,5 @@
+import { ButtonEdit } from "@/components/ui/Button/ButtonEdit";
+import { ButtonRemove } from "@/components/ui/Button/ButtonRemove";
 import { Stock } from "@/data/stocksProd";
 import { PackageSearch, SquarePen, Trash2 } from "lucide-react";
 import Image from "next/image";
@@ -92,20 +94,8 @@ export const StockTable = (props: StockTableProps) => {
                 </td>
                 <td className="w-[20%] p-4 2xl:py-3">
                   <div className="flex justify-center space-x-2">
-                    <button
-                      onClick={() => onClick(item.id)}
-                      className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg hover:scale-103 active:scale-95 transition-all shadow-sm border border-blue-100 dark:border-blue-900/30 cursor-pointer"
-                      title="Edit Product"
-                    >
-                      <SquarePen size={18} />
-                    </button>
-                    <button
-                      disabled
-                      className="p-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg hover:scale-103 active:scale-95 transition-all shadow-sm border border-red-100 dark:border-red-900/30 cursor-not-allowed"
-                      title="Delete Product"
-                    >
-                      <Trash2 size={18} />
-                    </button>
+                    <ButtonEdit onClick={() => onClick(item.id)} />
+                    <ButtonRemove />
                   </div>
                 </td>
               </tr>

@@ -1,6 +1,6 @@
 import { OrdersTable } from "@/components/common/Table/OrdersTable";
 import { SearchBar } from "@/components/ui/Input/SearchBar";
-import { Pagination } from "@/fragments/pagination/Pagination";
+import { Pagination } from "@/components/common/Pagination/Pagination";
 import { Order, OrderStatus } from "@/types/order.type";
 import { ChangeStatus } from "./dropdown/ChangeStatus";
 import { FilterStatus } from "./dropdown/FilterStatus";

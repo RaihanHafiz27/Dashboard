@@ -1,7 +1,7 @@
 import { Order } from "@/types/order.type";
 import { useEffect, useState } from "react";
 
-export const usePagination = (data: Order[], itemsPerPage: number) => {
+export const usePagination = <T>(data: T[], itemsPerPage: number) => {
   // UI State
   const [currentPage, setCurrentPage] = useState(1);
 

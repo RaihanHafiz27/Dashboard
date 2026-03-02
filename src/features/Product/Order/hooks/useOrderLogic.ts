@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "@/store/store";
 import { OrderStatus } from "@/types/order.type";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { usePagination } from "./usePagination";
+import { usePagination } from "../../../../hooks/usePagination";
 
 const ITEMS_PER_PAGE = 7;
 

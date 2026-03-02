@@ -3,18 +3,21 @@ export interface Users {
   name: string;
   telp: string;
   location: string;
-  image: string;
+  image?: string;
   status: boolean;
   email: string;
 }
 
 const dummyImages = [
   "/images/woman-2.png",
-  "/images/man-4.png",
-  "/images/woman-5.png",
+  // "/images/man-4.png",
+  "",
+  // "/images/woman-5.png",
+  "",
   "/images/man-1.png",
   "/images/woman-6.png",
-  "/images/man-2.png",
+  // "/images/man-2.png",
+  "",
   "/images/woman-4.png",
   "/images/man-3.png",
 ];
@@ -56,16 +59,16 @@ const generateDummyDataUsers = () => {
   const dummyUsers: Users[] = [];
 
   for (let i = 1; i <= 21; i++) {
-    // Ambil nama saat ini
+    // Get the current name
     const currentName = names[i % names.length];
 
-    // Ubah nama agar valid untuk email
+    // Change the name to be valid for email
     const emailName = currentName.split(" ")[0].toLowerCase();
     dummyUsers.push({
       id: `USR-${0 + i}`,
       location: addresses[i % addresses.length],
       name: currentName,
-      // 2. Ambil path gambar secara berurutan atau acak
+      // Take image paths sequentially or randomly
       image: dummyImages[i % dummyImages.length],
       telp: phone[i % phone.length],
       status: i % 3 !== 0 ? true : false,
