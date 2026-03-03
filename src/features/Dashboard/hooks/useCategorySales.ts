@@ -12,17 +12,17 @@ const initialChartData = {
 };
 
 export const useCategorySales = () => {
-  const [filter, setFilter] = useState<string>("all");
+  const [filter, setFilter] = useState<string>("All");
   const [chartData, setChartData] = useState(initialChartData);
 
   const filterOptions = initialChartData.datasets.map((l) => l.label);
 
   useEffect(() => {
-    if (filter === "all") {
+    if (filter === "All") {
       setChartData(initialChartData);
     } else {
       const fillteredDataset = initialChartData.datasets.find(
-        (dataset) => dataset.label === filter
+        (dataset) => dataset.label === filter,
       );
 
       if (fillteredDataset) {

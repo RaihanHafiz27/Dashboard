@@ -8,7 +8,7 @@ interface SearchProps {
 }
 
 export const SearchBar = ({
-  placeholder,
+  placeholder = "Search...",
   value,
   onChange,
   classname,
@@ -18,7 +18,7 @@ export const SearchBar = ({
       <input
         type="text"
         title={placeholder}
-        placeholder={placeholder ? placeholder : "Search..."}
+        placeholder={placeholder}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
         className="bg-slate-200 dark:bg-transparent border border-slate-200 dark:border-gray-500 p-2 w-full rounded-sm text-sm  placeholder:text-gray-700 text-gray-700 focus:outline-none disabled:cursor-not-allowed"

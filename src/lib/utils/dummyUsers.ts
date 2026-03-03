@@ -1,10 +1,12 @@
+import { UsersStatus } from "@/features/Users/components/UsersView";
+
 export interface Users {
   id: string;
   name: string;
   telp: string;
   location: string;
   image?: string;
-  status: boolean;
+  status: UsersStatus;
   email: string;
 }
 
@@ -57,6 +59,7 @@ const phone = [
 
 const generateDummyDataUsers = () => {
   const dummyUsers: Users[] = [];
+  const userStatus: UsersStatus[] = ["Online", "Offline"];
 
   for (let i = 1; i <= 21; i++) {
     // Get the current name
@@ -71,7 +74,7 @@ const generateDummyDataUsers = () => {
       // Take image paths sequentially or randomly
       image: dummyImages[i % dummyImages.length],
       telp: phone[i % phone.length],
-      status: i % 3 !== 0 ? true : false,
+      status: userStatus[i % userStatus.length],
       email: `${emailName}@example.com`,
     });
   }

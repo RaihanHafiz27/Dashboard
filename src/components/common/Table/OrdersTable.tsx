@@ -33,7 +33,7 @@ export const OrdersTable = ({
           <th className=" pb-2 px-3 hidden lg:block">Date</th>
         </tr>
       </thead>
-      <tbody className="divide-y divide-gray-300 dark:divide-none text-sm">
+      <tbody className="text-sm">
         {data.length === 0 ? (
           <tr>
             <td colSpan={6} className="p-0 border-none">

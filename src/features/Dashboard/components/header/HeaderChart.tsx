@@ -14,7 +14,7 @@ export const HeaderChart = ({ label, children }: HeaderProps) => {
       </h3>
 
       {/* DROPDOWN */}
-      {children}
+      <div className="w-44 flex items-center justify-end">{children}</div>
     </div>
   );
 };

@@ -3,18 +3,41 @@ import { SummaryUsers } from "@/features/Users/components/card/SummaryUsers";
 import { Pagination } from "@/components/common/Pagination/Pagination";
 import { Users } from "@/lib/utils/dummyUsers";
 import { UsersTable } from "./table/UsersTable";
-import { UsersStatusFilter } from "./dropdown/UsersStatusFilter";
+import { FilterDropdown } from "@/components/common/Dropdown/FilterDropdown";
 
 interface UsersViewProps {
-  // Pagination Action & State
-  handlePagination: (page: number) => void;
-  currentTableData: Users[];
+  // FILTER CONTROL
+  filterValue: string | UsersStatus;
+  onFilterChange: (val: string | UsersStatus) => void;
+
+  // SEARCH CONTROL
+  searchValue: string;
+  onSearchChange: (val: string) => void;
+
+  // PAGIANTION CONTROL
   currentPage: number;
   totalPages: number;
+  handlePagination: (page: number) => void;
+
+  // THE DATA
+  data: Users[];
 }
 
+export type UsersStatus = "Online" | "Offline";
+
+const userStatus: UsersStatus[] = ["Online", "Offline"];
+
 export const UsersView = (props: UsersViewProps) => {
-  const { currentTableData, currentPage, totalPages, handlePagination } = props;
+  const {
+    filterValue,
+    onFilterChange,
+    searchValue,
+    onSearchChange,
+    currentPage,
+    totalPages,
+    handlePagination,
+    data,
+  } = props;
 
   return (
     <>
@@ -27,12 +50,16 @@ export const UsersView = (props: UsersViewProps) => {
             All Users
           </p>
           <div className="grid grid-cols-2 gap-x-2">
-            <SearchBar />
-            <UsersStatusFilter selected="abc" open={false} />
+            <SearchBar value={searchValue} onChange={onSearchChange} />
+            <FilterDropdown
+              value={filterValue}
+              options={userStatus}
+              onChange={onFilterChange}
+            />
           </div>
         </div>
         {/* Table Users */}
-        <UsersTable data={currentTableData} />
+        <UsersTable data={data} />
 
         {/* pagination */}
         <div className=" flex justify-between items-center pb-2">

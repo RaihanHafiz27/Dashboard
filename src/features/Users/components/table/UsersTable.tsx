@@ -5,10 +5,6 @@ import { Dot } from "lucide-react";
 import Image from "next/image";
 import { Avatar } from "../profile/Avatar";
 
-// interface UsersTableProps {
-//   data: Users[];
-// }
-
 export const UsersTable = ({ data }: { data: Users[] }) => {
   return (
     <div className="flex flex-col h-[500px] 2xl:h-[600px] space-y-2 overflow-hidden ">
@@ -69,13 +65,13 @@ export const UsersTable = ({ data }: { data: Users[] }) => {
                 <div className="flex justify-center">
                   <span
                     className={`inline-flex items-center px-3 py-1 rounded-md text-xs font-medium border ${
-                      user.status === true
+                      user.status === "Online"
                         ? " bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800"
                         : " bg-gray-100 text-gray-600 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700"
                     }`}
                   >
                     <Dot className={`w-4 h-4 mr-1`} />
-                    {user.status ? "Online" : "Offline"}
+                    {user.status}
                   </span>
                 </div>
               </td>

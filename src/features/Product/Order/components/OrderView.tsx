@@ -3,7 +3,7 @@ import { SearchBar } from "@/components/ui/Input/SearchBar";
 import { Pagination } from "@/components/common/Pagination/Pagination";
 import { Order, OrderStatus } from "@/types/order.type";
 import { ChangeStatus } from "./dropdown/ChangeStatus";
-import { FilterStatus } from "./dropdown/FilterStatus";
+import { FilterDropdown } from "@/components/common/Dropdown/FilterDropdown";
 
 interface OrderViewProps {
   // Table Data
@@ -27,6 +27,13 @@ interface OrderViewProps {
   onSearchChange: (val: string) => void;
 }
 
+const statuses: OrderStatus[] = [
+  "Pending",
+  "Processing",
+  "Completed",
+  "Cancelled",
+];
+
 export const OrderView = ({
   tableData,
   statusColors,
@@ -45,7 +52,12 @@ export const OrderView = ({
         <h3 className="text-xl text-gray-700 dark:text-gray-300">All Orders</h3>
         <div className="grid grid-cols-2 gap-x-2">
           <SearchBar value={searchValue} onChange={onSearchChange} />
-          <FilterStatus value={filterValue} onChange={onFilterChange} />
+          {/* <FilterStatus value={filterValue} onChange={onFilterChange} /> */}
+          <FilterDropdown
+            value={filterValue}
+            options={statuses}
+            onChange={onFilterChange}
+          />
         </div>
       </div>
       {/* tabel */}
