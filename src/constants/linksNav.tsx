@@ -43,8 +43,8 @@ export const navLinks: NavLinks[] = [
   },
   {
     id: 4,
-    title: "invoice",
-    to: "/",
+    title: "cash flow",
+    to: "/cash-flow",
     icon: <DollarSign />,
     status: "inactive",
   },

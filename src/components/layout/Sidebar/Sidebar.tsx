@@ -121,7 +121,7 @@ const SidebarItem = (props: SidebarItemProps) => {
         <div className="mb-1">
           <button
             onClick={onToggle}
-            className={`w-full flex items-center justify-between p-2 rounded-lg transition-al duration-200 group relative hover:pl-4
+            className={`w-full flex items-center justify-between p-2 rounded-lg transition-all duration-200 group relative hover:pl-4
             ${
               isParentActive || isExpanded
                 ? "border-b-2 border-sky-500 text-gray-600 bg-sky-500/10 dark:text-slate-200 dark:bg-gray-200/10"
