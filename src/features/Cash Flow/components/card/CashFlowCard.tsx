@@ -6,6 +6,7 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
+import CountUp from "react-countup";
 
 export const CashFlowCard = ({ data }: { data: FinancialSummaryItem[] }) => {
   const iconColor: Record<Variant, string> = {
@@ -35,17 +36,21 @@ export const CashFlowCard = ({ data }: { data: FinancialSummaryItem[] }) => {
                 {item.label}
               </p>
               <div className="space-y-1">
-                <h3 className="text-gray-700 dark:text-slate-200 text-xl font-bold">
-                  {item.id === "stat-4"
-                    ? `${item.value}%`
-                    : `$ ${item.value.toLocaleString("en-US")}`}
+                <h3 className="text-gray-700 dark:text-slate-200 text-xl font-bold space-x-1">
+                  {item.id !== "stat-4" && <span>$</span>}
+                  <CountUp start={0} end={item.value} duration={5} />
+                  {item.id === "stat-4" && "%"}
                 </h3>
                 {/* TREND INDICATOR */}
                 <div className="flex items-center text-[10px]">
                   <span
-                    className={`flex items-center font-bold px-1.5 rounded-full ${item.isUp ? "bg-green-100 text-green-600 dark:bg-green-900/30" : "bg-red-100 text-red-600 dark:bg-red-900/30"}`}
+                    className={`flex items-center font-bold px-1.5 rounded-full space-x-1 ${item.isUp ? "bg-green-100 text-green-600 dark:bg-green-900/30" : "bg-red-100 text-red-600 dark:bg-red-900/30"}`}
                   >
-                    {item.isUp ? "↑" : "↓"} {item.change}%
+                    <p>{item.isUp ? "↑" : "↓"}</p>
+                    <span className="flex items-center">
+                      <CountUp start={0} end={item.change} duration={2} />
+                      <p>%</p>
+                    </span>
                   </span>
                   <span className=" text-gray-400 font-medium">
                     {item.description}

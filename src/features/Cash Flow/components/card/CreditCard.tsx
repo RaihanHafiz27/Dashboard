@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CountUp from "react-countup";
 
 export interface CreditCardProps {
   balance: number;
@@ -20,9 +21,12 @@ export const CreditCard = (props: CreditCardProps) => {
           <h5 className="text-gray-400 dark:text-gray-500 text-xs uppercase">
             Balance
           </h5>
-          <p className="text-xl">$ {balance.toLocaleString("en-US")}</p>
+          <span className="flex items-center text-xl space-x-1">
+            <p>$</p>
+            <CountUp start={0} end={balance} duration={5} />
+          </span>
         </div>
-        <div className="w-10 h-10">
+        <div className="w-9 h-9">
           <Image
             src={"/images/chip.png"}
             alt="chip"
