@@ -15,7 +15,14 @@ export interface FinancialSummaryItem {
   description: string;
 }
 
-export interface CashFlow {
-  credit_card: CreditCardProps;
-  financial_summary: FinancialSummaryItem[];
+export type StatusTransaction = "completed" | "pending" | "processing";
+
+export interface Transactions {
+  transaction_id: string;
+  type: string;
+  date: string;
+  amount: number;
+  description: string;
+  status: StatusTransaction;
+  displayDate?: string;
 }

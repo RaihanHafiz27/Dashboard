@@ -25,7 +25,7 @@ export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`hidden lg:flex flex-col h-full overflow-hidden text-gray-700 dark:text-slate-200  transition-all duration-300 ease-in-out px-2 py-4 space-y-4 ${
-        isSidebarOpen ? "w-60" : "w-16"
+        isSidebarOpen ? "w-60 2xl:w-[300px]" : "w-16"
       }`}
     >
       {/* HEADER LOGO */}

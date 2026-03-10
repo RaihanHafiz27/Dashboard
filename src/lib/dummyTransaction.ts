@@ -1,7 +1,7 @@
 import {
   StatusTransaction,
   Transactions,
-} from "@/features/Cash Flow/components/CashFlowView";
+} from "@/features/Cash Flow/types/Cashflow.type";
 
 const dates = [
   "2026-03-01T13:22:11.000Z",
@@ -12,7 +12,7 @@ const dates = [
   "2026-03-08T15:19:11.000Z",
 ];
 
-const balance = [1100, 1289, 765, 120000, 4023, 12090];
+const balance = [1100, 1289, 765, 12000, 4023, 90];
 
 const descs = [
   "Freelance project payment",
@@ -29,9 +29,9 @@ const generateDummyDataTransaction = () => {
 
   const statues: StatusTransaction[] = ["completed", "pending", "processing"];
 
-  for (let i = 0; i <= 25; i++) {
+  for (let i = 0; i <= 14; i++) {
     transactions.push({
-      transaction_id: `TRX${1000 + i}`,
+      transaction_id: `TRX${1001 + i}`,
       type: i % 3 === 0 ? "income" : "expense",
       date: dates[i % dates.length],
       amount: balance[i % balance.length],

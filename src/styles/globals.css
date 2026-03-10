@@ -4,6 +4,7 @@
 
 @theme {
   --scale-103: 1.03;
+  --scale-101: 1.01;
 
   /* Mendaftarkan animasi baru bernama 'pop' */
   --animate-pop: pop-in 0.2s ease-out;

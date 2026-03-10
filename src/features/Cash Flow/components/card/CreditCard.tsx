@@ -13,20 +13,18 @@ export interface CreditCardProps {
 export const CreditCard = (props: CreditCardProps) => {
   const { balance, card_holder, card_number, expiry_date } = props;
   return (
-    // bg-gray-900 dark:bg-gradient-to-r dark:from-indigo-700 dark:to-sky-700
-    // bg-gradient-to-r from-indigo-600 via-indigo-700 to-blue-700 dark:bg-none dark:bg-gray-700
-    <div className="bg-gray-900 dark:bg-white p-6 rounded-2xl shadow-xl text-slate-200 dark:text-gray-700 relative overflow-hidden h-56 flex flex-col justify-between hover:scale-103 transition-all duration-300">
+    <div className="bg-gray-900 dark:bg-white p-6 rounded-2xl shadow-xl text-slate-200 dark:text-gray-700 relative overflow-hidden h-56 2xl:h-60 flex flex-col justify-between hover:scale-103 transition-all duration-300">
       <div className="flex justify-between items-center z-10">
         <div>
-          <h5 className="text-gray-400 dark:text-gray-500 text-xs uppercase">
+          <h5 className="text-gray-400 dark:text-gray-500 text-xs 2xl:text-sm uppercase">
             Balance
           </h5>
-          <span className="flex items-center text-xl space-x-1">
+          <span className="flex items-center text-xl 2xl:text-2xl space-x-1">
             <p>$</p>
             <CountUp start={0} end={balance} duration={5} />
           </span>
         </div>
-        <div className="w-9 h-9">
+        <div className="w-9 h-9 2xl:w-10 2xl:h-10">
           <Image
             src={"/images/chip.png"}
             alt="chip"
@@ -37,25 +35,25 @@ export const CreditCard = (props: CreditCardProps) => {
         </div>
       </div>
       <div>
-        <p className="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">
+        <p className="text-xs 2xl:text-sm text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1">
           Card Number
         </p>
-        <p className="text-lg font-mono tracking-widest">
+        <p className="text-lg 2xl:text-xl font-mono tracking-widest">
           {card_number || "**** **** **** ****"}
         </p>
       </div>
-      <div className="flex justify-between text-sm">
+      <div className="flex justify-between">
         <div>
           <p className="text-gray-400 dark:text-gray-500 text-xs uppercase">
             Card Holder
           </p>
-          <p className="tracking-wider">{card_holder}</p>
+          <p className="tracking-wider text-sm 2xl:text-base">{card_holder}</p>
         </div>
         <div>
           <p className="text-gray-400 dark:text-gray-500 text-xs uppercase">
             Valid Thru
           </p>
-          <p>{expiry_date}</p>
+          <p className="tracking-wider text-sm 2xl:text-base">{expiry_date}</p>
         </div>
       </div>
     </div>
