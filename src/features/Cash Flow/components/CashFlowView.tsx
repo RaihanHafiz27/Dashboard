@@ -1,14 +1,12 @@
 import { CashFlowCard } from "./card/CashFlowCard";
 import { CreditCard, CreditCardProps } from "./card/CreditCard";
-import { useState } from "react";
-import { motion } from "motion/react";
-import { CircleArrowDown, CircleArrowUp, Printer, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { dummyTransactions } from "@/lib/dummyTransaction";
 import { Pagination } from "@/components/common/Pagination/Pagination";
-import { usePagination } from "@/hooks/usePagination";
 import { FinancialSummaryItem, Transactions } from "../types/Cashflow.type";
 import { CashFlowTable } from "./table/CashFlowTable";
 import { FilterCashFlow } from "./filter/FilterCashFlow";
+import dynamic from "next/dynamic";
 
 export interface CashFlowCard {
   credit_card: CreditCardProps;
@@ -31,6 +29,14 @@ interface CashFlowProps {
   totalPages: number;
   handlePagination: (page: number) => void;
 }
+
+const CashFlowReportAction = dynamic(
+  () =>
+    import("./pdf/CashFlowReportAction").then(
+      (mod) => mod.CashFlowReportAction,
+    ),
+  { ssr: false },
+);
 
 export const CashFlowView = (props: CashFlowProps) => {
   const {
@@ -63,13 +69,8 @@ export const CashFlowView = (props: CashFlowProps) => {
         {/* TABLE ACTION */}
         <div className="flex items-center justify-between px-2">
           <div className="space-x-3 flex items-center">
-            <button className="bg-gray-200/50 dark:bg-slate-200 p-2 text-slate-200 border border-gray-300 rounded-md group hover:scale-110 transition-transform duration-200 cursor-pointer">
-              <Printer
-                size={20}
-                fill="#364153"
-                className="group-hover:scale-110 transition-transform duration-200"
-              />
-            </button>
+            {/* PDF ACTION */}
+            <CashFlowReportAction data={dummyTransactions} />
             <button
               disabled
               className="bg-sky-600 p-2 text-sm rounded-md text-slate-200 cursor-not-allowed"

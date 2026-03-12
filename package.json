@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.17",
+    "@react-pdf/renderer": "^4.3.2",
     "@reduxjs/toolkit": "^2.9.1",
     "chart.js": "^4.5.0",
     "lucide-react": "^0.542.0",
