@@ -57,7 +57,7 @@ export const navLinks: NavLinks[] = [
   },
   {
     id: 6,
-    title: "mailbox",
+    title: "inbox",
     to: "/",
     icon: <Mail />,
     status: "active",
@@ -79,6 +79,6 @@ export const navLinks: NavLinks[] = [
     title: "help",
     to: "/help",
     icon: <CircleQuestionMark />,
-    status: "inactive",
+    status: "active",
   },
 ];
