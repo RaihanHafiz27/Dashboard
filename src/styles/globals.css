@@ -6,10 +6,10 @@
   --scale-103: 1.03;
   --scale-101: 1.01;
 
-  /* Mendaftarkan animasi baru bernama 'pop' */
+  /* Register a new animation 'pop' */
   --animate-pop: pop-in 0.2s ease-out;
 
-  /* Mendefinisikan Keyframes-nya */
+  /* Define Keyframes */
   @keyframes pop-in {
     0% {
       opacity: 0;
@@ -20,6 +20,10 @@
       transform: scale(1);
     }
   }
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 /* ======= SCROLLBAR  =======*/

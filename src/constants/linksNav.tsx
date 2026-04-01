@@ -65,12 +65,7 @@ export const navLinks: NavLinks[] = [
   {
     id: 7,
     title: "settings",
-    // to: "/",
-    subs: [
-      { title: "profile", to: "#", iconSub: <Circle size={18} /> },
-      { title: "account", to: "#", iconSub: <Circle size={18} /> },
-      { title: "security", to: "#", iconSub: <Circle size={18} /> },
-    ],
+    to: "/settings",
     icon: <Settings />,
     status: "inactive",
   },
