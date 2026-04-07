@@ -5,10 +5,11 @@ interface InputProfileProps {
   placeholder?: string;
   value: string;
   onChange: any;
+  maxLength: number;
 }
 
 export const InputProfile = (props: InputProfileProps) => {
-  const { label, type, name, placeholder, value, onChange } = props;
+  const { label, type, name, placeholder, value, onChange, maxLength } = props;
 
   return (
     <div className="flex flex-col space-y-1.5 w-full">
@@ -25,6 +26,7 @@ export const InputProfile = (props: InputProfileProps) => {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        maxLength={maxLength}
         className="p-2 text-sm text-slate-700 dark:text-slate-200 dark:text-shadow-slate-200 placeholder:text-slate-600 border border-slate-300 dark:border-gray-600 rounded-md bg-slate-100 dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
       />
     </div>

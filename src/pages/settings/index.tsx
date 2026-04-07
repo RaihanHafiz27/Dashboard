@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { PreferencesSection } from "@/features/Settings/components/section/PreferencesSection";
 import { SecuritySection } from "@/features/Settings/components/section/SecuritySection";
@@ -15,6 +15,7 @@ export interface formDataType {
   phoneNumber: string;
   dateOfBirth: string;
   address: string;
+  profileImage: File | null;
   city: string;
   postalCode: string;
   country: string;
@@ -30,12 +31,11 @@ const SettingsPage = () => {
     phoneNumber: "",
     dateOfBirth: "",
     address: "",
+    profileImage: null,
     postalCode: "",
     city: "",
     country: "",
   });
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [selectedCity, setSelectedCities] = useState("");
 
   const allCountries = Country.getAllCountries();
 
@@ -44,18 +44,61 @@ const SettingsPage = () => {
   }, []);
 
   const cityOptions = useMemo(() => {
-    if (!selectedCountry) return [];
-    const citiesOfCountry = City.getCitiesOfCountry(selectedCountry);
+    if (!formData.country) return [];
+    const citiesOfCountry = City.getCitiesOfCountry(formData.country);
     return citiesOfCountry?.map((city) => ({
       value: `${city.name}-${city.latitude}`,
       title: city.name,
     }));
-  }, [selectedCountry]);
+  }, [formData.country]);
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleInputChange = (name: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      // ADDITIONAL LOGIC: If the country changes, clear the city
+      ...(name === "country" ? { city: "" } : {}),
+    }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        profileImage: file,
+      }));
+    }
+  };
+
+  const [preview, setPreview] = useState<string>("");
+
+  useEffect(() => {
+    if (!formData.profileImage || !(formData.profileImage instanceof File)) {
+      setPreview("");
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(formData.profileImage);
+    setPreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [formData.profileImage]);
+
+  console.log(formData.country);
+  console.log(formData.city);
+  console.log(formData.dateOfBirth);
+  console.log(formData.fullName);
+  console.log(formData.email);
+  console.log(formData.profileImage);
+  console.log(preview);
 
   return (
     <div className="border border-slate-300 p-8 rounded-lg shadow-lg space-y-4">
@@ -94,12 +137,16 @@ const SettingsPage = () => {
             {choosedSection === "edit profile" && (
               <ProfileSection
                 formData={formData}
-                handleChange={handleChange}
+                // handleChange={handleChange}
+                handleChange={handleInputChange}
                 countryOptions={countryOptions}
-                selectedCountry={selectedCountry}
-                setSelectedCountry={setSelectedCountry}
+                selectedCountry={formData.country}
+                // setSelectedCountry={setSelectedCountry}
+                setSelectedCountry={(val) => handleSelectChange("country", val)}
                 allCitiesOfCountry={cityOptions}
-                setSelectedCity={setSelectedCities}
+                setSelectedCity={(val) => handleSelectChange("city", val)}
+                handleImage={handleImageChange}
+                profile={preview}
               />
             )}
             {/* PREFERENCES SECTION */}
