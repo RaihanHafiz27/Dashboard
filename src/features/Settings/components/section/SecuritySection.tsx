@@ -13,7 +13,13 @@ export const SecuritySection = () => {
           condition={true}
         />
       </div>
-      <div className="flex flex-col gap-4">
+      <form
+        id="security-form"
+        onSubmit={(e) => {
+          (e.preventDefault(), alert("Hello from security"));
+        }}
+        className="flex flex-col gap-4"
+      >
         <h3 className="text-slate-700 dark:text-slate-200">Change Password</h3>
         <InputPassword
           title="Current Password"
@@ -25,7 +31,7 @@ export const SecuritySection = () => {
           name="new password"
           id="new-password"
         />
-      </div>
+      </form>
     </div>
   );
 };

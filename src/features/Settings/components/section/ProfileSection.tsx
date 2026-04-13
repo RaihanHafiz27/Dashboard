@@ -1,11 +1,12 @@
-import { formDataType } from "@/pages/settings";
+import { FormDataTypes } from "@/pages/settings";
 import Image from "next/image";
 import { InputProfile } from "../input/InputProfile";
 import { LocationPicker } from "../input/LocationPicker";
 import { Camera } from "lucide-react";
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { CountryAndCityOptions } from "../SettingsView";
 
-type textFields = keyof Omit<formDataType, "profileImage">;
+type textFields = keyof Omit<FormDataTypes, "profileImage">;
 
 interface FieldType {
   name: textFields;
@@ -40,7 +41,7 @@ const profileFields: FieldType[] = [
   {
     name: "password",
     label: "Password",
-    type: "text",
+    type: "password",
     placeholder: "-",
     maxLetters: 10,
   },
@@ -74,104 +75,112 @@ const profileFields: FieldType[] = [
   },
 ];
 
-export const ProfileSection = ({
-  formData,
-  handleChange,
-  countryOptions,
-  selectedCountry,
-  setSelectedCountry,
-  allCitiesOfCountry,
-  setSelectedCity,
-  handleImage,
-  profile,
-}: {
-  formData: formDataType;
-  handleChange: any;
-  countryOptions: any[];
-  selectedCountry: string;
-  setSelectedCountry: (val: string) => void;
-  allCitiesOfCountry: any;
-  setSelectedCity: (val: string) => void;
-  handleImage: (e: any) => void;
-  profile: string;
-}) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+type ProfileSectionProps = {
+  formUser: FormDataTypes;
+  onInputChange: (name: string, value: string) => void;
+  countryOptions: CountryAndCityOptions[];
+  handleSelectedChange: (name: string, value: string) => void;
+  allCitiesOfCountry: CountryAndCityOptions[] | undefined;
+  onImageChange: (val: React.ChangeEvent<HTMLInputElement>) => void;
+  profile: string | null;
+  onSubmit: (e: React.FormEvent) => void;
+};
 
-  const handleEditClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current?.click();
-    }
-  };
+export const ProfileSection = (props: ProfileSectionProps) => {
+  const {
+    formUser,
+    onInputChange,
+    countryOptions,
+    handleSelectedChange,
+    allCitiesOfCountry,
+    onImageChange,
+    profile,
+  } = props;
 
   return (
-    <div className="flex gap-14 py-4 space-y-8">
-      <div className="flex flex-col items-center space-y-2">
-        <div className="relative bg-gray-300 w-28 h-28 rounded-full overflow-hidden grid place-items-center">
-          {profile ? (
-            <Image src={profile} alt="profile" fill className="object-cover" />
-          ) : (
-            <Camera
-              size={48}
-              strokeWidth={1.5}
-              fill="#314158"
-              className="text-gray-300"
-            />
-          )}
-        </div>
-        {/* <button className="capitalize text-blue-500 text-sm">edit photo</button> */}
-        <div>
-          <button
-            onClick={handleEditClick}
-            className="capitalize text-blue-500 text-sm"
+    <form
+      id="profile-form"
+      onSubmit={(e) => {
+        (e.preventDefault(), alert("Hello from profile"));
+      }}
+    >
+      <div className="flex gap-14 py-4 space-y-8">
+        <div className="flex flex-col items-center space-y-2">
+          <div className="relative bg-gray-300 w-28 h-28 rounded-full overflow-hidden grid place-items-center select-none">
+            {profile ? (
+              <Image
+                src={profile}
+                alt="profile picture"
+                fill
+                unoptimized
+                className="object-cover"
+              />
+            ) : (
+              <Camera
+                size={48}
+                strokeWidth={1.5}
+                fill="#314158"
+                className="text-gray-300"
+              />
+            )}
+          </div>
+
+          <label
+            htmlFor="profile-upload"
+            className="cursor-pointer text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors inline-flex select-none"
           >
-            edit photo
-          </button>
+            Edit Photo
+            <input
+              id="profile-upload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={onImageChange}
+            />
+          </label>
+        </div>
+        <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
+          {profileFields.map((field) => (
+            <InputProfile
+              key={field.name}
+              {...field}
+              value={formUser[field.name]}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                onInputChange(field.name, e.target.value)
+              }
+              maxLength={field.maxLetters}
+              readOnly={field.name === "password"}
+            />
+          ))}
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            // onChange={(e) => handleChange("profile", e.target.files)}
-            onChange={(e) => handleImage(e)}
+          {/* SELECT COUNTRY & CITY */}
+          <LocationPicker
+            label="Country"
+            name="country"
+            id="country"
+            onChange={(value) => {
+              handleSelectedChange("country", value);
+            }}
+            placeholder="Choose Country"
+            dataOptions={countryOptions}
+            value={formUser.country}
+          />
+          <LocationPicker
+            label="City"
+            name="city"
+            id="city"
+            onChange={(value) => {
+              handleSelectedChange("city", value);
+            }}
+            placeholder={
+              formUser.country ? "Choose City" : "Select country first"
+            }
+            disabled={!formUser.country}
+            dataOptions={allCitiesOfCountry || []}
+            value={formUser.city}
           />
         </div>
       </div>
-      <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
-        {profileFields.map((field) => (
-          <InputProfile
-            key={field.name}
-            {...field}
-            value={formData[field.name]}
-            // onChange={handleChange}
-            onChange={(e: any) => handleChange(field.name, e.target.value)}
-            // onChange={(val: any) => handleChange(field.name, val)}
-            maxLength={field.maxLetters}
-          />
-        ))}
-        {/* select */}
-
-        <LocationPicker
-          label="Country"
-          name="country"
-          id="country"
-          onChange={(val) => {
-            setSelectedCountry(val);
-            setSelectedCity("");
-          }}
-          placeholder="Choose Country"
-          dataOptions={countryOptions}
-        />
-        <LocationPicker
-          label="City"
-          name="city"
-          id="city"
-          onChange={setSelectedCity}
-          placeholder={selectedCountry ? "Choose City" : "Select country first"}
-          disabled={!selectedCountry}
-          dataOptions={allCitiesOfCountry}
-        />
-      </div>
-    </div>
+    </form>
   );
 };

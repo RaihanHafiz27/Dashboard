@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import ordersReducer from "./ordersSlice";
 import usersReducer from "./usersSlice";
 import todosReducer from "./todosSlice";
+import profileReducer from "./profileSlice";
 
 // --- Configuration Store ---
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     orders: ordersReducer,
     users: usersReducer,
     todos: todosReducer,
+    profile: profileReducer,
   },
 });
 

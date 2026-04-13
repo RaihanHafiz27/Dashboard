@@ -7,12 +7,14 @@ const preferencesFields = [
     label: "Currency",
     type: "text",
     placeholder: "USD",
+    maxLength: 3,
   },
   {
     name: "timeZone",
     label: "Time Zone",
     type: "text",
     placeholder: "(GMT-12:00) International Date Line West",
+    maxLength: 30,
   },
 ];
 
