@@ -1,9 +1,17 @@
 import { FormDataTypes } from "@/pages/settings";
-import { loadPersistedProfile, updateProfile } from "@/store/profileSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  loadPersistedProfile,
+  ProfileType,
+  updateProfile,
+  updateProfileAsync,
+} from "@/store/profileSlice";
 import { RootState } from "@/store/store";
+import bcrypt from "bcryptjs";
 import { City, Country } from "country-state-city";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { passwordValidation } from "../utils/passwordValidation";
 
 /**
  * Custom hook to handle the logic for the Settings page.
@@ -39,8 +47,28 @@ export const useLogicSettings = () => {
     country: "",
   });
 
-  const profileUser = useSelector((state: RootState) => state.profile);
-  const dispatch = useDispatch();
+  // Form State for security password
+  const [securityForm, setSecurityForm] = useState({
+    password: "",
+    newPassword: "",
+    currentPassword: "",
+    confirmPassword: "",
+  });
+
+  const { status } = useAppSelector((state: RootState) => state.profile);
+  const profileUser = useAppSelector((state: RootState) => state.profile);
+  const dispatch = useAppDispatch();
+
+  const isFirstTimePassword = profileUser.password === "";
+  // const isFirstTimePassword = false;
+
+  const validation = useMemo(() => {
+    const target = isFirstTimePassword
+      ? securityForm.password
+      : securityForm.newPassword;
+
+    return passwordValidation(target);
+  }, [securityForm.password, securityForm.newPassword, isFirstTimePassword]);
 
   /**
    * An effect for managing image preview URLs.
@@ -63,7 +91,7 @@ export const useLogicSettings = () => {
     if (profileUser) {
       setFormUser({
         ...profileUser,
-        profileImage: null, // We set it to null because the form is only for holding NEW files
+        profileImage: null, // Set it to null bcs the form is only for holding NEW files
       });
     }
   }, [profileUser]);
@@ -130,27 +158,117 @@ export const useLogicSettings = () => {
   const handleSave = () => {
     const file = formUser.profileImage;
 
+    // SCENARIO 1: User ganti foto profil baru
     if (file instanceof File) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result as string;
 
+        // PANGGIL THUNK DI SINI
         dispatch(
-          updateProfile({
+          updateProfileAsync({
             ...formUser,
-            profileImage: base64String,
+            profileImage: base64String, // Gambar jadi string base64
           }),
         );
-        alert("Update success!");
       };
       reader.readAsDataURL(file);
-    } else {
+    }
+
+    // SCENARIO 2: User tidak ganti foto, cuma ganti teks/password
+    else {
       dispatch(
-        updateProfile({
+        updateProfileAsync({
           ...formUser,
-          profileImage: profileUser.profileImage, // used oldest data
+          // Tetap pakai gambar lama yang ada di Redux (tipenya string)
+          profileImage: profileUser.profileImage,
         }),
       );
+    }
+  };
+
+  const handleSecurityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setSecurityForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSecuritySave = async () => {
+    const { password, newPassword, currentPassword, confirmPassword } =
+      securityForm;
+
+    const targetPassword = isFirstTimePassword ? password : newPassword;
+    const validation = passwordValidation(targetPassword);
+
+    // if (!validation.isValid) {
+    //   return alert(`Password weak: ${validation.errors.join(", ")}`);
+    // }
+
+    if (!isFirstTimePassword) {
+      if (!currentPassword) {
+        return alert("Please enter your current password!");
+      }
+
+      if (!newPassword) {
+        return alert("Please enter your new password!");
+      }
+
+      if (!confirmPassword) {
+        return alert("Please confirm your new password!");
+      }
+
+      const isMatch = bcrypt.compareSync(currentPassword, profileUser.password);
+
+      if (!isMatch) {
+        return alert("current password is incorrect!");
+      }
+
+      if (newPassword === currentPassword) {
+        return alert(
+          "New password cannot be the same as the current password!",
+        );
+      }
+
+      if (newPassword !== confirmPassword) {
+        return alert("Confirmation password does not match!");
+      }
+
+      alert("success!!");
+    } else {
+      if (!password) {
+        return alert("Please enter your password!");
+      }
+
+      if (!confirmPassword) {
+        return alert("Please confirm your password!");
+      }
+
+      if (password !== confirmPassword) {
+        return alert("Confirmation password does not match!");
+      }
+    }
+
+    try {
+      const dataToSave: ProfileType = {
+        ...formUser,
+        profileImage: profileUser.profileImage,
+        password: targetPassword,
+      };
+
+      // Eksekusi Dispatch
+      await dispatch(updateProfileAsync(dataToSave)).unwrap();
+
+      // Reset Form Local
+      setSecurityForm({
+        currentPassword: "",
+        password: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+
+      alert("Security settings updated successfully!");
+    } catch (error) {
+      console.error("Failed to update security:", error);
+      alert("Something went wrong while saving.");
     }
   };
 
@@ -170,5 +288,10 @@ export const useLogicSettings = () => {
     handleImageChange,
     profileImage: profilePreview ? profilePreview : profileUser.profileImage,
     handleSubmit,
+    securityForm,
+    isFirstTimePassword,
+    handleSecurityChange,
+    validation,
+    handleSecuritySave,
   };
 };

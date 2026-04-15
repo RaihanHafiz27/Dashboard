@@ -2,7 +2,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { ProfileSection } from "./section/ProfileSection";
 import { FormDataTypes } from "@/pages/settings";
 import { PreferencesSection } from "./section/PreferencesSection";
-import { SecuritySection } from "./section/SecuritySection";
+import { SecuritySection, SecurityState } from "./section/SecuritySection";
+import { passwordValidationType } from "../utils/passwordValidation";
 
 export type CountryAndCityOptions = {
   value: string;
@@ -21,6 +22,11 @@ interface SettingsViewProps {
   handleImageChange: (val: React.ChangeEvent<HTMLInputElement>) => void;
   profileImage: string | null;
   handleSubmit: (e: React.FormEvent) => void;
+  securityForm: SecurityState;
+  isFirstTimePassword: boolean;
+  handleSecurityChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validation: passwordValidationType;
+  handleSecuritySave: () => void;
 }
 
 export const SettingsView = (props: SettingsViewProps) => {
@@ -36,7 +42,15 @@ export const SettingsView = (props: SettingsViewProps) => {
     handleImageChange,
     profileImage,
     handleSubmit,
+    securityForm,
+    isFirstTimePassword,
+    handleSecurityChange,
+    validation,
+    handleSecuritySave,
   } = props;
+
+  console.log(formUser);
+
   return (
     <div className="border border-slate-300 p-8 rounded-lg shadow-lg space-y-4">
       {/* lINK FOR CHANGE SECTION */}
@@ -87,7 +101,15 @@ export const SettingsView = (props: SettingsViewProps) => {
             {/* PREFERENCES SECTION */}
             {choosedSection === "preferences" && <PreferencesSection />}
             {/* SECURITY SECTION */}
-            {choosedSection === "security" && <SecuritySection />}
+            {choosedSection === "security" && (
+              <SecuritySection
+                securityForm={securityForm}
+                isFirstTimePassword={isFirstTimePassword}
+                handleSecurityChange={handleSecurityChange}
+                validation={validation}
+                handleSecuritySave={handleSecuritySave}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
