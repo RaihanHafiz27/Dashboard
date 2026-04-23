@@ -17,7 +17,9 @@ interface SettingsViewProps {
   formUser: FormDataTypes;
   handleInputChange: (name: string, value: string) => void;
   countryOptions: CountryAndCityOptions[];
-  handleSelectedChange: (name: string, value: string) => void;
+  // handleSelectedChange: (name: string, value: string) => void;
+  handleSelectedChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+
   allCitiesOfCountry: CountryAndCityOptions[] | undefined;
   handleImageChange: (val: React.ChangeEvent<HTMLInputElement>) => void;
   profileImage: string | null;

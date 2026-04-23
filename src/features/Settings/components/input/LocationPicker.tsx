@@ -5,7 +5,8 @@ interface LocationPickerProps {
   name: string;
   id: string;
   disabled?: boolean;
-  onChange: (val: string) => void;
+  // onChange: (val: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
   dataOptions: CountryAndCityOptions[] | undefined;
   value?: string;
@@ -34,7 +35,8 @@ export const LocationPicker = (props: LocationPickerProps) => {
         name={name}
         id={id}
         disabled={disabled}
-        onChange={(e) => onChange(e.target.value)}
+        // onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         value={value}
         className="p-2 text-sm border border-slate-300 dark:border-gray-600 rounded-md text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-600"
       >

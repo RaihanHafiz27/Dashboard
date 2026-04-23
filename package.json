@@ -12,6 +12,7 @@
     "@floating-ui/react": "^0.27.17",
     "@react-pdf/renderer": "^4.3.2",
     "@reduxjs/toolkit": "^2.9.1",
+    "@supabase/supabase-js": "^2.104.1",
     "bcryptjs": "^3.0.3",
     "chart.js": "^4.5.0",
     "country-state-city": "^3.2.1",

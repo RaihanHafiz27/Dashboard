@@ -79,7 +79,8 @@ type ProfileSectionProps = {
   formUser: FormDataTypes;
   onInputChange: (name: string, value: string) => void;
   countryOptions: CountryAndCityOptions[];
-  handleSelectedChange: (name: string, value: string) => void;
+  // handleSelectedChange: (name: string, value: string) => void;
+  handleSelectedChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   allCitiesOfCountry: CountryAndCityOptions[] | undefined;
   onImageChange: (val: React.ChangeEvent<HTMLInputElement>) => void;
   profile: string | null;
@@ -95,14 +96,16 @@ export const ProfileSection = (props: ProfileSectionProps) => {
     allCitiesOfCountry,
     onImageChange,
     profile,
+    onSubmit,
   } = props;
 
   return (
     <form
       id="profile-form"
-      onSubmit={(e) => {
-        (e.preventDefault(), alert("Hello from profile"));
-      }}
+      onSubmit={onSubmit}
+      // onSubmit={(e) => {
+      //   (e.preventDefault(), alert("Hello from profile"));
+      // }}
     >
       <div className="flex gap-14 py-4 space-y-8">
         <div className="flex flex-col items-center space-y-2">
@@ -145,9 +148,10 @@ export const ProfileSection = (props: ProfileSectionProps) => {
               key={field.name}
               {...field}
               value={formUser[field.name]}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                onInputChange(field.name, e.target.value)
-              }
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   onInputChange(field.name, e.target.value)
+              // }
+              onChange={onInputChange}
               maxLength={field.maxLetters}
               readOnly={field.name === "password"}
             />
@@ -158,9 +162,10 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             label="Country"
             name="country"
             id="country"
-            onChange={(value) => {
-              handleSelectedChange("country", value);
-            }}
+            // onChange={(value) => {
+            //   handleSelectedChange("country", value);
+            // }}
+            onChange={handleSelectedChange}
             placeholder="Choose Country"
             dataOptions={countryOptions}
             value={formUser.country}
@@ -169,9 +174,10 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             label="City"
             name="city"
             id="city"
-            onChange={(value) => {
-              handleSelectedChange("city", value);
-            }}
+            // onChange={(value) => {
+            //   handleSelectedChange("city", value);
+            // }}
+            onChange={handleSelectedChange}
             placeholder={
               formUser.country ? "Choose City" : "Select country first"
             }
