@@ -3,6 +3,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { ProfileType, updateProfileAsync } from "@/store/profileSlice";
 import { useEffect, useState } from "react";
 import { fileToBase64 } from "../utils/fileToBase64";
+import { uploadProfileImage } from "../utils/uploadImage";
+import { useProfile } from "@/hooks/useProfile";
 
 /**
  * Hook to manage profile-related form logic, including image previews
@@ -25,6 +27,10 @@ export const useProfileLogic = (profileUser: ProfileType) => {
     city: "",
     country: "",
   });
+
+  // const { data: profile, isLoading, isSuccess, isError, error } = useProfile(1);
+
+  console.log(formUser);
 
   const dispatch = useAppDispatch();
 
@@ -86,16 +92,21 @@ export const useProfileLogic = (profileUser: ProfileType) => {
    */
   const handleProfileSave = async () => {
     try {
-      let finalImage = profileUser.profileImage;
+      let finalImageUrl = profileUser.profileImage;
 
       if (formUser.profileImage instanceof File) {
-        finalImage = await fileToBase64(formUser.profileImage);
+        finalImageUrl = await uploadProfileImage(
+          formUser.profileImage,
+          formUser.userName,
+        );
       }
+
+      const { profileImage, ...dataWithoutFile } = formUser;
 
       await dispatch(
         updateProfileAsync({
-          ...formUser,
-          profileImage: finalImage,
+          ...dataWithoutFile,
+          profileImage: finalImageUrl,
         }),
       ).unwrap();
 

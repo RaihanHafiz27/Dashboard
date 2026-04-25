@@ -14,8 +14,9 @@ interface SettingsViewProps {
   sections: string[];
   choosedSection: string;
   setChoosedSection: (e: string) => void;
+  profile: FormDataTypes;
   formUser: FormDataTypes;
-  handleInputChange: (name: string, value: string) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   countryOptions: CountryAndCityOptions[];
   // handleSelectedChange: (name: string, value: string) => void;
   handleSelectedChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -36,7 +37,9 @@ export const SettingsView = (props: SettingsViewProps) => {
     sections,
     choosedSection,
     setChoosedSection,
+    profile,
     formUser,
+
     handleInputChange,
     countryOptions,
     handleSelectedChange,

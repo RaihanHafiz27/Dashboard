@@ -3,6 +3,7 @@ import { Bell, MoonIcon, PanelTopOpen, Star, SunIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { Notification } from "../../../features/Notification/components/Notification";
+import Link from "next/link";
 
 export const InformationBar = ({
   lockedValue,
@@ -61,13 +62,15 @@ export const InformationBar = ({
         >
           {theme === "dark" ? <SunIcon /> : <MoonIcon />}
         </button>
-        <Image
-          src={"/images/profile.jpg"}
-          width={100}
-          height={100}
-          alt="profile"
-          className="w-9 h-9 rounded-full cursor-not-allowed  transition-all duration-200 hover:scale-110"
-        />
+        <Link href={"/profile"}>
+          <Image
+            src={"/images/profile.jpg"}
+            width={100}
+            height={100}
+            alt="profile"
+            className="w-9 h-9 rounded-full transition-all duration-200 hover:scale-110"
+          />
+        </Link>
       </div>
     </div>
   );

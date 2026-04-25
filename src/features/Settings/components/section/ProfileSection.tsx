@@ -5,6 +5,7 @@ import { LocationPicker } from "../input/LocationPicker";
 import { Camera } from "lucide-react";
 import React, { useRef } from "react";
 import { CountryAndCityOptions } from "../SettingsView";
+import { useProfile } from "@/hooks/useProfile";
 
 type textFields = keyof Omit<FormDataTypes, "profileImage">;
 
@@ -77,7 +78,7 @@ const profileFields: FieldType[] = [
 
 type ProfileSectionProps = {
   formUser: FormDataTypes;
-  onInputChange: (name: string, value: string) => void;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   countryOptions: CountryAndCityOptions[];
   // handleSelectedChange: (name: string, value: string) => void;
   handleSelectedChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -98,6 +99,16 @@ export const ProfileSection = (props: ProfileSectionProps) => {
     profile,
     onSubmit,
   } = props;
+
+  const {
+    data: profileData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useProfile(1);
+
+  console.log(profileData);
 
   return (
     <form
@@ -147,10 +158,9 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             <InputProfile
               key={field.name}
               {...field}
-              value={formUser[field.name]}
-              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              //   onInputChange(field.name, e.target.value)
-              // }
+              value={
+                profileData ? profileData[field.name] : formUser[field.name]
+              }
               onChange={onInputChange}
               maxLength={field.maxLetters}
               readOnly={field.name === "password"}

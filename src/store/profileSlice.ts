@@ -4,6 +4,7 @@
  * and asynchronous data synchronization.
  */
 
+import { uploadProfileImage } from "@/features/Settings/utils/uploadImage";
 import { supabase } from "@/lib/supabase/supabase";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import bcrypt from "bcryptjs";
@@ -50,29 +51,31 @@ const initialState: ProfileState = {
  */
 export const updateProfileAsync = createAsyncThunk(
   "profile/updateProfileAsync",
-  async (newData: ProfileType, { rejectWithValue }) => {
+  async (payload: ProfileType, { rejectWithValue }) => {
     try {
       const { data, error } = await supabase
         .from("profiles")
         .upsert({
           id: 1,
-          fullName: newData.fullName,
-          userName: newData.userName,
-          email: newData.email,
-          password: newData.password,
-          phoneNumber: newData.phoneNumber,
-          dateOfBirth: newData.dateOfBirth,
-          address: newData.address,
-          profileImage: newData.profileImage,
-          country: newData.country,
-          city: newData.city,
-          postalCode: newData.postalCode,
+          fullName: payload.fullName,
+          userName: payload.userName,
+          email: payload.email,
+          password: payload.password,
+          phoneNumber: payload.phoneNumber,
+          dateOfBirth: payload.dateOfBirth,
+          address: payload.address,
+          profileImage: payload.profileImage,
+          country: payload.country,
+          city: payload.city,
+          postalCode: payload.postalCode,
         })
         .select();
 
-      return newData;
+      if (error) throw error;
+
+      return payload;
     } catch (error: any) {
-      return rejectWithValue(error.message || "Failed to process profile data");
+      return rejectWithValue(error.message);
     }
   },
 );
