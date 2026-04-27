@@ -21,7 +21,7 @@ export const useLocationLogic = (formUser: FormDataTypes) => {
     }));
   }, [formUser.country]);
   return {
-    countryOptions,
+    countries: countryOptions,
     allCitiesOfCountry: cityOptions,
   };
 };

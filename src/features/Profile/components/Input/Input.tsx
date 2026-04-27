@@ -1,28 +1,22 @@
-interface InputProfileProps {
+import { useContext } from "react";
+import { useFormContext } from "../context/FormContext";
+
+interface InputProps {
   label: string;
   type: string;
   name: string;
   placeholder?: string;
-  value?: string;
-  onChange: any;
   maxLength: number;
   readOnly?: boolean;
 }
 
-export const InputProfile = (props: InputProfileProps) => {
-  const {
-    label,
-    type,
-    name,
-    placeholder,
-    value,
-    onChange,
-    maxLength,
-    readOnly,
-  } = props;
+export const Input = (props: InputProps) => {
+  const { label, type, name, placeholder, maxLength, readOnly } = props;
+
+  const { value, onChange } = useFormContext();
 
   return (
-    <div className="flex flex-col space-y-1.5 w-full">
+    <div className="flex flex-col space-y-2 w-full">
       <label
         htmlFor={name}
         className="text-sm tracking-widest text-slate-700 dark:text-slate-300"
@@ -33,7 +27,7 @@ export const InputProfile = (props: InputProfileProps) => {
         type={type}
         id={name}
         name={name}
-        value={value}
+        value={value[name]}
         onChange={onChange}
         placeholder={placeholder}
         maxLength={maxLength}

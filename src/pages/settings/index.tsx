@@ -12,7 +12,7 @@ export interface FormDataTypes extends Omit<ProfileType, "profileImage"> {
 const SettingsPage = () => {
   const useLogic = useLogicSettings();
 
-  return <SettingsView sections={settingsType} {...useLogic} />;
+  // return <SettingsView sections={settingsType} {...useLogic} />;
 };
 
 export default SettingsPage;

@@ -12,7 +12,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { passwordValidation } from "../utils/passwordValidation";
 import { useProfileLogic } from "./useProfileLogic";
-import { useLocationLogic } from "./useLocationLogic";
+import { useLocationLogic } from "../../Profile/hooks/useLocationLogic";
 import { useSecurityLogic } from "./useSecurityLogic";
 
 /**

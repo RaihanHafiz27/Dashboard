@@ -43,7 +43,7 @@
 
 /* Membuat thumb (bagian yang dapat digeser) transparan */
 ::-webkit-scrollbar-thumb {
-  background-color: #00a6f4;
+  background-color: #7f22fe;
   border-radius: 10px;
 }
 

@@ -1,14 +1,12 @@
 import { AnimatePresence, motion } from "motion/react";
-import { ProfileSection } from "./section/ProfileSection";
+import {
+  CountryAndCityOptions,
+  ProfileSection,
+} from "./section/ProfileSection";
 import { FormDataTypes } from "@/pages/settings";
 import { PreferencesSection } from "./section/PreferencesSection";
 import { SecuritySection, SecurityState } from "./section/SecuritySection";
 import { passwordValidationType } from "../utils/passwordValidation";
-
-export type CountryAndCityOptions = {
-  value: string;
-  title: string;
-};
 
 interface SettingsViewProps {
   sections: string[];

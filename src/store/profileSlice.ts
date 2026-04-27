@@ -15,8 +15,11 @@ export interface ProfileType {
   userName: string;
   email: string;
   password: string;
+  gender: string;
   phoneNumber: string;
+  statusMarried: string;
   dateOfBirth: string;
+  placeOfBirth: string;
   address: string;
   profileImage: string | null;
   country: string;
@@ -34,8 +37,11 @@ const initialState: ProfileState = {
   userName: "",
   email: "",
   password: "",
+  gender: "",
   phoneNumber: "",
+  statusMarried: "",
   dateOfBirth: "",
+  placeOfBirth: "",
   address: "",
   profileImage: "",
   country: "",

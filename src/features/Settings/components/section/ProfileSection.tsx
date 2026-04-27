@@ -1,15 +1,17 @@
 import { FormDataTypes } from "@/pages/settings";
 import Image from "next/image";
-import { InputProfile } from "../input/InputProfile";
-import { LocationPicker } from "../input/LocationPicker";
 import { Camera } from "lucide-react";
 import React, { useRef } from "react";
-import { CountryAndCityOptions } from "../SettingsView";
 import { useProfile } from "@/hooks/useProfile";
 
-type textFields = keyof Omit<FormDataTypes, "profileImage">;
+export type CountryAndCityOptions = {
+  value: string;
+  title: string;
+};
 
-interface FieldType {
+export type textFields = keyof Omit<FormDataTypes, "profileImage">;
+
+export interface FieldType {
   name: textFields;
   label: string;
   type: string;
@@ -153,7 +155,7 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             />
           </label>
         </div>
-        <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
+        {/* <div className="flex-1 grid grid-cols-2 gap-x-8 gap-y-6">
           {profileFields.map((field) => (
             <InputProfile
               key={field.name}
@@ -167,14 +169,11 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             />
           ))}
 
-          {/* SELECT COUNTRY & CITY */}
           <LocationPicker
             label="Country"
             name="country"
             id="country"
-            // onChange={(value) => {
-            //   handleSelectedChange("country", value);
-            // }}
+         
             onChange={handleSelectedChange}
             placeholder="Choose Country"
             dataOptions={countryOptions}
@@ -184,9 +183,7 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             label="City"
             name="city"
             id="city"
-            // onChange={(value) => {
-            //   handleSelectedChange("city", value);
-            // }}
+         
             onChange={handleSelectedChange}
             placeholder={
               formUser.country ? "Choose City" : "Select country first"
@@ -195,7 +192,7 @@ export const ProfileSection = (props: ProfileSectionProps) => {
             dataOptions={allCitiesOfCountry || []}
             value={formUser.city}
           />
-        </div>
+        </div> */}
       </div>
     </form>
   );

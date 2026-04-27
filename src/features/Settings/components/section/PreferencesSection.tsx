@@ -1,5 +1,4 @@
 import { ToggleSwitch } from "../button/ToggleSwitch";
-import { InputProfile } from "../input/InputProfile";
 
 const preferencesFields = [
   {
@@ -21,7 +20,7 @@ const preferencesFields = [
 export const PreferencesSection = () => {
   return (
     <div className="py-4 space-y-8">
-      <div className="grid grid-cols-2 gap-x-8">
+      {/* <div className="grid grid-cols-2 gap-x-8">
         {preferencesFields.map((field) => (
           <InputProfile
             key={field.name}
@@ -30,7 +29,7 @@ export const PreferencesSection = () => {
             onChange={() => {}}
           />
         ))}
-      </div>
+      </div> */}
       <div className="space-y-4">
         <h3 className=" text-slate-700 dark:text-slate-300">Notification</h3>
         <div className="grid grid-cols-1 gap-y-3">
