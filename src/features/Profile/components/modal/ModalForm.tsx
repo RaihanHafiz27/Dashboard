@@ -39,7 +39,11 @@ export const ModalForm = (props: ModalProps) => {
           >
             Cancel
           </button>
-          <button className="bg-violet-600 text-slate-100 text-sm px-6 py-2 rounded-lg  hover:bg-violet-700">
+          <button
+            type="submit"
+            form="profile-form"
+            className="bg-violet-600 text-slate-100 text-sm px-6 py-2 rounded-lg  hover:bg-violet-700"
+          >
             Save Changes
           </button>
         </div>

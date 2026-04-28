@@ -5,33 +5,33 @@ export interface OptionsType {
   value: string;
 }
 
-interface SelectProps {
+interface SelectProps<T> {
   label: string;
-  name: string;
+  name: keyof T;
   disabled?: boolean;
   placeholder: string;
   dataOptions: OptionsType[] | undefined;
 }
 
-export const Select = (props: SelectProps) => {
+export const Select = <T,>(props: SelectProps<T>) => {
   const { label, name, disabled, placeholder, dataOptions } = props;
 
-  const { value, onChange } = useFormContext();
+  const { value, onChange } = useFormContext<T>();
 
   return (
     <div className="flex flex-col space-y-2">
       <label
-        htmlFor={name}
+        htmlFor={name as string}
         className={`text-sm font-medium ${disabled ? "text-gray-400" : "text-slate-700 dark:text-slate-300 "}`}
       >
         {label}
       </label>
       <select
-        name={name}
-        id={name}
+        name={name as string}
+        id={name as string}
         disabled={disabled}
         onChange={onChange}
-        value={value[name]}
+        value={(value[name] as string) || ""}
         className="p-2 text-sm border border-slate-300 dark:border-gray-600 rounded-md text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-gray-900 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-600"
       >
         <option value="">{placeholder || "Select option..."}</option>

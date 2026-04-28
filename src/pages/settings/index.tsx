@@ -6,7 +6,7 @@ const settingsType = ["edit profile", "preferences", "security"];
 
 // The data in the Settings form can be a file
 export interface FormDataTypes extends Omit<ProfileType, "profileImage"> {
-  profileImage: File | null;
+  profileImage: File | string | null;
 }
 
 const SettingsPage = () => {

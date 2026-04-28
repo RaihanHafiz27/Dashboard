@@ -2,14 +2,19 @@ import { Camera, UserRound } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useFormContext } from "../context/FormContext";
+import { FormDataTypes } from "@/pages/settings";
 
 export const ImageDropzone = () => {
   const [preview, setPreview] = useState<string | null>(null);
+
+  const { setValue } = useFormContext<FormDataTypes>();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
 
     setPreview(URL.createObjectURL(file));
+    setValue("profileImage", file);
 
     console.log("siap upload");
   }, []);
@@ -36,7 +41,7 @@ export const ImageDropzone = () => {
             <div className="relative border-4 border-slate-100 bg-gray-300 w-28 h-28 rounded-full overflow-hidden grid place-items-center select-none">
               {preview ? (
                 <Image
-                  src={""}
+                  src={preview}
                   alt="profile picture"
                   fill
                   unoptimized

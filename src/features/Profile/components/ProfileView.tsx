@@ -21,14 +21,25 @@ export interface ProfileViewProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
   location: LocationType;
+  setValue: <K extends keyof FormDataTypes>(
+    name: K,
+    val: FormDataTypes[K],
+  ) => void;
+  onSubmit: (e: React.FormEvent) => void;
   profileUser: any;
 }
 
 export const ProfileView = (props: ProfileViewProps) => {
-  const { isOpen, setIsOpen, formUser, onChange, location, profileUser } =
-    props;
-
-  console.log(formUser);
+  const {
+    isOpen,
+    setIsOpen,
+    formUser,
+    onChange,
+    location,
+    setValue,
+    onSubmit,
+    profileUser,
+  } = props;
 
   return (
     <div className="min-h-screen space-y-6">
@@ -43,8 +54,12 @@ export const ProfileView = (props: ProfileViewProps) => {
       </div>
       {isOpen && (
         <ModalForm isOpen={isOpen} onClose={() => setIsOpen(!isOpen)}>
-          <FormProvider value={formUser} onChange={onChange}>
-            <ProfileEditForm location={location} />
+          <FormProvider
+            value={formUser}
+            onChange={onChange}
+            setValue={setValue}
+          >
+            <ProfileEditForm location={location} onSubmit={onSubmit} />
           </FormProvider>
         </ModalForm>
       )}

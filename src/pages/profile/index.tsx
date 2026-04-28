@@ -21,6 +21,7 @@ import { FormDataTypes } from "../settings";
 import { ProfileView } from "@/features/Profile/components/ProfileView";
 
 import { useLocationLogic } from "@/features/Profile/hooks/useLocationLogic";
+import { useUpdateProfile } from "@/features/Profile/hooks/useUpdateProfile";
 
 export type IconTypes =
   | "user"
@@ -125,6 +126,9 @@ const summary: SummaryLabel[] = [
 
 const ProfilePage = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { mutate: updateProfile, isPending } = useUpdateProfile();
+
   const [formUser, setFormUser] = useState<FormDataTypes>({
     fullName: "",
     userName: "",
@@ -141,10 +145,6 @@ const ProfilePage = () => {
     city: "",
     country: "",
   });
-
-  console.log(isOpen);
-
-  const profile = false;
 
   const iconMap: Record<IconTypes, React.ReactElement> = {
     user: <UserRound size={22} strokeWidth={1.5} />,
@@ -196,6 +196,17 @@ const ProfilePage = () => {
     }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      setFormUser((prev) => ({
+        ...prev,
+        profileImage: file,
+      }));
+    }
+  };
+
   const handleFieldChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -213,23 +224,27 @@ const ProfilePage = () => {
     });
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      setFormUser((prev) => ({
-        ...prev,
-        profileImage: file,
-      }));
-    }
-  };
-
   const location = useLocationLogic(formUser);
 
-  // console.log(location);
-  console.log(formUser);
-
   const profileUser: any = [];
+
+  const setValue = <K extends keyof FormDataTypes>(
+    name: K,
+    val: FormDataTypes[K],
+  ) => {
+    setFormUser((prev) => ({
+      ...prev,
+      [name]: val,
+    }));
+  };
+
+  const handleSaveForm = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    updateProfile(formUser, {
+      onSuccess: () => setIsOpen(false),
+    });
+  };
 
   return (
     <ProfileView
@@ -238,6 +253,8 @@ const ProfilePage = () => {
       formUser={formUser}
       onChange={handleFieldChange}
       location={location}
+      setValue={setValue}
+      onSubmit={handleSaveForm}
       profileUser={profileUser}
     />
   );

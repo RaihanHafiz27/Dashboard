@@ -114,7 +114,7 @@ export const ProfileSection = (props: ProfileSectionProps) => {
 
   return (
     <form
-      id="profile-form"
+      // id="profile-form"
       onSubmit={onSubmit}
       // onSubmit={(e) => {
       //   (e.preventDefault(), alert("Hello from profile"));

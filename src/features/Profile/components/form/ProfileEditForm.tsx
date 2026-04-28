@@ -6,18 +6,24 @@ import {
 import { ImageDropzone } from "../Input/ImageDropZone";
 import { useFormContext } from "../context/FormContext";
 import { LocationType } from "../ProfileView";
+import { FormDataTypes } from "@/pages/settings";
 
 interface ProfileEditFormProps {
   location: LocationType;
+  onSubmit: (e: React.FormEvent) => void;
 }
 
 export const ProfileEditForm = (props: ProfileEditFormProps) => {
-  const { location } = props;
+  const { location, onSubmit } = props;
 
-  const { value } = useFormContext();
+  const { value } = useFormContext<FormDataTypes>();
 
   return (
-    <form className="flex flex-col gap-y-8">
+    <form
+      id="profile-form"
+      onSubmit={onSubmit}
+      className="flex flex-col gap-y-8"
+    >
       {/* Profile Picture Section */}
       <div className="flex flex-col gap-y-3">
         <p className="font-bold text-sm text-slate-600 tracking-wider">
@@ -49,23 +55,25 @@ export const ProfileEditForm = (props: ProfileEditFormProps) => {
           placeholder="-"
           maxLength={50}
         />
-        <Input
-          name="password"
-          label="Password"
-          type="password"
-          placeholder="-"
-          maxLength={30}
-          readOnly
-        />
         <Select
           name="gender"
           label="Gender"
-          placeholder="Choose Gender"
+          placeholder="Choose Your Gender"
+          dataOptions={[
+            { title: "Man", value: "man" },
+            { title: "Woman", value: "woman" },
+          ]}
+        />
+        <Select
+          name="statusMarried"
+          label="Status"
+          placeholder="Choose Your Status"
           dataOptions={[
             { title: "Single", value: "single" },
             { title: "Married", value: "married" },
           ]}
         />
+
         <Input
           name="phoneNumber"
           label="Phone Number"
@@ -103,13 +111,13 @@ export const ProfileEditForm = (props: ProfileEditFormProps) => {
         <Select
           label="Country"
           name="country"
-          placeholder="Choose Country"
+          placeholder="Choose Your Country"
           dataOptions={location.countries}
         />
         <Select
           label="City"
           name="city"
-          placeholder="Choose City"
+          placeholder="Choose Your City"
           dataOptions={location.allCitiesOfCountry}
           disabled={!value.country}
         />
