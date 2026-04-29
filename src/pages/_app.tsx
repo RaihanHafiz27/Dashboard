@@ -6,11 +6,20 @@ import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import StoreHydrator from "@/store/StoreHydration";
 import { ThemeProvider } from "@/context/ThemeContext";
-import { useState } from "react";
+import { ReactElement, ReactNode, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { NextPage } from "next";
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -24,27 +33,20 @@ export default function App({ Component, pageProps }: AppProps) {
       }),
   );
 
+  const getLayout =
+    Component.getLayout ??
+    ((page) => <DashboardLayout>{page}</DashboardLayout>);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <Provider store={store}>
           <StoreHydrator />
-          <DashboardLayout>
-            <Component {...pageProps} />
-          </DashboardLayout>
+          {getLayout(<Component {...pageProps} />)}
           <Toaster position="top-right" />
         </Provider>
       </ThemeProvider>
       <ReactQueryDevtools /> {/* Only view on development mode */}
     </QueryClientProvider>
-    // <ThemeProvider>
-    //   <Provider store={store}>
-    //     <StoreHydrator />
-    //     <DashboardLayout>
-    //       <Component {...pageProps} />
-    //     </DashboardLayout>
-    //     <Toaster position="top-right" />
-    //   </Provider>
-    // </ThemeProvider>
   );
 }
