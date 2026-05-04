@@ -1,7 +1,8 @@
-import { ShieldCheck, UserRound, Zap } from "lucide-react";
+import { LucideIcon, ShieldCheck, UserRound, Zap } from "lucide-react";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 type Icons = "shield" | "thunder" | "person";
 
@@ -56,165 +57,164 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["500"],
 });
 
-export const AuthLayout = ({ children }: any) => {
-  const iconsMap: Record<Icons, React.ReactNode> = {
-    shield: <ShieldCheck size={20} strokeWidth={1.5} />,
-    thunder: <Zap size={20} strokeWidth={1.5} />,
-    person: <UserRound size={20} strokeWidth={1.5} />,
-  };
+interface AuthProps {
+  children: ReactNode;
+  containerClass: string;
 
+  // left side
+  welomeTitle: ReactNode;
+  welcomeDesc: string;
+
+  // right side
+  formTitle: string;
+  formSubsTitle: string;
+
+  // navigation
+  promptText: string;
+  linkText: string;
+  linkHref: string;
+
+  // footer
+  separationText: string;
+}
+
+export const AuthLayout = (props: AuthProps) => {
+  const {
+    children,
+    containerClass,
+    welomeTitle,
+    welcomeDesc,
+    formTitle,
+    formSubsTitle,
+    promptText,
+    linkText,
+    linkHref,
+    separationText,
+  } = props;
   return (
-    <div className={`flex flex-col w-full min-h-dvh ${plusJakarta.className}`}>
+    <main className={`flex flex-col w-full min-h-dvh ${plusJakarta.className}`}>
       <div className="flex-1 w-full h-full  grid grid-cols-2">
-        <div className="relative flex flex-col justify-between bg-gradient-to-r from-blue-100 to-violet-200 p-8">
+        {/* LEFT SECTION */}
+        <section className="relative flex flex-col justify-between bg-gradient-to-r from-blue-100 to-violet-200 md:p-8 2xl:p-10">
           <DecorationLayout />
-          <div className="flex items-center gap-x-2">
+          <header className="flex items-center gap-x-2 z-10">
             <Image
               src={"/images/logo1.png"}
               width={100}
               height={100}
               alt="logo"
               loading="lazy"
-              className="w-12 h-auto"
+              className="md:w-12 2xl:w-16 h-auto"
             />
-            <span className={`font-bold text-2xl text-gray-700 tracking-wide`}>
+            <span
+              className={`font-bold text-2xl 2xl:text-4xl text-gray-700 tracking-wide`}
+            >
               Xyz
             </span>
-          </div>
+          </header>
           <div className="">
-            <h2 className="font-bold text-4xl text-gray-700 tracking-wide mb-2">
-              Welcome <span className="text-violet-600">back!</span>
+            <h2 className="font-bold text-3xl 2xl:text-5xl text-gray-700 tracking-wide mb-2">
+              {welomeTitle}
             </h2>
-            <p className="text-sm font-medium text-gray-500 max-w-[370px] tracking-wide">
-              Sign in to access your profile, manage your account, and stay
-              conneted.
+            <p className="text-sm 2xl:text-xl font-medium text-gray-500 md:max-w-[370px] 2xl:max-w-[550px] tracking-wide">
+              {welcomeDesc}
             </p>
           </div>
           <Image
             src={"/images/digital.svg"}
             alt="visual"
-            width={100}
-            height={100}
-            className="w-80 h-auto mx-auto z-10"
+            width={400}
+            height={400}
+            className="md:w-80 2xl:w-lg  h-auto mx-auto z-10 object-contain"
           />
           <div className="grid grid-cols-3 gap-6 z-10">
             {quickInformation.map((item) => (
               <div key={item.id} className="flex gap-x-3">
                 <div className="">
-                  <div className="bg-slate-100 p-2 rounded-full text-violet-600">
-                    {iconsMap[item.icon]}
+                  <div className="bg-white/50 backdrop-blur-sm p-2 rounded-xl w-fit h-fit shadow-sm">
+                    <DynamicIcon name={item.icon} />
                   </div>
                 </div>
-                <div className="">
-                  <p className="font-bold text-[13px] tracking-wide capitalize text-violet-600 mb-1">
+                <div>
+                  <p className="font-bold md:text-xs 2xl:text-sm tracking-wide capitalize text-violet-600 mb-1">
                     {item.label}
                   </p>
-                  <p className="text-[11px] font-medium tracking-wide capitalize text-gray-500">
+                  <p className="md:text-[10px] 2xl:text-xs font-medium tracking-wide capitalize text-gray-500 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-        <div className="px-14 py-8 flex flex-col justify-between">
-          <div className="flex flex-col gap-y-6">
-            <span className="text-end text-gray-600 font-medium text-sm">
-              Don't have an account?{" "}
-              <Link href={"/"} className="text-violet-600 font-semibold">
-                Sign up
+        </section>
+        {/* RIGHT SECTION */}
+        <section className="md:px-14 md:py-8 2xl:p-20 flex flex-col justify-between">
+          <nav className="flex justify-end">
+            <span className=" text-gray-600 font-medium md:text-sm 2xl:text-base">
+              {promptText}{" "}
+              <Link href={linkHref} className="text-violet-600 font-semibold">
+                {linkText}
               </Link>
             </span>
-            <div>
-              <h3 className="text-2xl font-semibold text-gray-700 mb-2">
-                Sign in to your account
+          </nav>
+          <div
+            className={`${containerClass} w-full mx-auto py-10 lg:py-0 flex flex-col md:gap-y-6 2xl:gap-y-10`}
+          >
+            <header>
+              <h3 className="md:text-2xl 2xl:text-3xl font-semibold text-gray-700 mb-2">
+                {formTitle}
               </h3>
-              <p className="text-sm font-medium text-gray-600">
-                Enter your credentials to continue
+              <p className="md:text-sm 2xl:text-base font-medium text-gray-600">
+                {formSubsTitle}
               </p>
+            </header>
+            {/* FORM COMPONENT */}
+            {children}
+            {/* OR Separator */}
+            <div className="relative flex items-center">
+              <div className="flex-1 border-t border-gray-300"></div>
+              <span className="mx-6 shrink-0 text-sm text-gray-500 tracking-wider">
+                {separationText}
+              </span>
+              <div className="flex-1 border-t border-gray-300"></div>
+            </div>
+            <div className="grid grid-cols-3 gap-x-4">
+              {loginWith.map((item) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  disabled
+                  className="border border-gray-300 p-2 flex items-center justify-center gap-x-2 rounded-lg hover:scale-105 transition-all duration-300 cursor-not-allowed"
+                >
+                  <Image
+                    src={item.icon}
+                    alt={item.label}
+                    width={100}
+                    height={100}
+                    className="md:w-4 2xl:w-5 h-auto"
+                  />
+                  <p className="text-sm capitalize text-gray-700">
+                    {item.label}
+                  </p>
+                </button>
+              ))}
             </div>
           </div>
-          <div className="">{children}</div>
-          <div className="relative flex items-center">
-            <div className="flex-1 border-t border-gray-300"></div>
-            <span className="mx-6 shrink-0 text-sm text-gray-500 tracking-wider">
-              or continue with
-            </span>
-            <div className="flex-1 border-t border-gray-300"></div>
-          </div>
-          <div className="grid grid-cols-3 gap-x-4">
-            {loginWith.map((item) => (
-              <button
-                type="button"
-                key={item.id}
-                className="border border-gray-300 p-2 flex items-center justify-center gap-x-2 rounded-lg hover:scale-105 transition-all duration-300"
-              >
-                <Image
-                  src={item.icon}
-                  alt={item.label}
-                  width={100}
-                  height={100}
-                  className="w-4 h-auto"
-                />
-                <p className="text-sm capitalize text-gray-700">{item.label}</p>
-              </button>
-            ))}
-          </div>
-          <p className="text-sm text-gray-600 text-center">
-            By signing in, you agree to our{" "}
-            <Link href={"#"} className="text-violet-600 font-semibold">
+
+          <footer className="text-sm text-gray-600 text-center">
+            By signing {linkText === "Sign In" ? "up" : "in"}, you agree to our{" "}
+            <span className="text-violet-600 font-semibold">
               Terms of Service
-            </Link>{" "}
+            </span>{" "}
             and{" "}
-            <Link href={"#"} className="text-violet-600 font-semibold">
+            <span className="text-violet-600 font-semibold">
               Privacy Policy
-            </Link>
+            </span>
             .
-          </p>
-        </div>
+          </footer>
+        </section>
       </div>
-    </div>
-    // <div className="w-full min-h-dvh  grid place-items-center">
-    //   <div className="border-2 border-gray-200  max-w-4xl w-full grid grid-cols-2 rounded-lg divide-x-2 divide-gray-200 shadow-md">
-    //     <div className="relative flex flex-col gap-y-4 bg-gradient-to-r from-blue-100 to-violet-200 p-8">
-    //       <DecorationLayout />
-    //       <div className="flex items-center gap-x-2">
-    //         <Image
-    //           src={"/images/logo1.png"}
-    //           width={100}
-    //           height={100}
-    //           alt="logo"
-    //           loading="lazy"
-    //           className="w-12 h-auto"
-    //         />
-    //         <span className={`font-bold text-2xl text-gray-700 tracking-wide`}>
-    //           Xyz
-    //         </span>
-    //       </div>
-    //       <div className="space-y-2">
-    //         <h2 className="font-bold text-3xl text-gray-700 tracking-wide">
-    //           Welcome <span className="text-violet-600">back!</span>
-    //         </h2>
-    //         <p className="text-sm font-medium text-gray-500">
-    //           Sign in to access your profile, manage your account, and stay
-    //           conneted.
-    //         </p>
-    //       </div>
-    //       <Image
-    //         src={"/images/digital.svg"}
-    //         alt="visual"
-    //         width={100}
-    //         height={100}
-    //         className="w-64 h-auto mx-auto"
-    //       />
-    //       <p>Hellow</p>
-    //     </div>
-    //     <div className="p-8">
-    //       <h1>Layouts</h1>
-    //       <div>{children}</div>
-    //     </div>
-    //   </div>
-    // </div>
+    </main>
   );
 };
 
@@ -265,5 +265,30 @@ const DecorationLayout = () => {
         ></path>
       </svg>
     </div>
+  );
+};
+
+const ICON_MAP: Record<Icons, LucideIcon> = {
+  shield: ShieldCheck,
+  thunder: Zap,
+  person: UserRound,
+};
+
+const DynamicIcon = ({
+  name,
+  classname,
+}: {
+  name: Icons;
+  classname?: string;
+}) => {
+  const IconComponent = ICON_MAP[name];
+
+  if (!IconComponent) return null;
+
+  return (
+    <IconComponent
+      className={`w-6 h-6 2xl:w-8 2xl:h-8 text-violet-600 ${classname}`}
+      strokeWidth={1.5}
+    />
   );
 };
