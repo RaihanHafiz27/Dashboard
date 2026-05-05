@@ -1,4 +1,4 @@
-import { AuthLayout } from "@/layouts/AuthLayout";
+import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { NextPageWithLayout } from "../_app";
 import { Input } from "@/components/common/Input/Input";
 import { LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
@@ -6,6 +6,8 @@ import { useState } from "react";
 import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
 import { passwordValidation } from "@/features/Settings/utils/passwordValidation";
 import { Button } from "@/components/common/Button/Button";
+import { showToast } from "@/lib/utils/toast";
+import { SignUpView } from "@/features/SignUp/components/SignUpView";
 
 const SignUpPage: NextPageWithLayout = () => {
   const [formSignUp, setFormSignUp] = useState({
@@ -32,7 +34,29 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formSignUp);
+
+    if (formSignUp.password !== formSignUp.confirmPassword) {
+      return showToast.error("Passwords do not match.");
+    }
+
+    if (!validation.isValid) {
+      const errorMessage = validation.errors[0] || "Please check your input.";
+      return showToast.error(errorMessage);
+    }
+
+    try {
+      showToast.success("Account created successfully!");
+
+      // Reset Form
+      setFormSignUp({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      showToast.error("Something went wrong. Please try again.");
+    }
   };
 
   const isValidForm = Object.values(formSignUp).every(
@@ -40,86 +64,54 @@ const SignUpPage: NextPageWithLayout = () => {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <div>
-        <div className="grid grid-cols-2 gap-6">
-          <Input
-            label="full name"
-            name="fullName"
-            type="text"
-            placeholder="Enter your full name"
-            maxLength={50}
-            icon={<UserRound size={22} strokeWidth={1.5} />}
-            onChange={handleInputSignUp}
-          />
-          <Input
-            label="email address"
-            name="email"
-            type="email"
-            placeholder="Enter your email address"
-            maxLength={50}
-            icon={<Mail size={22} strokeWidth={1.5} />}
-            onChange={handleInputSignUp}
-          />
-          <Input
-            label="password"
-            name="password"
-            type="password"
-            placeholder="Create a password"
-            maxLength={50}
-            icon={<LockKeyhole size={22} strokeWidth={1.5} />}
-            isShow={visibility.password}
-            onClickToogle={() => toggle("password")}
-            onChange={handleInputSignUp}
-          />
+    <SignUpView handleSubmit={handleSubmit} disabled={!isValidForm}>
+      <Input
+        label="full name"
+        name="fullName"
+        type="text"
+        placeholder="Enter full name"
+        value={formSignUp.fullName}
+        maxLength={50}
+        icon={<UserRound size={22} strokeWidth={1.5} />}
+        onChange={handleInputSignUp}
+      />
+      <Input
+        label="email address"
+        name="email"
+        type="email"
+        placeholder="Enter email address"
+        value={formSignUp.email}
+        maxLength={50}
+        icon={<Mail size={22} strokeWidth={1.5} />}
+        onChange={handleInputSignUp}
+      />
+      <Input
+        label="password"
+        name="password"
+        type="password"
+        placeholder="Create a password"
+        value={formSignUp.password}
+        maxLength={50}
+        icon={<LockKeyhole size={22} strokeWidth={1.5} />}
+        isShow={visibility.password}
+        onClickToogle={() => toggle("password")}
+        onChange={handleInputSignUp}
+      />
 
-          <Input
-            label="confirm password"
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm your password"
-            maxLength={50}
-            icon={<LockKeyhole size={22} strokeWidth={1.5} />}
-            isShow={visibility.confirmPassword}
-            onClickToogle={() => toggle("confirmPassword")}
-            disabled={formSignUp.password.length === 0}
-            onChange={handleInputSignUp}
-          />
-        </div>
-
-        <div className="flex items-center w-full pt-3 gap-x-1 ">
-          <ShieldCheck size={20} strokeWidth={1.5} className="text-green-500" />
-          <span className="text-xs text-gray-500">
-            Use 8+ characters with a mix of letters, capital, numbers & symbol.
-          </span>
-        </div>
-      </div>
-
-      <div className="col-span-2">
-        <div className="flex items-center gap-x-2 mb-4">
-          <input type="checkbox" disabled className="cursor-not-allowed" />
-          <label htmlFor="" className="text-sm text-gray-600">
-            I agree to the{" "}
-            <span className="text-violet-600 font-semibold">
-              Terms of Service
-            </span>{" "}
-            and{" "}
-            <span className="text-violet-600 font-semibold">
-              Privacy Policy
-            </span>
-            .
-          </label>
-        </div>
-        <Button label="Create Account" type="submit" disabled={!isValidForm} />
-        {/* <button
-          type="submit"
-          disabled={!isValidForm}
-          className={`w-full bg-violet-600 hover:bg-violet-700 py-2 rounded-lg md:text-sm 2xl:text-base text-slate-200 transition-colors ${!isValidForm ? "cursor-not-allowed" : "cursor-pointer"}`}
-        >
-          Create Account
-        </button> */}
-      </div>
-    </form>
+      <Input
+        label="confirm password"
+        name="confirmPassword"
+        type="password"
+        placeholder="Confirm password"
+        value={formSignUp.confirmPassword}
+        maxLength={50}
+        icon={<LockKeyhole size={22} strokeWidth={1.5} />}
+        isShow={visibility.confirmPassword}
+        onClickToogle={() => toggle("confirmPassword")}
+        disabled={formSignUp.password.length === 0}
+        onChange={handleInputSignUp}
+      />
+    </SignUpView>
   );
 };
 

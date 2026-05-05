@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <Provider store={store}>
           <StoreHydrator />
           {getLayout(<Component {...pageProps} />)}
-          <Toaster position="top-right" />
+          <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         </Provider>
       </ThemeProvider>
       <ReactQueryDevtools /> {/* Only view on development mode */}

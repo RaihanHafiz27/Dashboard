@@ -1,4 +1,4 @@
-import { AuthLayout } from "@/layouts/AuthLayout";
+import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { NextPageWithLayout } from "../_app";
 import { Input } from "@/components/common/Input/Input";
 import { LockKeyhole, Mail } from "lucide-react";
@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/common/Button/Button";
 import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
+import { SignInView } from "@/features/SignIn/components/SignInView";
+import { showToast } from "@/lib/utils/toast";
 
 const SignInPage: NextPageWithLayout = () => {
   const [formSignIn, setFormSignIn] = useState({
@@ -29,11 +31,24 @@ const SignInPage: NextPageWithLayout = () => {
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formSignIn.password !== "123")
+      return showToast.error("Your password is incorrect.");
+
+    try {
+      showToast.success("Login Success.");
+      setFormSignIn({
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      showToast.error("Something went wrong. Please try again.");
+    }
+
     console.log(formSignIn);
   };
 
   return (
-    <form onSubmit={handleSignIn} className="grid grid-cols-1 gap-y-6">
+    <SignInView handleSignIn={handleSignIn} disabled={!isValidForm}>
       <Input
         label="email address"
         name="email"
@@ -41,6 +56,7 @@ const SignInPage: NextPageWithLayout = () => {
         placeholder="Enter your email address"
         maxLength={50}
         icon={<Mail size={22} strokeWidth={1.5} />}
+        value={formSignIn.email}
         onChange={handleInputSignIn}
       />
       <Input
@@ -50,40 +66,19 @@ const SignInPage: NextPageWithLayout = () => {
         placeholder="Enter your password"
         maxLength={50}
         icon={<LockKeyhole size={22} strokeWidth={1.5} />}
+        value={formSignIn.password}
         onChange={handleInputSignIn}
         onClickToogle={() => toggle("password")}
         isShow={visibility.password}
       />
-      <div className="flex flex-col gap-y-2">
-        <Link
-          href={"#"}
-          className="text-end text-violet-600 hover:text-violet-700 transition-colors text-sm font-semibold"
-        >
-          Forgot password?
-        </Link>
-        <div className="flex items-center gap-x-2">
-          <input type="checkbox" disabled className="cursor-not-allowed" />
-          <label htmlFor="" className="text-sm text-gray-600">
-            Remember me
-          </label>
-        </div>
-      </div>
-      <Button label="Sign In" type="submit" disabled={!isValidForm} />
-
-      {/* <button
-        type="submit"
-        className="w-full bg-violet-600 hover:bg-violet-700 py-2 rounded-lg md:text-sm 2xl:text-base text-slate-200 transition-colors cursor-pointer"
-      >
-        Sign In
-      </button> */}
-    </form>
+    </SignInView>
   );
 };
 
 SignInPage.getLayout = (page) => {
   return (
     <AuthLayout
-      containerClass="max-w-md"
+      containerClass="max-w-lg"
       welomeTitle={
         <>
           Welcome <span className="text-violet-600">back!</span>
