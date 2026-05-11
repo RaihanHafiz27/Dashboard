@@ -1,7 +1,10 @@
 import { useState } from "react";
 
+/**
+ * Manage visibility state for multiple password inputs.
+ * @example const { visibility, toggle } = usePasswordVisibility(['password', 'confirm'])
+ */
 export const usePasswordVisibility = <T extends string>(initialFields: T[]) => {
-  // Kita buat state objek dinamis berdasarkan array fields yang dimasukkan
   const [visibility, setVisibility] = useState(() => {
     return initialFields.reduce(
       (acc, field) => {

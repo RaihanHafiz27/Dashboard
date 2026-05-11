@@ -1,70 +1,29 @@
 import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { NextPageWithLayout } from "../_app";
 import { Input } from "@/components/common/Input/Input";
-import { LockKeyhole, Mail, ShieldCheck, UserRound } from "lucide-react";
-import { useState } from "react";
-import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
-import { passwordValidation } from "@/features/Settings/utils/passwordValidation";
-import { Button } from "@/components/common/Button/Button";
-import { showToast } from "@/lib/utils/toast";
+import { LockKeyhole, Mail, UserRound } from "lucide-react";
 import { SignUpView } from "@/features/SignUp/components/SignUpView";
+import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
+import { useSignUpForm } from "@/features/SignUp/hooks/useSignUpForm";
 
 const SignUpPage: NextPageWithLayout = () => {
-  const [formSignUp, setFormSignUp] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
+  const {
+    formSignUp,
+    isPending,
+    handleInputSignUp,
+    handleSubmit,
+    isFormValid,
+  } = useSignUpForm();
   const { visibility, toggle } = usePasswordVisibility([
     "password",
     "confirmPassword",
   ]);
 
-  const validation = passwordValidation(formSignUp.password);
-
-  const handleInputSignUp = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormSignUp((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (formSignUp.password !== formSignUp.confirmPassword) {
-      return showToast.error("Passwords do not match.");
-    }
-
-    if (!validation.isValid) {
-      const errorMessage = validation.errors[0] || "Please check your input.";
-      return showToast.error(errorMessage);
-    }
-
-    try {
-      showToast.success("Account created successfully!");
-
-      // Reset Form
-      setFormSignUp({
-        fullName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      showToast.error("Something went wrong. Please try again.");
-    }
-  };
-
-  const isValidForm = Object.values(formSignUp).every(
-    (value) => value.trim() !== "",
-  );
-
   return (
-    <SignUpView handleSubmit={handleSubmit} disabled={!isValidForm}>
+    <SignUpView
+      handleSubmit={handleSubmit}
+      disabled={!isFormValid || isPending}
+    >
       <Input
         label="full name"
         name="fullName"
