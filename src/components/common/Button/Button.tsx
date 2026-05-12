@@ -1,12 +1,21 @@
+import { LoaderCircle } from "lucide-react";
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   variant?: "primary" | "secondary" | "outline";
+  isPending?: boolean;
 }
 
 export const Button = (props: ButtonProps) => {
-  const { label, variant = "primary", className, disabled, ...rest } = props;
+  const {
+    label,
+    variant = "primary",
+    className,
+    disabled,
+    isPending,
+    ...rest
+  } = props;
 
   const variants = {
     primary:
@@ -21,7 +30,11 @@ export const Button = (props: ButtonProps) => {
       disabled={disabled}
       className={`w-full py-2 rounded-lg md:text-sm 2xl:text-base text-slate-200 transition-colors cursor-pointer disabled:cursor-not-allowed ${variants[variant]} ${className}`}
     >
-      {label}
+      {isPending ? (
+        <LoaderCircle size={20} className="animate-spin mx-auto" />
+      ) : (
+        label
+      )}
     </button>
   );
 };

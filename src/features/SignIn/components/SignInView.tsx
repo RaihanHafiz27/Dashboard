@@ -6,10 +6,11 @@ interface SignInViewProps {
   handleSignIn: (e: React.FormEvent) => void;
   children: ReactNode;
   disabled: boolean;
+  isPending: boolean;
 }
 
 export const SignInView = (props: SignInViewProps) => {
-  const { handleSignIn, children, disabled } = props;
+  const { handleSignIn, children, disabled, isPending } = props;
 
   return (
     <form onSubmit={handleSignIn} className="grid grid-cols-1 gap-y-6">
@@ -28,7 +29,12 @@ export const SignInView = (props: SignInViewProps) => {
           </label>
         </div>
       </div>
-      <Button label="Sign In" type="submit" disabled={disabled} />
+      <Button
+        label="Sign In"
+        type="submit"
+        disabled={disabled}
+        isPending={isPending}
+      />
     </form>
   );
 };

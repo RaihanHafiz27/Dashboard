@@ -1,8 +1,16 @@
 import { passwordValidation } from "@/features/Settings/utils/passwordValidation";
-import { useSignUpMutation } from "@/hooks/auth/useAuthMuattion";
+import { useSignUpMutation } from "@/hooks/auth/useAuthMutation";
 import { showToast } from "@/lib/utils/toast";
 import { useState } from "react";
 
+/**
+ * Hook to manage the state and business logic for the Sign-Up form.
+ * Handles input synchronization, password strength validation, and form submission.
+ * * @description
+ * - Validates password matching and strength before mutation.
+ * - Strips `confirmPassword` from the payload before sending to the server.
+ * - Resets the form state upon successful registration.
+ */
 export const useSignUpForm = () => {
   const [formSignUp, setFormSignUp] = useState({
     fullName: "",

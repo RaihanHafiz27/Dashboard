@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { SearchBar } from "../../ui/Input/SearchBar";
 import { NavLinks } from "@/types/navLinks.type";
 import { usePathname } from "next/navigation";
+import { useSignOutMutation } from "@/hooks/auth/useAuthMutation";
 
 export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
   const [showMenu, setShowMenu] = useState<string | null>(null);
@@ -19,6 +20,9 @@ export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
   const handleToggleMenu = (title: string) => {
     setShowMenu((prev) => (prev === title ? null : title));
   };
+
+  const { mutate: signOut, isPending } = useSignOutMutation();
+
   return (
     <aside
       // Event Handler for Hover Sidebar
@@ -76,8 +80,10 @@ export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
       {/* Logout Button */}
       <div className="shrink-0 p-2 ">
         <button
-          className="flex items-center space-x-2 text-gray-600 dark:text-slate-200 cursor-not-allowed"
-          disabled
+          type="button"
+          disabled={isPending}
+          onClick={() => signOut()}
+          className="w-full flex items-center gap-x-2  text-gray-600 dark:text-slate-200  rounded-md hover:bg-sky-500/10 transition-all duration-200 capitalize p-2 hover:pl-4 cursor-pointer disabled:cursor-not-allowed"
         >
           <span className="shrink-0">
             <LogOut />

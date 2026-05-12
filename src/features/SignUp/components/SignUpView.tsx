@@ -6,10 +6,11 @@ interface SignUpViewProps {
   handleSubmit: (e: React.FormEvent) => void;
   children: ReactNode;
   disabled: boolean;
+  isPending: boolean;
 }
 
 export const SignUpView = (props: SignUpViewProps) => {
-  const { handleSubmit, children, disabled } = props;
+  const { handleSubmit, children, disabled, isPending } = props;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -39,7 +40,12 @@ export const SignUpView = (props: SignUpViewProps) => {
             .
           </label>
         </div>
-        <Button label="Create Account" type="submit" disabled={disabled} />
+        <Button
+          label="Create Account"
+          type="submit"
+          disabled={disabled}
+          isPending={isPending}
+        />
       </div>
     </form>
   );

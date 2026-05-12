@@ -2,53 +2,27 @@ import { AuthLayout } from "@/layouts/auth/AuthLayout";
 import { NextPageWithLayout } from "../_app";
 import { Input } from "@/components/common/Input/Input";
 import { LockKeyhole, Mail } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
-import { Button } from "@/components/common/Button/Button";
 import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
 import { SignInView } from "@/features/SignIn/components/SignInView";
-import { showToast } from "@/lib/utils/toast";
+import { useSigInForm } from "@/features/SignIn/hooks/useSignInForm";
 
 const SignInPage: NextPageWithLayout = () => {
-  const [formSignIn, setFormSignIn] = useState({
-    email: "",
-    password: "",
-  });
+  const {
+    formSignIn,
+    isPending,
+    handleInputSignIn,
+    isFormValid,
+    handleSignIn,
+  } = useSigInForm();
 
   const { toggle, visibility } = usePasswordVisibility(["password"]);
 
-  const isValidForm = Object.values(formSignIn).every(
-    (value) => value.trim() !== "",
-  );
-
-  const handleInputSignIn = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormSignIn((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formSignIn.password !== "123")
-      return showToast.error("Your password is incorrect.");
-
-    try {
-      showToast.success("Login Success.");
-      setFormSignIn({
-        email: "",
-        password: "",
-      });
-    } catch (error) {
-      showToast.error("Something went wrong. Please try again.");
-    }
-
-    console.log(formSignIn);
-  };
-
   return (
-    <SignInView handleSignIn={handleSignIn} disabled={!isValidForm}>
+    <SignInView
+      handleSignIn={handleSignIn}
+      disabled={!isFormValid || isPending}
+      isPending={isPending}
+    >
       <Input
         label="email address"
         name="email"

@@ -14,6 +14,7 @@ const SignUpPage: NextPageWithLayout = () => {
     handleSubmit,
     isFormValid,
   } = useSignUpForm();
+
   const { visibility, toggle } = usePasswordVisibility([
     "password",
     "confirmPassword",
@@ -23,6 +24,7 @@ const SignUpPage: NextPageWithLayout = () => {
     <SignUpView
       handleSubmit={handleSubmit}
       disabled={!isFormValid || isPending}
+      isPending={isPending}
     >
       <Input
         label="full name"
