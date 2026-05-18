@@ -108,7 +108,7 @@ const OrderRow = ({
       <td className=" py-3 px-3">
         <div className=" flex items-center w-full space-x-4">
           <div
-            className={`shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-md bg-sky-800/50 dark:bg-sky-700 ${item.status === "Cancelled" && "opacity-20"}`}
+            className={`shrink-0 inline-flex h-12 w-12 items-center justify-center rounded-md bg-violet-300 dark:bg-violet-400 ${item.status === "Cancelled" && "opacity-20"}`}
           >
             <Image
               src={item.imageUrl}

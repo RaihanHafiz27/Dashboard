@@ -17,11 +17,6 @@ export const CategoryBar = ({ textColor, gridColor }: ChartColor) => {
   return (
     <div className=" bg-slate-100 dark:bg-transparent group border border-slate-300 dark:border-gray-500 shadow-md rounded-sm lg:col-span-2">
       <HeaderChart label="Best Categories">
-        {/* <FilterControl
-          options={filterOptions}
-          selected={filter}
-          onChange={setFilter}
-        /> */}
         <FilterDropdown
           value={filter}
           options={filterOptions}

@@ -14,7 +14,7 @@ export const ModalPremium = ({
 }) => {
   return (
     <div className="bg-black/40 fixed inset-0 z-[1000] grid place-items-center">
-      <div className="bg-sky-100 dark:bg-gray-800 w-96 h-[40vh] lg:h-[80vh] 2xl:h-[55vh] py-2 rounded-4xl flex flex-col">
+      <div className="bg-violet-100 dark:bg-gray-800 w-96 h-[40vh] lg:h-[80vh] 2xl:h-[55vh] py-2 rounded-4xl flex flex-col">
         <div className="grow flex flex-col justify-center items-center p-6 space-y-6">
           <Image
             src={"/images/sparkle.png"}
@@ -57,19 +57,19 @@ export const ModalPremium = ({
           <div className="flex flex-col w-full space-y-4">
             <button
               disabled
-              className="bg-sky-600 hover:bg-sky-700 text-slate-200 py-2 rounded-2xl cursor-not-allowed"
+              className="bg-violet-600 hover:bg-violet-700 text-slate-200 py-2 rounded-2xl cursor-not-allowed"
             >
               Upgrade
             </button>
             <button
               onClick={() => setIsOpenPrem(false)}
-              className="text-sky-600 hover:text-sky-700 cursor-pointer"
+              className="text-violet-600 hover:text-violet-700 cursor-pointer"
             >
               Go Back
             </button>
           </div>
         </div>
-        <div className="bg-sky-600  h-1.5 w-1/2 mx-auto rounded-md"></div>
+        <div className="bg-violet-600  h-1.5 w-1/2 mx-auto rounded-md"></div>
       </div>
     </div>
   );

@@ -44,10 +44,14 @@ export const InformationBar = ({
         {/* Premium Button */}
         <button
           onClick={modalAction}
-          className="flex items-center space-x-2 bg-sky-600/20 dark:bg-sky-600/20 px-6 py-2 rounded-sm text-sm text-sky-700 dark:text-sky-500 cursor-pointer transition-all duration-200 hover:scale-105"
+          className="flex items-center space-x-2 bg-violet-500/10 dark:bg-violet-600/20 px-6 py-2 rounded-sm text-sm text-violet-600 dark:text-violet-500 cursor-pointer transition-all duration-200 hover:scale-105"
         >
           <i>
-            <Star size={20} className="fill-sky-700 dark:fill-sky-500" />
+            <Star
+              size={20}
+              strokeWidth={1.5}
+              className="fill-violet-600 dark:fill-violet-500"
+            />
           </i>
           <span>Premium</span>
         </button>

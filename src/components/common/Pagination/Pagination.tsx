@@ -34,7 +34,7 @@ export const Pagination = ({
             onClick={() => handlePagination(i)}
             className={`w-9 h-9 2xl:w-11 2xl:h-11  rounded-full hover:cursor-pointer hover:scale-110 transition-all duration-300 ${
               i === currentPage
-                ? "bg-sky-600 text-white font-semibold shadow"
+                ? "bg-violet-600 text-white font-semibold shadow"
                 : "text-gray-600 hover:bg-gray-100 border border-gray-300"
             }`}
           >

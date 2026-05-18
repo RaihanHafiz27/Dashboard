@@ -18,7 +18,7 @@ export const SummaryCard = () => {
           </div>
           <span className="flex items-center space-x-2">
             <CountUp
-              className="text-2xl 2xl:text-3xl font-bold text-gray-700 dark:text-gray-300"
+              className="text-2xl 2xl:text-3xl font-bold text-gray-600 dark:text-gray-300"
               start={0}
               end={item.sum}
               duration={5}
@@ -26,8 +26,8 @@ export const SummaryCard = () => {
             <div
               className={`flex items-center gap-1 text-xs font-medium mt-1 ${
                 item.growth >= 0
-                  ? "text-green-500 bg-green-500/20 py-1 px-2 rounded-sm "
-                  : "text-red-500 bg-red-500/20 py-1 px-2 rounded-sm "
+                  ? "text-green-500 bg-green-300/20 py-1 px-2 rounded-sm "
+                  : "text-red-500 bg-red-300/20 py-1 px-2 rounded-sm "
               }`}
             >
               {item.growth >= 0 ? (

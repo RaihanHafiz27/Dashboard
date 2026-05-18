@@ -58,7 +58,7 @@ export const StockTable = (props: StockTableProps) => {
               >
                 <td className="w-[30%] p-4 2xl:py-3">
                   <div className="flex items-center space-x-3 min-w-0">
-                    <div className="relative w-14 h-14 2xl:w-20 2xl:h-20 bg-sky-800/50 dark:bg-sky-700 grid place-items-center rounded-md shrink-0">
+                    <div className="relative w-14 h-14 2xl:w-20 2xl:h-20 bg-violet-300 dark:bg-violet-400 grid place-items-center rounded-md shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}

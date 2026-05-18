@@ -4,7 +4,7 @@ export const productsCategory: ProductType[] = [
   {
     productId: "P001",
     productName: "Fashion",
-    color: "rgb(0, 213, 190)",
+    color: "rgb(127, 34, 254)",
     sales: [
       { month: "Jan", total: 80 },
       { month: "Feb", total: 80 },
@@ -23,7 +23,7 @@ export const productsCategory: ProductType[] = [
   {
     productId: "P002",
     productName: "Smartphone",
-    color: "rgb(0, 132, 209)",
+    color: "rgb(166, 132, 255)",
     sales: [
       { month: "Jan", total: 20 },
       { month: "Feb", total: 110 },
@@ -42,7 +42,7 @@ export const productsCategory: ProductType[] = [
   {
     productId: "P003",
     productName: "Accessories",
-    color: "rgb(237, 107, 255)",
+    color: "rgb(196, 180, 255)",
     sales: [
       { month: "Jan", total: 60 },
       { month: "Feb", total: 135 },

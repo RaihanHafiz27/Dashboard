@@ -47,7 +47,7 @@ export const HelpView = () => {
 
         {/* Footer Support */}
         <div
-          className={`mt-8 rounded-lg p-6 border-l-4 border-sky-500 bg-sky-100 dark:bg-sky-900/20`}
+          className={`mt-8 rounded-lg p-6 border-l-4 border-violet-600 bg-violet-100 dark:bg-violet-900/20`}
         >
           <h3
             className={`text-lg font-semibold text-slate-700 dark:text-slate-200 mb-2`}

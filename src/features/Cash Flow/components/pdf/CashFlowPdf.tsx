@@ -11,7 +11,7 @@ export const CashFlowPdf = ({ data }: { data: Transactions[] }) => {
         <View style={styles.header} fixed>
           <View>
             <View style={styles.logoSection}>
-              <Image src={"/images/logo-pdf.png"} style={styles.logo} />
+              <Image src={"/images/logo1.png"} style={styles.logo} />
               <Text style={styles.companyName}>Xyz</Text>
             </View>
             <Text style={styles.companyAddress}>

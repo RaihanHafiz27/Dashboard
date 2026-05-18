@@ -73,7 +73,7 @@ export const CashFlowView = (props: CashFlowProps) => {
             <CashFlowReportAction data={dummyTransactions} />
             <button
               disabled
-              className="bg-sky-600 p-2 text-sm rounded-md text-slate-200 cursor-not-allowed"
+              className="bg-violet-600 p-2 text-sm rounded-md text-slate-200 cursor-not-allowed"
             >
               <Send size={18} />
             </button>

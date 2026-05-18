@@ -60,7 +60,7 @@ export const TaskView = (props: TaskViewProps) => {
           <div className="w-full h-[65vh] grid place-items-center">
             <div>
               <Image
-                src={"/images/todo.svg"}
+                src={"/images/todo1.svg"}
                 width={300}
                 height={300}
                 alt="no-task"

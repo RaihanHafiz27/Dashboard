@@ -35,7 +35,7 @@ export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
       {/* HEADER LOGO */}
       <div className="flex items-center shrink-0 pl-2">
         <Image
-          src={"/images/logo.png"}
+          src={"/images/logo1.png"}
           width={100}
           height={100}
           alt="logo"
@@ -78,12 +78,12 @@ export const Sidebar = ({ isLocked }: { isLocked: boolean }) => {
       </nav>
 
       {/* Logout Button */}
-      <div className="shrink-0 p-2 ">
+      <div className="shrink-0 py-2">
         <button
           type="button"
           disabled={isPending}
           onClick={() => signOut()}
-          className="w-full flex items-center gap-x-2  text-gray-600 dark:text-slate-200  rounded-md hover:bg-sky-500/10 transition-all duration-200 capitalize p-2 hover:pl-4 cursor-pointer disabled:cursor-not-allowed"
+          className="w-full flex items-center gap-x-2  text-gray-600 dark:text-slate-200  rounded-md hover:bg-violet-500/10 hover:dark:bg-gray-800 transition-all duration-200 capitalize p-2 hover:pl-4 cursor-pointer disabled:cursor-not-allowed"
         >
           <span className="shrink-0">
             <LogOut />
@@ -130,8 +130,8 @@ const SidebarItem = (props: SidebarItemProps) => {
             className={`w-full flex items-center justify-between p-2 rounded-lg transition-all duration-200 group relative hover:pl-4
             ${
               isParentActive || isExpanded
-                ? "border-b-2 border-sky-500 text-gray-600 bg-sky-500/10 dark:text-slate-200 dark:bg-gray-200/10"
-                : "text-gray-600 hover:bg-sky-500/10 dark:text-gray-300 dark:hover:bg-gray-800"
+                ? "border-b-2 border-violet-500 text-gray-600 bg-violet-500/10 dark:text-slate-200 dark:bg-gray-200/10"
+                : "text-gray-600 hover:bg-violet-500/10 dark:text-gray-300 dark:hover:bg-gray-800"
             }
           `}
           >
@@ -165,8 +165,8 @@ const SidebarItem = (props: SidebarItemProps) => {
                       href={sub.to}
                       className={`w-full flex items-center p-2 text-sm rounded-md transition-all duration-200 hover:pl-4 capitalize ${
                         isSubActive
-                          ? " text-slate-200 bg-sky-500 dark:bg-gray-200/10"
-                          : "text-gray-500 hover:text-slate-200 hover:bg-sky-500 dark:text-slate-200"
+                          ? " text-slate-200 bg-violet-500 dark:bg-gray-200/10"
+                          : "text-gray-500 hover:text-slate-200 hover:bg-violet-500 dark:text-slate-200"
                       }`}
                     >
                       <span className="shrink-0">{sub.iconSub}</span>
@@ -185,8 +185,8 @@ const SidebarItem = (props: SidebarItemProps) => {
           className={`flex items-center p-2 rounded-md transition-all duration-200 mb-1 group capitalize hover:pl-4
         ${
           isSingleActive
-            ? "border-l-4 border-sky-500 text-gray-600 bg-sky-500/10 dark:text-slate-200 dark:bg-gray-200/10" // Style Active Keren
-            : "hover:bg-sky-500/10 hover:dark:bg-gray-200/10"
+            ? "border-l-4 border-violet-600 text-gray-600 bg-violet-500/10 dark:text-slate-200 dark:bg-gray-800"
+            : "hover:bg-violet-500/10 hover:dark:bg-gray-800"
         }
       `}
         >

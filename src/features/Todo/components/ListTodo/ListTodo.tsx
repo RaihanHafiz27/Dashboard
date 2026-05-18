@@ -15,7 +15,7 @@ export const ListTodo = (item: Todos) => {
       key={item.id}
       onClick={() => dispatch(updateTodoStatus({ id: item.id }))}
       className={`border border-gray-300 dark:border-gray-500 p-4 shadow-md rounded-sm flex items-center justify-between cursor-pointer hover:shadow-none group hover:translate-y-[2px] transition-all duration-300 ${
-        item?.status ? "bg-sky-600/10" : "bg-slate-100 dark:bg-transparent"
+        item?.status ? "bg-violet-600/10" : "bg-slate-100 dark:bg-transparent"
       }`}
     >
       <label
@@ -36,10 +36,10 @@ export const ListTodo = (item: Todos) => {
             h-7 w-7 p-1.5 rounded border flex items-center justify-center transition
             ${
               item?.status
-                ? "border-blue-600 bg-blue-600"
+                ? "border-violet-600 bg-violet-600"
                 : "border-gray-400 bg-slate-100 dark:bg-transparent"
             }
-            peer-checked:border-blue-600 peer-checked:bg-blue-600 dark:peer-checked:bg-transparent dark:peer-checked:border-gray-300
+            peer-checked:border-blue-600 peer-checked:bg-violet-600 dark:peer-checked:bg-transparent dark:peer-checked:border-gray-300
           `}
         >
           {/* Icon check */}

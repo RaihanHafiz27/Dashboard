@@ -6,9 +6,9 @@ interface BuyerCategory {
 }
 
 const buyerData: BuyerCategory[] = [
-  { label: "Teenagers (13-19)", value: 350 },
-  { label: "Adults (20-40)", value: 780 },
-  { label: "Elderly (41+)", value: 220 },
+  { label: "Teenagers (13-19)", value: 750 },
+  { label: "Adults (20-40)", value: 350 },
+  { label: "Elderly (41+)", value: 200 },
 ];
 
 export const useBuyerAnalytics = () => {
@@ -20,9 +20,9 @@ export const useBuyerAnalytics = () => {
           label: "Jumlah Pembeli",
           data: buyerData.map((item) => item.value),
           backgroundColor: [
-            "rgb(0, 213, 190)",
-            "rgb(0, 132, 209)",
-            "rgb(237, 107, 255)",
+            "rgb(127, 34, 254)",
+            "rgb(166, 132, 255)",
+            "rgb(196, 180, 255)",
           ],
           borderRadius: 10,
           spacing: 0,
@@ -30,7 +30,7 @@ export const useBuyerAnalytics = () => {
         },
       ],
     }),
-    []
+    [],
   );
 
   const totalTransaction = useMemo(() => {

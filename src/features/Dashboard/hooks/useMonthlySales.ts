@@ -7,7 +7,7 @@ export const useMonthlySales = () => {
       {
         label: "Monthly Sales",
         data: salesData.map((item) => item.total),
-        borderColor: "rgb(0, 132, 209)",
+        borderColor: "rgb(127, 34, 254)",
         backgroundColor: (context: any) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(
@@ -16,8 +16,8 @@ export const useMonthlySales = () => {
             0,
             context.chart.height,
           );
-          gradient.addColorStop(0, "rgba(0, 132, 209, 0.5)");
-          gradient.addColorStop(1, "rgba(0, 132, 209, 0)");
+          gradient.addColorStop(0, "rgba(166, 132, 255, 0.5)");
+          gradient.addColorStop(1, "rgba(196, 180, 255, 0)");
           return gradient;
         },
         fill: true,

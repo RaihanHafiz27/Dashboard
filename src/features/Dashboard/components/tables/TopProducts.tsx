@@ -7,7 +7,6 @@ import { HeaderChart } from "../header/HeaderChart";
 export const TopProducts = () => {
   return (
     <div className="rounded-sm bg-slate-100 dark:bg-transparent border border-slate-300 dark:border-gray-500 shadow-md">
-      {/* <ActionMenu items={features} label="Top Products" /> */}
       <HeaderChart label="Top Products">
         <ActionMenu items={features} />
       </HeaderChart>
@@ -17,7 +16,7 @@ export const TopProducts = () => {
             key={prod.id}
             className="flex items-center space-x-4  hover:scale-103 transition-all duration-200"
           >
-            <div className="relative bg-sky-800/50 dark:bg-sky-700 rounded-sm">
+            <div className="relative bg-violet-300 dark:bg-violet-400 rounded-sm">
               <Image
                 src={prod.img}
                 width={100}
@@ -25,7 +24,7 @@ export const TopProducts = () => {
                 alt={prod.title}
                 className="object-cover w-20 2xl:w-24 h-auto"
               />
-              <span className="bg-gray-800  text-xs 2xl:text-base py-1 rounded-sm px-2 left-0 text-slate-200  absolute top-0">
+              <span className="bg-violet-600  text-xs 2xl:text-base py-1 rounded-sm px-2 left-0 text-slate-200  absolute top-0">
                 {prod.id}
               </span>
             </div>

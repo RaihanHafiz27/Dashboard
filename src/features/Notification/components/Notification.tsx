@@ -48,7 +48,7 @@ export const Notification = () => {
             className="z-[999]"
           >
             <div className="bg-slate-50 border border-slate-200 dark:bg-slate-800 dark:border-slate-700 w-60 rounded-lg shadow-xl animate-pop overflow-hidden">
-              <p className="p-3 text-xs text-sky-500 text-center font-semibold">
+              <p className="p-3 text-xs text-violet-600 text-center font-semibold">
                 Notifications
               </p>
               <ul className="">
@@ -64,7 +64,7 @@ export const Notification = () => {
                         className="flex items-start space-x-3"
                       >
                         <div
-                          className={`p-2 rounded-full shrink-0 ${item.isRead ? "bg-slate-100 text-slate-300 dark:bg-slate-600/20 dark:text-slate-700" : "bg-sky-100 dark:bg-slate-600/20 text-sky-500 dark:text-slate-300"}`}
+                          className={`p-2 rounded-full shrink-0 ${item.isRead ? "bg-slate-100 text-slate-300 dark:bg-slate-600/20 dark:text-slate-700" : "bg-violet-100 dark:bg-slate-600/20 text-violet-600 dark:text-slate-300"}`}
                         >
                           <BellDot size={20} />
                         </div>
