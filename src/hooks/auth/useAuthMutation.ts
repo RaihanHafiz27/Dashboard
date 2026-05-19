@@ -37,6 +37,7 @@ export const useSignInMutation = () => {
     onSuccess: () => {
       showToast.success("login successful!");
       setTimeout(() => {
+        router.refresh();
         router.push("/dashboard");
       }, 2000);
     },
